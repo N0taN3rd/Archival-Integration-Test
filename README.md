@@ -2,6 +2,10 @@
 Good Luck
 ## TESTS
 
+### Archival Acid Test 1.0 Mats
+- http://acid.matkelly.com/
+- add http://www.cs.odu.edu/~hdo/acidtest/
+
 ### Iframes
 - Load pages from another/same domain on HTTP and HTTPS
 - Load pages from another/same domain on HTTP and HTTPS and use [iframe page to load resources for parent page](https://github.com/N0taN3rd/archiveAcid/blob/master/docs/evalInjectedIframe2.html)
