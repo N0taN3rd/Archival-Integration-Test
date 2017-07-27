@@ -1,9 +1,12 @@
 # Archival Acid Test 2.0
-Good Luck
+This repository is a follow-on study of the Archival Acid Test ([web](http://acid.matkelly.com/), [source](https://github.com/machawk1/archivalAcidTest)) that seeks to evaluate archival crawlers and replay systems for the Web.
+
+Good Luck.
+
 ## TESTS
 
 ### Archival Acid Test 1.0 Mats
-- http://acid.matkelly.com/
+- The original Archival Acid Test ([web](http://acid.matkelly.com/), [source](https://github.com/machawk1/archivalAcidTest))
 - add http://www.cs.odu.edu/~hdo/acidtest/
 
 ### Iframes
