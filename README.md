@@ -11,9 +11,11 @@ Good Luck
 
 ### Document.domain
 - Set document.domain
+- http://ws-dl.blogspot.com/2017/01/2017-01-20-cnncom-has-been-unarchivable.html
 
 ### Document.cookie
 - Anything to do with cookies will brick everyone!
+- http://ws-dl.blogspot.com/2017/03/2017-03-09-state-of-replay-or-location.html
 
 ### Service Worker
 - Only HTTPS
@@ -29,6 +31,9 @@ The fetch api will hit CORS almost all the time
 - Request to another domain on same parent domain that would require CORS negotitation
 - Request for content type that would require CORS negotitation
 - Fetch in general
+
+### JS XHR Libs
+- Axios http://ws-dl.blogspot.com/2017/03/2017-03-09-state-of-replay-or-location.html
 
 ### HTTP/1.1 and HTTP/2 with HTTPS Tests
 - Requests using GET, POST, HEAD, OPTIONS, PUT, DELETE, PATCH
