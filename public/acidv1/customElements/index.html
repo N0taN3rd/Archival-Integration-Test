@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <base href="http://localhost:8090/acidv1/customElements/"/>
+    <title>The Archival Acid Test 1.0</title>
+    <style id="globalStyle" type="text/css">
+        body {
+            height: 150%;
+        }
+
+        div#relativeImageFromCSS {
+            background-image: url('img.png');
+        }
+
+        div#absoluteImageFromCSS {
+            background-image: url('http://thisdomain.com/img.png');
+        }
+
+        div#externalImageFromCSS {
+            background-image: url('http://anotherSite/img.png');
+        }
+
+        div {
+            width: 100px;
+        }
+
+        img, canvas {
+            width: 10px;
+            height: 10px;
+            margin: 0 1px 1px 0;
+            padding: 0;
+            display: block;
+            float: left;
+        }
+
+        iframe {
+            padding: 0;
+        }
+
+        h1 {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        h2, h3, h4, p {
+            margin: 0;
+            padding: 0;
+            clear: both;
+        }
+
+        h2 {
+            margin-top: 1.0em;
+        }
+
+        ul {
+            margin: 0.5em auto;
+            padding-top: 0;
+            list-style-type: none;
+        }
+
+        div {
+            height: 10px;
+            border: 1px solid black;
+            padding: 1px 0 1px 1px;
+        }
+
+        .shadyDiv {
+            height: 10px;
+            border: 1px solid black;
+            padding: 1px 0 1px 1px;
+        }
+
+        div#test1 {
+            width: 55px;
+        }
+
+        div#scriptParent {
+            width: 77px;
+        }
+
+        div#html5Parent {
+            width: 22px;
+        }
+
+        p#test2iHeightAssurance {
+            margin-top: 2000px;
+        }
+
+        p {
+            margin-bottom: 1.0em;
+        }
+
+        li span {
+            font-style: italic;
+        }
+    </style>
+    <script type="text/javascript" src="arrayBuffer.js"></script>
+</head>
+<body>
+<acid-h data-which="1" data-content="The Archival Acid Test"></acid-h>
+<acid-fp></acid-fp>
+<acid-h data-which="2" data-content="The Tests"></acid-h>
+<acid-h data-which="3" data-content="The Basics (5 Tests)"></acid-h>
+<acid-basic data-id="test1"
+            data-im1="pixel.png"
+            data-title1="test1a"
+            data-im2="http://acid.matkelly.com/pixel.png"
+            data-title2="test1b"
+            data-im3="http://www.cs.odu.edu/~mkelly/acid/pixel.png"
+            data-title3="test1c"
+            data-im4="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjZDOTUzNTREMUVCRDExRTJBRjM2RkI1NjAwQzQzQTFGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjZDOTUzNTRFMUVCRDExRTJBRjM2RkI1NjAwQzQzQTFGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NkM5NTM1NEIxRUJEMTFFMkFGMzZGQjU2MDBDNDNBMUYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NkM5NTM1NEMxRUJEMTFFMkFGMzZGQjU2MDBDNDNBMUYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5pvSZLAAAADklEQVR42mJmYPgPEGAAAQ8BA8CY0HcAAAAASUVORK5CYII"
+            data-title4="test1d"
+            data-im5="//acid.matkelly.com/pixel.png"
+            data-title5="test1e"
+>
+</acid-basic>
+<acid-h data-which="3" data-content="Javascript (7 tests)"></acid-h>
+<template id="acid-js-script">
+    <script type="text/javascript">
+      //Test 2c, Script inline, DOM Manipution
+      document.addEventListener('DOMContentLoaded', function () {
+        var inlineScriptImage = new Image();
+        inlineScriptImage.src = "pixel.png";
+        inlineScriptImage.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('shadowJs').shadowRoot;
+        var scriptParent = veryShady.getElementById('scriptParent');
+        scriptParent.appendChild(inlineScriptImage);
+      });
+
+      //Test 2d, AJAX image replacement of content that should be in the archive
+      document.addEventListener('DOMContentLoaded', function () {
+        //Test 2d setup
+        var test2DImageRed = new Image();
+        test2DImageRed.src = "red.png";
+        test2DImageRed.id = "test2d";
+        test2DImageRed.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('shadowJs').shadowRoot;
+        var scriptParent = veryShady.getElementById('scriptParent');
+        scriptParent.appendChild(test2DImageRed);
+
+        //Test 2d init AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://acid.matkelly.com/pixel.png', true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function (e) {
+          veryShady.getElementById('test2d').src = "data:image/png;base64," + base64ArrayBuffer(e.currentTarget.response);
+        };
+        xhr.send();
+      });
+
+      //Test 2e, AJAX requests with content that should be included in the archive, test for false positive
+      // e.g. Same Origin Policy
+      document.addEventListener('DOMContentLoaded', function () {
+        //Test 2e setup
+        var test2EImageBlue = new Image();
+        test2EImageBlue.src = "pixel.png";
+        test2EImageBlue.id = "test2e";
+        test2EImageBlue.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('shadowJs').shadowRoot;
+        var scriptParent = veryShady.getElementById('scriptParent');
+        scriptParent.appendChild(test2EImageBlue);
+
+        //Test 10 init AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://acid.matkelly.com/pixel.png', true);
+        try {
+          xhr.responseType = 'arraybuffer';	//response type of synchronous request should not be changeable, INVALID_ACCESS_ERR: DOM Exception 15
+          xhr.onload = function (e) {
+            veryShady.getElementById('test2e').src = "data:image/png;base64," + base64ArrayBuffer(e.currentTarget.response);
+          };
+          xhr.send();
+        } catch (err) {
+          //console.log(err); //correct path
+        }
+      });
+
+      // TODO Test 2f: some code only served to certain user agents
+      // Test 2g: code that manipulates DOM after a certain delay (test the synchonicity of tools)
+      document.addEventListener('DOMContentLoaded', function () {
+        //Test 12 setup
+        var test2GImageRed = new Image();
+        test2GImageRed.src = "red.png";
+        test2GImageRed.id = "test2g";
+        test2GImageRed.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('shadowJs').shadowRoot;
+        var scriptParent = veryShady.getElementById('scriptParent');
+        scriptParent.appendChild(test2GImageRed);
+
+        //change image after 2 seconds
+        setTimeout(function () {
+          veryShady.getElementById('test2g').src = "pixel.png";
+        }, 2000);
+      });
+      // Test 2h: code that manipulates DOM after a certain delay (test the synchonicity of tools)
+      document.addEventListener('DOMContentLoaded', function () {
+        //Test 2h setup
+        //var test13ImageBlue = new Image();
+        var test2HIframeBlue = document.createElement('iframe');
+        test2HIframeBlue.src = "pixel.png";
+        test2HIframeBlue.id = "test2h";
+        test2HIframeBlue.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('shadowJs').shadowRoot;
+        var scriptParent = veryShady.getElementById('scriptParent');
+        //scriptParent.appendChild(test13ImageBlue);
+        //scriptParent.appendChild(test13IframeBlue);
+
+        setTimeout(function () {
+          //document.write('<scr'+'ipt type="text/javascript" src="dynamicallyIncludedScript.js"></sc'+'ript>');
+        }, 2100);
+      });
+      // Test 2i: code that loads content only after user interaction (tests for interaction-reliant loading of resource)
+      var test2iExecuted = false;
+      document.addEventListener('DOMContentLoaded', function () {
+        var test2IImageRed = new Image();
+        test2IImageRed.src = "red.png";
+        test2IImageRed.id = "test2i";
+        test2IImageRed.title = "2i";
+        test2IImageRed.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('shadowJs').shadowRoot;
+        var scriptParent = veryShady.getElementById('scriptParent');
+        scriptParent.appendChild(test2IImageRed);
+        window.onscroll = function (oEvent) {
+          if (test2iExecuted) {return;}
+          test2iExecuted = true;
+          veryShady.getElementById('test2i').src = "pixel_2i.png";
+        };
+      });
+    </script>
+</template>
+<acid-js id="shadowJs" data-id="scriptParent"
+         data-t1-script="localScript.js"
+         data-t1-id="localScript"
+         data-t2-script="http://www.cs.odu.edu/~mkelly/acid/externalScript.js"
+         data-t2-id="externalScript"
+></acid-js>
+<acid-h data-which="3" data-content="HTML5 Features (2 tests)"></acid-h>
+<div id="html5Parent">
+    <script type="text/javascript" id="test3Ascript">
+      document.addEventListener('DOMContentLoaded', function () {
+        //Test 3a setup
+        var test3Acanvas = document.createElement('canvas');
+        test3Acanvas.width = "10";
+        test3Acanvas.height = "10";
+        test3Acanvas.id = "test3a";
+        var scriptParent = document.getElementById('html5Parent');
+        scriptParent.replaceChild(test3Acanvas, document.getElementById('test3Ascript'));
+
+        //Test 3a, HTML5 Canvas Draw
+        var canvas = document.getElementById('test3a');
+        var context = canvas.getContext("2d");
+        context.fillStyle = "#0000FF";
+        context.fillRect(0, 0, 10, 10);
+      });
+      //Test 3b: LocalStorage
+      document.addEventListener('DOMContentLoaded', function () {
+        //Test3b setup
+        var test3BImageRed = new Image();
+        test3BImageRed.src = "red.png";
+        test3BImageRed.id = "test3b";
+        var scriptParent = document.getElementById('html5Parent');
+        scriptParent.appendChild(test3BImageRed);
+
+        localStorage.setItem("test3bSrc", "pixel.png");
+        document.getElementById('test3b').src = localStorage.getItem('test3bSrc');
+
+      });
+    </script>
+</div>
+<acid-h id="moreInfo" data-which="2" data-content="More Information"></acid-h>
+<acid-h data-which="3" data-content="The Motivation"></acid-h>
+<acid-p data-content="The purpose of this web page is to test the capability of web crawlers intended for archiving (e.g., Heritrix) and
+    potentially their corresponding replay systems (e.g., Wayback)."></acid-p>
+<acid-h id="moreInfo" data-which="3" data-content="Tests' Rationales"></acid-h>
+<acid-p data-content="Tell an archival crawler to capture this page. Replay the capture in an archival replay system. Any non-blue squares
+    means that some aesthetic or functionality capability of the page on the live web is not being preserved into the
+    archive."></acid-p>
+<acid-h data-which="4" data-content="The Basics"></acid-h>
+<ul>
+    <li>1a - Local image, relative to the test</li>
+    <li>1b - Local image, absolute URI</li>
+    <li>1c - Remote image, absolute</li>
+    <li>1d - Inline content, encoded image</li>
+    <li>1e - Scheme-less resource</li>
+    <li>1f - Hotlinking span(not implemented)</li>
+</ul>
+<acid-h data-which="4" data-content="JavaScript"></acid-h>
+<ul>
+    <li>2a - Script, local</li>
+    <li>2b - Script, remote</li>
+    <li>2c - Script inline, DOM manipulation</li>
+    <li>2d - Ajax image replacement of content that should be in archive</li>
+    <li>2e - Ajax requests with content that should be included in the archve, test for false positive (e.g., same
+        origin policy)
+    </li>
+    <li>2f - Code only served to certain user agents (e.g., mobile) span(not implemented)</li>
+    <li>2g - Code that manipulates DOM after a certain delay (test the synchronicity of the tools)</li>
+    <li>2h - spanVacant</li>
+    <li>2i - Code that loads content only after user interaction (tests for interaction-reliant loading of a resource)
+    </li>
+</ul>
+<acid-h data-which="4" data-content="HTML5 Features"></acid-h>
+<ul>
+    <li>3a - HTML5 Canvas Drawing</li>
+    <li>3b - LocalStorage</li>
+    <li>3c - Exernal Webpage span(not implemented)</li>
+    <li>3d - XSS Allowed span(not implemented)</li>
+    <li>3e - XSS Disallowed span(not implemented)</li>
+    <li>3f - Embedded Objects span(not implemented)</li>
+</ul>
+<p id="test2iHeightAssurance">&nbsp;</p>
+<script>
+  class ACIDH extends HTMLElement {
+    constructor () {
+      super()
+      var shadow = this.attachShadow({mode: 'open'});
+      var which = this.getAttribute('data-which');
+      var h
+      switch (which) {
+        case '1':
+          h = document.createElement('h1');
+          h.style = 'margin-bottom: 0; padding-bottom: 0;';
+          break
+        case '2':
+          h = document.createElement('h2');
+          h.style = 'margin: 0; margin-top: 1.0em; padding: 0; clear: both;';
+          break
+        case '3':
+          h = document.createElement('h3');
+          h.style = 'margin: 0; padding: 0; clear: both;';
+          break
+        case '4':
+          h = document.createElement('h4');
+          h.style = 'margin: 0; padding: 0; clear: both;';
+          break
+        case '5':
+          h = document.createElement('h5');
+          h.style = 'margin: 0; padding: 0; clear: both;';
+          break
+      }
+      h.innerText = this.getAttribute('data-content');
+      shadow.appendChild(h);
+    }
+  }
+
+  class ACIDA extends HTMLElement {
+    constructor () {
+      super()
+      var shadow = this.attachShadow({mode: 'open'});
+      var a = document.createElement('a');
+      a.href = this.getAttribute('data-ref');
+      a.innerText = this.getAttribute('data-content');
+      shadow.appendChild(a);
+    }
+  }
+
+  class ACIDP extends HTMLElement {
+    constructor () {
+      super()
+      var shadow = this.attachShadow({mode: 'open'});
+      var p = document.createElement('p');
+      p.style = 'margin: 0; padding: 0; clear: both;margin-bottom: 1.0em;';
+      p.innerHTML = this.getAttribute('data-content');
+      shadow.appendChild(p);
+    }
+  }
+
+  class ACIDIM extends HTMLElement {
+    constructor () {
+      super()
+      var shadow = this.attachShadow({mode: 'open'});
+      var im = document.createElement('img');
+      im.style = 'width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;';
+      im.src = this.getAttribute('data-im');
+      im.title = this.getAttribute('data-title');
+      shadow.appendChild(im);
+    }
+  }
+
+  class ACIDFP extends HTMLElement {
+    constructor () {
+      super()
+      var shadow = this.attachShadow({mode: 'open'});
+      var p = document.createElement('p');
+      p.style = 'margin-bottom: 1.0em; padding: 0; clear: both;';
+      p.innerHTML = `
+           This page was setup to test the capabilities and shortcomings of archival web crawlers.
+      More information about the rationale and individual tests can be found
+      <acid-a data-ref="#moreInfo" data-content="below"></acid-a>.
+      For questions/comments contact
+      <acid-a data-ref="mailto:archiveacidtest@matkelly.com?subject=Archive Acid test comment" data-content="Mat Kelly"></acid-a>.
+          `
+      shadow.appendChild(p);
+    }
+  }
+
+  class ACIDBasic extends HTMLElement {
+    constructor () {
+      super()
+      var shadow = this.attachShadow({mode: 'open'});
+      var d = document.createElement('div');
+      d.id = this.getAttribute('data-id');
+      d.style= 'width: 55px;height: 10px; border: 1px solid black; padding: 1px 0 1px 1px;'
+      d.innerHTML = `
+        <acid-img data-im="${this.getAttribute('data-im1')}" data-title="${this.getAttribute('data-title1')}"></acid-img>
+        <acid-img data-im="${this.getAttribute('data-im2')}" data-title="${this.getAttribute('data-title2')}"></acid-img>
+        <acid-img data-im="${this.getAttribute('data-im3')}"  data-title="${this.getAttribute('data-title3')}"></acid-img>
+        <acid-img data-im="${this.getAttribute('data-im4')}" data-title="${this.getAttribute('data-title4')}"></acid-img>
+        <acid-img data-im="${this.getAttribute('data-im5')}" data-title="${this.getAttribute('data-title5')}"></acid-img>
+      `
+      shadow.appendChild(d);
+    }
+  }
+
+  class ACIDJS extends HTMLElement {
+    constructor () {
+      super()
+      var shadow = this.attachShadow({mode: 'open'});
+      var d = document.createElement('div');
+      d.id = this.getAttribute('data-id');
+      d.style= 'width: 77px;height: 10px; border: 1px solid black; padding: 1px 0 1px 1px;';
+      shadow.appendChild(d);
+      var s1 = document.createElement('script');
+      s1.src = this.getAttribute('data-t1-script');
+      s1.id = this.getAttribute('data-t1-id');
+      s1.type = "text/javascript";
+      d.appendChild(s1);
+      var s2 = document.createElement('script');
+      s2.src = this.getAttribute('data-t2-script');
+      s2.id = this.getAttribute('data-t2-id');
+      s2.type = "text/javascript";
+      d.appendChild(s2);
+      d.appendChild(document.getElementById('acid-js-script').content);
+    }
+  }
+
+  window.customElements.define('acid-h', ACIDH);
+  window.customElements.define('acid-a', ACIDA);
+  window.customElements.define('acid-p', ACIDP);
+  window.customElements.define('acid-img', ACIDIM);
+  window.customElements.define('acid-fp', ACIDFP);
+  window.customElements.define('acid-basic', ACIDBasic);
+  window.customElements.define('acid-js', ACIDJS);
+</script>
+</body>
+</html>

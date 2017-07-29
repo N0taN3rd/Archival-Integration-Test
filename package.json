@@ -22,5 +22,8 @@
     "pug": "^2.0.0-rc.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
+  },
+  "scripts": {
+    "run-backend": "node --harmony backend/"
   }
 }
