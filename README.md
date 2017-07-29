@@ -1,19 +1,28 @@
 # Archival Acid Test 2.0
-Good Luck
+This repository is a follow-on study of the Archival Acid Test ([web](http://acid.matkelly.com/), [source](https://github.com/machawk1/archivalAcidTest)) that seeks to evaluate archival crawlers and replay systems for the Web.
+
+Good Luck.
+
 ## TESTS
+
+### Archival Acid Test 1.0 Mats
+- The original Archival Acid Test ([web](http://acid.matkelly.com/), [source](https://github.com/machawk1/archivalAcidTest))
+- add http://www.cs.odu.edu/~hdo/acidtest/
 
 ### Iframes
 - Load pages from another/same domain on HTTP and HTTPS
-- Load pages from another/same domain on HTTP and HTTPS and use iframe page to load resources for parent page
-- Load page from another/same domain on HTTP and HTTPS and use it to request another html page and rewrite links the requested page to work in parent
+- Load pages from another/same domain on HTTP and HTTPS and use [iframe page to load resources for parent page](https://github.com/N0taN3rd/archiveAcid/blob/master/docs/evalInjectedIframe2.html)
+- Load page from another/same domain on HTTP and HTTPS and use it to request another html page and [rewrite links of the requested page to work in parent](https://github.com/N0taN3rd/archiveAcid/blob/master/src/cleanUpRandyHTML.js)
 
 [Unarchivable via Internet Archive](http://web.archive.org/web/20170519051421/http://www.cs.odu.edu/~jberlin/funtimes2/), [Original](http://www.cs.odu.edu/~jberlin/funtimes2/)
 
 ### Document.domain
 - Set document.domain
+- http://ws-dl.blogspot.com/2017/01/2017-01-20-cnncom-has-been-unarchivable.html
 
 ### Document.cookie
 - Anything to do with cookies will brick everyone!
+- http://ws-dl.blogspot.com/2017/03/2017-03-09-state-of-replay-or-location.html
 
 ### Service Worker
 - Only HTTPS
@@ -30,6 +39,9 @@ The fetch api will hit CORS almost all the time
 - Request for content type that would require CORS negotitation
 - Fetch in general
 
+### JS XHR Libs
+- Axios http://ws-dl.blogspot.com/2017/03/2017-03-09-state-of-replay-or-location.html
+
 ### HTTP/1.1 and HTTP/2 with HTTPS Tests
 - Requests using GET, POST, HEAD, OPTIONS, PUT, DELETE, PATCH
 - Bearer, Cookie auth
@@ -45,7 +57,7 @@ The fetch api will hit CORS almost all the time
 ### React/Angular/Vue/Elm Test
 [Replay test with React](https://n0tan3rd.github.io/replay_test/) for [2017-03-09: A State Of Replay or Location, Location, Location](http://ws-dl.blogspot.com/2017/03/2017-03-09-state-of-replay-or-location.html)
 https://n0tan3rd.github.io/replay_test/
-- React SSR can detect it modifications made by the archive client side
+- React SSR can detect modifications (rewrites) made by the archive client side
 
 ### JS Powered HTML Components (Not Web Components Or Custom Elements)
 - See [distill](https://github.com/distillpub/template) and DHR [blog](http://blog.dshr.org/2017/05/distill-is-this-what-journals-should.html)
@@ -70,15 +82,15 @@ https://n0tan3rd.github.io/replay_test/
 - Pywb/Webrecorder have issues with this
 
 ### Hidden URLs :feelsgood:
-- base64 btoa, atob
-- URLs as text in `a,p,div` tags
-- URLS in char arrays
+- base64 btoa, [atob](https://github.com/N0taN3rd/archiveAcid/blob/master/src/index.js)
+- [URLs as text in `a,p,div` tags](https://github.com/N0taN3rd/archiveAcid/blob/master/docs/index.html)
+- URLS in [char arrays](https://github.com/N0taN3rd/archiveAcid/blob/master/src/notUrls.js)
 - URLS in link tags in body and head
 - URLS in meta/link tags known to not be rewritten
 - URLS in link header from archive/archived response
 - URLS in JSON script tag
 - URLS in XML script tag
-- URLS in the title
+- URLS in the title `document.title`
 ![get link headers](accessToLinkHeader.png)
 
 ### JS Detection And Prevention Of Archiving
@@ -99,11 +111,13 @@ if (window[_0xc76c[1]][_0xc76c[0]] && window[_0xc76c[1]][_0xc76c[0]][_0xc76c[3]]
 
 ### JS Detection Of Archiving With Correction
 - https://github.com/N0taN3rd/archiveAcid/blob/master/src/purl.js
+- [Iframe on host your supposed to be one communicate with parent](https://github.com/N0taN3rd/archiveAcid/blob/master/docs/evalInjectedIframe2.html)
 
 ### three.js
 - https://threejs.org/
 
 ### Eval
+- [Eval code that evals another html element](https://github.com/N0taN3rd/archiveAcid/blob/master/docs/funtimes.js)
 - Pywb/Webrecorder can not handle so will brick them hard. Something something Iframes??
 - Eval iframe with current URL as src heheehehehehe
 
