@@ -1,0 +1,26 @@
+{
+  "name": "Archival-Acid-Test-2.0",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:oduwsdl/Archival-Acid-Test-2.0.git",
+  "author": "John Berlin <n0tan3rd@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "express-session": "^1.15.4",
+    "feathers": "^2.1.7",
+    "feathers-authentication": "^1.2.7",
+    "feathers-hooks": "^2.0.2",
+    "feathers-nedb": "^2.6.2",
+    "feathers-rest": "^1.8.0",
+    "fs-extra": "^4.0.0",
+    "nedb": "^1.8.0",
+    "pug": "^2.0.0-rc.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
