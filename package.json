@@ -19,6 +19,7 @@
     "express-useragent": "^1.0.7",
     "feathers": "^2.1.7",
     "feathers-authentication": "^1.2.7",
+    "feathers-errors": "^2.9.1",
     "feathers-hooks": "^2.0.2",
     "feathers-nedb": "^2.6.2",
     "feathers-rest": "^1.8.0",
@@ -38,7 +39,8 @@
     "webpack-dev-server": "^2.6.1"
   },
   "scripts": {
-    "run-backend": "DEBUG=express:* node --harmony backend/",
+    "run-backend": "node --harmony backend/index.js",
+    "run-api": "node --harmony backend/apiServer",
     "dev-ui": "HOT=1 NODE_ENV=development node --harmony ./node_modules/.bin/webpack-dev-server --config ./webpack/cors/webpack.config.js --port 9000 --content-base ./apps/cors/simpleTest --hot --inline"
   },
   "devDependencies": {

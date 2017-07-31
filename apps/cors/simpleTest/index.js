@@ -13,39 +13,42 @@ const url = 'https://api.flickr.com/services/rest/?' +
 
 function loadPhotosJQ () {
   let photos = $('#photos')
-  $.ajax(url, {
+  $.ajax('http://localhost:8091/serviceCors/i', {
     type: meth,
     dataType: 'json'
   }).done((data, textStatus, jqXHR) => {
-    let cdiv = $('<div class="uk-flex">').append(
-        $('<div style="height: 200px; overflow: auto;" class="uk-grid-collapse uk-grid-small uk-width-1-2" uk-grid>').attr('id', 'jqPhotos')
-      ).append(
-        $('<div class="uk-width-1-2">').append(
-          $('<div class="uk-card uk-card-default uk-card-body" id="jqStatus">')
-        )
-      )
-
     console.log(data)
     console.log(textStatus)
-    console.log(jqXHR.getAllResponseHeaders())
-    photos.empty()
-    photos.append(cdiv)
-    let jqPhotos = $('#jqPhotos')
-    let jqStatus = $('#jqStatus')
-    if (data.stat === 'ok') {
-      let ims = data.photos.photo
-      let i = 0
-      let len = ims.length
-      for (; i < len; i++) {
-        jqPhotos.append(
-          $('<div class="uk-tile uk-tile-default">').append(
-            $('<img>', { src: ims[ i ].url_q })
-          )
-        )
-      }
-    } else {
-
-    }
+    console.log(jqXHR)
+    // let cdiv = $('<div class="uk-flex">').append(
+    //     $('<div style="height: 200px; overflow: auto;" class="uk-grid-collapse uk-grid-small uk-width-1-2" uk-grid>').attr('id', 'jqPhotos')
+    //   ).append(
+    //     $('<div class="uk-width-1-2">').append(
+    //       $('<div class="uk-card uk-card-default uk-card-body" id="jqStatus">')
+    //     )
+    //   )
+    //
+    // console.log(data)
+    // console.log(textStatus)
+    // console.log(jqXHR.getAllResponseHeaders())
+    // photos.empty()
+    // photos.append(cdiv)
+    // let jqPhotos = $('#jqPhotos')
+    // let jqStatus = $('#jqStatus')
+    // if (data.stat === 'ok') {
+    //   let ims = data.photos.photo
+    //   let i = 0
+    //   let len = ims.length
+    //   for (; i < len; i++) {
+    //     jqPhotos.append(
+    //       $('<div class="uk-tile uk-tile-default">').append(
+    //         $('<img>', { src: ims[ i ].url_q })
+    //       )
+    //     )
+    //   }
+    // } else {
+    //
+    // }
     // bowfinben@cs.com
   })
   /*

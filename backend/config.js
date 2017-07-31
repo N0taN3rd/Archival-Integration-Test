@@ -12,5 +12,9 @@ module.exports = {
     }
   },
   port: 8090,
-  dbPath: path.join(__dirname,'..', 'dbs')
+  apiPort: 8091,
+  dbPath: path.join(__dirname,'..', 'dbs'),
+  staticPath: path.join(__dirname, '..', 'public'),
+  viewsPath: path.join(__dirname, '..', 'pug'),
+  viewEngine: 'pug'
 }
