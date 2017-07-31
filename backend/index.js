@@ -11,16 +11,23 @@ const path = require('path')
 const http = require('http')
 
 const config = require('./config')
+const redirectionRouter = require('./routes/redirection')
 
 const app = feathers(express())
 
 app.set('config', config)
-app.set('view engine', 'pug')
+  .set('views', path.join(__dirname, '..', 'pug'))
+  .set('view engine', 'pug')
+
+app.configure(rest())
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
   .use(cookieParser())
   .use(bodyParser.json())
-  .use(bodyParser.urlencoded({ extended: true }))
+  .use(bodyParser.urlencoded({extended: true}))
+
+app.use('/redirection', redirectionRouter)
+
 
 const server = new http.Server(app)
 

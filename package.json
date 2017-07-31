@@ -6,24 +6,50 @@
   "author": "John Berlin <n0tan3rd@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@blueprintjs/core": "^1.24.0",
+    "@blueprintjs/docs": "^1.1.1",
+    "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "compression": "^1.7.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "express": "^4.15.3",
     "express-session": "^1.15.4",
+    "express-useragent": "^1.0.7",
     "feathers": "^2.1.7",
     "feathers-authentication": "^1.2.7",
     "feathers-hooks": "^2.0.2",
     "feathers-nedb": "^2.6.2",
     "feathers-rest": "^1.8.0",
     "fs-extra": "^4.0.0",
+    "jquery": "^3.2.1",
+    "js-cookie": "^2.1.4",
+    "lodash": "^4.17.4",
     "nedb": "^1.8.0",
+    "normalize.css": "^7.0.0",
     "pug": "^2.0.0-rc.2",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "uikit": "^3.0.0-beta.27",
+    "useragent": "^2.2.1",
+    "webpack-dev-server": "^2.6.1"
   },
   "scripts": {
-    "run-backend": "node --harmony backend/"
+    "run-backend": "DEBUG=express:* node --harmony backend/",
+    "dev-ui": "HOT=1 NODE_ENV=development node --harmony ./node_modules/.bin/webpack-dev-server --config ./webpack/cors/webpack.config.js --port 9000 --content-base ./apps/cors/simpleTest --hot --inline"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "json-loader": "^0.5.7",
+    "raw-loader": "^0.5.1",
+    "request": "^2.81.0",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.4.1",
+    "yamlparser": "^0.0.2"
   }
 }

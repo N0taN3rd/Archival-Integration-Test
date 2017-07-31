@@ -1,0 +1,22 @@
+doctype html
+html(lang='eng')
+    head
+        meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        meta(charset='utf-8')
+        title= title
+        script(src='/js/js.cookie.js')
+    body
+        h1= message
+        div#checkCookie
+        script.
+          var cdiv = document.getElementById('checkCookie')
+          var p = document.createElement('p')
+          var expectedCookie = Cookies.get('redirectFin')
+          if (expectedCookie !== null && expectedCookie !== undefined) {
+            p.innerHTML = `Yay you have the cookie! ${expectedCookie}`
+          } else {
+            p.innerHTML = `Boo you do not have the cookie!`
+          }
+          cdiv.appendChild(p);
+

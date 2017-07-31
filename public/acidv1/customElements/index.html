@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <base href="http://localhost:8090/acidv1/customElements/"/>
-    <title>The Archival Acid Test 1.0</title>
+    <base href="."/>
+    <title>ACTv1.0 Custom Elements</title>
     <style id="globalStyle" type="text/css">
         body {
             height: 150%;
@@ -38,6 +38,8 @@
 
         iframe {
             padding: 0;
+            margin: 0;
+            border: 0;
         }
 
         h1 {
@@ -61,28 +63,35 @@
             list-style-type: none;
         }
 
+        video {
+            margin: 0;
+            padding: 0;
+            float: left;
+            border: 0;
+        }
+
         div {
             height: 10px;
             border: 1px solid black;
             padding: 1px 0 1px 1px;
         }
 
-        .shadyDiv {
-            height: 10px;
-            border: 1px solid black;
-            padding: 1px 0 1px 1px;
-        }
-
         div#test1 {
-            width: 55px;
+            width: 66px;
         }
 
         div#scriptParent {
-            width: 77px;
+            width: 88px;
         }
 
         div#html5Parent {
-            width: 22px;
+            width: 44px;
+        }
+
+        iframe#test3c {
+            padding-right: 1px;
+            margin: 0;
+            float: left;
         }
 
         p#test2iHeightAssurance {
@@ -96,14 +105,20 @@
         li span {
             font-style: italic;
         }
+
+        #detectedBrowser {
+            font-style: normal;
+        }
     </style>
     <script type="text/javascript" src="arrayBuffer.js"></script>
 </head>
 <body>
+<p>Check <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements">Custom Elements MDN</a>
+    to see if your browser is supported</p>
 <acid-h data-which="1" data-content="The Archival Acid Test"></acid-h>
 <acid-fp></acid-fp>
 <acid-h data-which="2" data-content="The Tests"></acid-h>
-<acid-h data-which="3" data-content="The Basics (5 Tests)"></acid-h>
+<acid-h data-which="3" data-content="The Basics (6 tests)"></acid-h>
 <acid-basic data-id="test1"
             data-im1="pixel.png"
             data-title1="test1a"
@@ -115,15 +130,21 @@
             data-title4="test1d"
             data-im5="//acid.matkelly.com/pixel.png"
             data-title5="test1e"
+            data-im6="transparent_1f.png"
+            data-title6="test1f"
+            data-im6-class="onef"
+            data-im6-style="1f.css"
+            data-im6-id="onef"
 >
 </acid-basic>
-<acid-h data-which="3" data-content="Javascript (7 tests)"></acid-h>
+<acid-h data-which="3" data-content="Javascript (8 tests)"></acid-h>
 <template id="acid-js-script">
     <script type="text/javascript">
       //Test 2c, Script inline, DOM Manipution
       document.addEventListener('DOMContentLoaded', function () {
         var inlineScriptImage = new Image();
         inlineScriptImage.src = "pixel.png";
+        inlineScriptImage.title = "test2c";
         inlineScriptImage.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
         var veryShady = document.getElementById('shadowJs').shadowRoot;
         var scriptParent = veryShady.getElementById('scriptParent');
@@ -136,6 +157,7 @@
         var test2DImageRed = new Image();
         test2DImageRed.src = "red.png";
         test2DImageRed.id = "test2d";
+        test2DImageRed.title = "test2d";
         test2DImageRed.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
         var veryShady = document.getElementById('shadowJs').shadowRoot;
         var scriptParent = veryShady.getElementById('scriptParent');
@@ -143,7 +165,7 @@
 
         //Test 2d init AJAX
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://acid.matkelly.com/pixel.png', true);
+        xhr.open('GET', 'https://crossorigin.me/http://acid.matkelly.com/pixel.png', true);
         xhr.responseType = 'arraybuffer';
         xhr.onload = function (e) {
           veryShady.getElementById('test2d').src = "data:image/png;base64," + base64ArrayBuffer(e.currentTarget.response);
@@ -158,6 +180,7 @@
         var test2EImageBlue = new Image();
         test2EImageBlue.src = "pixel.png";
         test2EImageBlue.id = "test2e";
+        test2EImageBlue.title = "test2e";
         test2EImageBlue.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
         var veryShady = document.getElementById('shadowJs').shadowRoot;
         var scriptParent = veryShady.getElementById('scriptParent');
@@ -165,7 +188,7 @@
 
         //Test 10 init AJAX
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://acid.matkelly.com/pixel.png', true);
+        xhr.open('GET', 'https://crossorigin.me/http://acid.matkelly.com/pixel.png', true);
         try {
           xhr.responseType = 'arraybuffer';	//response type of synchronous request should not be changeable, INVALID_ACCESS_ERR: DOM Exception 15
           xhr.onload = function (e) {
@@ -184,6 +207,7 @@
         var test2GImageRed = new Image();
         test2GImageRed.src = "red.png";
         test2GImageRed.id = "test2g";
+        test2GImageRed.title = "test2g";
         test2GImageRed.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
         var veryShady = document.getElementById('shadowJs').shadowRoot;
         var scriptParent = veryShady.getElementById('scriptParent');
@@ -195,29 +219,29 @@
         }, 2000);
       });
       // Test 2h: code that manipulates DOM after a certain delay (test the synchonicity of tools)
-      document.addEventListener('DOMContentLoaded', function () {
-        //Test 2h setup
-        //var test13ImageBlue = new Image();
-        var test2HIframeBlue = document.createElement('iframe');
-        test2HIframeBlue.src = "pixel.png";
-        test2HIframeBlue.id = "test2h";
-        test2HIframeBlue.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
-        var veryShady = document.getElementById('shadowJs').shadowRoot;
-        var scriptParent = veryShady.getElementById('scriptParent');
-        //scriptParent.appendChild(test13ImageBlue);
-        //scriptParent.appendChild(test13IframeBlue);
+      /*document.addEventListener('DOMContentLoaded',function(){
+          //Test 2h setup
+          //var test13ImageBlue = new Image();
+          var test2HIframeBlue = document.createElement('iframe');
+          test2HIframeBlue.src = "pixel.png";
+          test2HIframeBlue.id = "test2h";
+          test2HIframeBlue.title = "test2h";
+          var scriptParent = document.getElementById('scriptParent');
+          //scriptParent.appendChild(test13ImageBlue);
+          //scriptParent.appendChild(test13IframeBlue);
 
-        setTimeout(function () {
-          //document.write('<scr'+'ipt type="text/javascript" src="dynamicallyIncludedScript.js"></sc'+'ript>');
-        }, 2100);
-      });
-      // Test 2i: code that loads content only after user interaction (tests for interaction-reliant loading of resource)
+          setTimeout(function(){
+              //document.write('<scr'+'ipt type="text/javascript" src="dynamicallyIncludedScript.js"></sc'+'ript>');
+          },2100);
+      });*/
+
+      // Test 2g: code that loads content only after user interaction (tests for interaction-reliant loading of resource)
       var test2iExecuted = false;
       document.addEventListener('DOMContentLoaded', function () {
         var test2IImageRed = new Image();
         test2IImageRed.src = "red.png";
         test2IImageRed.id = "test2i";
-        test2IImageRed.title = "2i";
+        test2IImageRed.title = "test2i";
         test2IImageRed.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
         var veryShady = document.getElementById('shadowJs').shadowRoot;
         var scriptParent = veryShady.getElementById('scriptParent');
@@ -228,47 +252,123 @@
           veryShady.getElementById('test2i').src = "pixel_2i.png";
         };
       });
+
+      // Test 2h: Dynamically added stylesheets
+      document.addEventListener('DOMContentLoaded', function () {
+        //Test 2j setup
+        var test2JImageRed = document.createElement('img');
+        test2JImageRed.src = "transparent_2j.png";
+        test2JImageRed.id = "test2j";
+        test2JImageRed.title = "test2j";
+        test2JImageRed.style = "margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+
+        var veryShady = document.getElementById('shadowJs').shadowRoot;
+        var scriptParent = veryShady.getElementById('scriptParent');
+        scriptParent.appendChild(test2JImageRed);
+
+        var linkTag = document.createElement("link");
+        linkTag.href = "2j.css";
+        linkTag.rel = "stylesheet";
+        linkTag.type = "text/css";
+
+        veryShady.appendChild(linkTag);
+        //scriptParent.appendChild(test13ImageBlue);
+        //scriptParent.appendChild(test13IframeBlue);
+
+        setTimeout(function () {
+          //document.write('<scr'+'ipt type="text/javascript" src="dynamicallyIncludedScript.js"></sc'+'ript>');
+        }, 2100);
+      });
     </script>
 </template>
 <acid-js id="shadowJs" data-id="scriptParent"
          data-t1-script="localScript.js"
          data-t1-id="localScript"
-         data-t2-script="http://www.cs.odu.edu/~mkelly/acid/externalScript.js"
+         data-t2-script="externalScript.js"
          data-t2-id="externalScript"
 ></acid-js>
-<acid-h data-which="3" data-content="HTML5 Features (2 tests)"></acid-h>
-<div id="html5Parent">
+<acid-h data-which="3" data-content="Advanced Features Tests (4 tests)"></acid-h>
+<template id="advancedScript">
     <script type="text/javascript" id="test3Ascript">
+
+      //TEST 3a: 	HTML5 Canvas drawing
       document.addEventListener('DOMContentLoaded', function () {
         //Test 3a setup
         var test3Acanvas = document.createElement('canvas');
         test3Acanvas.width = "10";
         test3Acanvas.height = "10";
         test3Acanvas.id = "test3a";
-        var scriptParent = document.getElementById('html5Parent');
-        scriptParent.replaceChild(test3Acanvas, document.getElementById('test3Ascript'));
+        test3Acanvas.title = "test3a";
+        test3Acanvas.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('acidAdv').shadowRoot;
+        var scriptParent = veryShady.getElementById('html5Parent');
+        scriptParent.replaceChild(test3Acanvas, veryShady.getElementById('test3Ascript'));
 
         //Test 3a, HTML5 Canvas Draw
-        var canvas = document.getElementById('test3a');
+        var canvas = veryShady.getElementById('test3a');
         var context = canvas.getContext("2d");
         context.fillStyle = "#0000FF";
         context.fillRect(0, 0, 10, 10);
+
       });
+
       //Test 3b: LocalStorage
       document.addEventListener('DOMContentLoaded', function () {
         //Test3b setup
         var test3BImageRed = new Image();
         test3BImageRed.src = "red.png";
         test3BImageRed.id = "test3b";
-        var scriptParent = document.getElementById('html5Parent');
+        test3BImageRed.title = "test3b";
+        test3BImageRed.style = "width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;";
+        var veryShady = document.getElementById('acidAdv').shadowRoot;
+        var scriptParent = veryShady.getElementById('html5Parent');
         scriptParent.appendChild(test3BImageRed);
 
         localStorage.setItem("test3bSrc", "pixel.png");
-        document.getElementById('test3b').src = localStorage.getItem('test3bSrc');
+        veryShady.getElementById('test3b').src = localStorage.getItem('test3bSrc');
 
       });
+
+      //Test 3c: Embedded web page (iframe)
+      document.addEventListener('DOMContentLoaded', function () {
+        var test3CIFrameElement = document.createElement("iframe");
+        test3CIFrameElement.id = "test3c";
+        test3CIFrameElement.width = "10";
+        test3CIFrameElement.height = "10";
+        test3CIFrameElement.src = "3c.html";
+        test3CIFrameElement.title = "test3c";
+        test3CIFrameElement.style = "padding: 0; margin: 0; border: 0; padding-right: 1px; margin: 0; float: left;";
+
+        var veryShady = document.getElementById('acidAdv').shadowRoot;
+        var scriptParent = veryShady.getElementById('html5Parent');
+        scriptParent.appendChild(test3CIFrameElement);
+      });
+
+      //Test 3f: HTML5 Multimedia
+      document.addEventListener('DOMContentLoaded', function () {
+        var test3FVideoElement = document.createElement("video");
+        test3FVideoElement.id = "test3f";
+        test3FVideoElement.width = "10";
+        test3FVideoElement.height = "10";
+        test3FVideoElement.autoplay = "autoplay";
+        test3FVideoElement.title = "test3f";
+        test3FVideoElement.style = "margin: 0; padding: 0; float: left; border: 0;";
+
+        var test3FSourceElement = document.createElement("source");
+        test3FSourceElement.src = "pixel_3f.mp4";
+        test3FSourceElement.type = "video/mp4";
+
+        test3FVideoElement.appendChild(test3FSourceElement);
+
+        var veryShady = document.getElementById('acidAdv').shadowRoot;
+        var scriptParent = veryShady.getElementById('html5Parent');
+        scriptParent.appendChild(test3FVideoElement);
+      });
+
+
     </script>
-</div>
+</template>
+<acid-advanced id="acidAdv" data-id="html5Parent"></acid-advanced>
 <acid-h id="moreInfo" data-which="2" data-content="More Information"></acid-h>
 <acid-h data-which="3" data-content="The Motivation"></acid-h>
 <acid-p data-content="The purpose of this web page is to test the capability of web crawlers intended for archiving (e.g., Heritrix) and
@@ -278,171 +378,212 @@
     means that some aesthetic or functionality capability of the page on the live web is not being preserved into the
     archive."></acid-p>
 <acid-h data-which="4" data-content="The Basics"></acid-h>
-<ul>
-    <li>1a - Local image, relative to the test</li>
-    <li>1b - Local image, absolute URI</li>
-    <li>1c - Remote image, absolute</li>
-    <li>1d - Inline content, encoded image</li>
-    <li>1e - Scheme-less resource</li>
-    <li>1f - Hotlinking span(not implemented)</li>
-</ul>
+<acid-ul
+        data-li="1a - Local image, relative to the test;1b - Local image, absolute URI;1c - Remote image, absolute;1d - Inline content, encoded image;1e - Scheme-less resource;1f - Recursively included CSS"
+></acid-ul>
 <acid-h data-which="4" data-content="JavaScript"></acid-h>
-<ul>
-    <li>2a - Script, local</li>
-    <li>2b - Script, remote</li>
-    <li>2c - Script inline, DOM manipulation</li>
-    <li>2d - Ajax image replacement of content that should be in archive</li>
-    <li>2e - Ajax requests with content that should be included in the archve, test for false positive (e.g., same
-        origin policy)
-    </li>
-    <li>2f - Code only served to certain user agents (e.g., mobile) span(not implemented)</li>
-    <li>2g - Code that manipulates DOM after a certain delay (test the synchronicity of the tools)</li>
-    <li>2h - spanVacant</li>
-    <li>2i - Code that loads content only after user interaction (tests for interaction-reliant loading of a resource)
-    </li>
-</ul>
+<acid-ul
+        data-li="2a - Script, local;2b - Script, remote;2c - Script inline, DOM manipulation;2d - Ajax image replacement of content that should be in archive;2e - Ajax requests with content that should be included in the archive, test for false positive (e.g., same origin policy);2f - Code that manipulates DOM after a certain delay (test the synchronicity of the tools);2g - Code that loads content only after user interaction (tests for interaction-reliant loading of a resource);2h - Code that dynamically adds stylesheets"
+></acid-ul>
 <acid-h data-which="4" data-content="HTML5 Features"></acid-h>
-<ul>
-    <li>3a - HTML5 Canvas Drawing</li>
-    <li>3b - LocalStorage</li>
-    <li>3c - Exernal Webpage span(not implemented)</li>
-    <li>3d - XSS Allowed span(not implemented)</li>
-    <li>3e - XSS Disallowed span(not implemented)</li>
-    <li>3f - Embedded Objects span(not implemented)</li>
-</ul>
-<p id="test2iHeightAssurance">&nbsp;</p>
+<acid-ul
+        data-li="3a - HTML5 Canvas Drawing;3b - LocalStorage;3c - External Webpage;3d - Embedded Objects (HTML5 video)"
+></acid-ul>
+<!--<p id="test2iHeightAssurance">&nbsp;</p>-->
+<acid-height></acid-height>
 <script>
-  class ACIDH extends HTMLElement {
-    constructor () {
-      super()
-      var shadow = this.attachShadow({mode: 'open'});
-      var which = this.getAttribute('data-which');
-      var h
-      switch (which) {
-        case '1':
-          h = document.createElement('h1');
-          h.style = 'margin-bottom: 0; padding-bottom: 0;';
-          break
-        case '2':
-          h = document.createElement('h2');
-          h.style = 'margin: 0; margin-top: 1.0em; padding: 0; clear: both;';
-          break
-        case '3':
-          h = document.createElement('h3');
-          h.style = 'margin: 0; padding: 0; clear: both;';
-          break
-        case '4':
-          h = document.createElement('h4');
-          h.style = 'margin: 0; padding: 0; clear: both;';
-          break
-        case '5':
-          h = document.createElement('h5');
-          h.style = 'margin: 0; padding: 0; clear: both;';
-          break
+  if ('customElements' in window) {
+    class ACIDH extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var which = this.getAttribute('data-which');
+        var h
+        switch (which) {
+          case '1':
+            h = document.createElement('h1');
+            h.style = 'margin-bottom: 0; padding-bottom: 0;';
+            break
+          case '2':
+            h = document.createElement('h2');
+            h.style = 'margin: 0; margin-top: 1.0em; padding: 0; clear: both;';
+            break
+          case '3':
+            h = document.createElement('h3');
+            h.style = 'margin: 0; padding: 0; clear: both;';
+            break
+          case '4':
+            h = document.createElement('h4');
+            h.style = 'margin: 0; padding: 0; clear: both;';
+            break
+          case '5':
+            h = document.createElement('h5');
+            h.style = 'margin: 0; padding: 0; clear: both;';
+            break
+        }
+        h.innerText = this.getAttribute('data-content');
+        shadow.appendChild(h);
       }
-      h.innerText = this.getAttribute('data-content');
-      shadow.appendChild(h);
     }
-  }
 
-  class ACIDA extends HTMLElement {
-    constructor () {
-      super()
-      var shadow = this.attachShadow({mode: 'open'});
-      var a = document.createElement('a');
-      a.href = this.getAttribute('data-ref');
-      a.innerText = this.getAttribute('data-content');
-      shadow.appendChild(a);
+    class ACIDA extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var a = document.createElement('a');
+        a.href = this.getAttribute('data-ref');
+        a.innerText = this.getAttribute('data-content');
+        shadow.appendChild(a);
+      }
     }
-  }
 
-  class ACIDP extends HTMLElement {
-    constructor () {
-      super()
-      var shadow = this.attachShadow({mode: 'open'});
-      var p = document.createElement('p');
-      p.style = 'margin: 0; padding: 0; clear: both;margin-bottom: 1.0em;';
-      p.innerHTML = this.getAttribute('data-content');
-      shadow.appendChild(p);
+    class ACIDP extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var p = document.createElement('p');
+        p.style = 'margin: 0; padding: 0; clear: both;margin-bottom: 1.0em;';
+        p.innerHTML = this.getAttribute('data-content');
+        shadow.appendChild(p);
+      }
     }
-  }
 
-  class ACIDIM extends HTMLElement {
-    constructor () {
-      super()
-      var shadow = this.attachShadow({mode: 'open'});
-      var im = document.createElement('img');
-      im.style = 'width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;';
-      im.src = this.getAttribute('data-im');
-      im.title = this.getAttribute('data-title');
-      shadow.appendChild(im);
+    class ACIDIM extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var im = document.createElement('img');
+        im.style = 'width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;';
+        im.src = this.getAttribute('data-im');
+        im.title = this.getAttribute('data-title');
+        shadow.appendChild(im);
+      }
     }
-  }
 
-  class ACIDFP extends HTMLElement {
-    constructor () {
-      super()
-      var shadow = this.attachShadow({mode: 'open'});
-      var p = document.createElement('p');
-      p.style = 'margin-bottom: 1.0em; padding: 0; clear: both;';
-      p.innerHTML = `
+    class ACIDIMWl extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var im = document.createElement('img');
+        im.style = 'width: 10px; height: 10px; margin: 0 1px 1px 0; padding: 0; display: block; float: left;';
+        im.src = this.getAttribute('data-im');
+        im.className = this.getAttribute('data-class');
+        im.id = this.getAttribute('data-id');
+        im.title = this.getAttribute('data-title');
+        var l = document.createElement('link');
+        l.rel = this.getAttribute('data-lrel');
+        l.type = this.getAttribute('data-ltype');
+        l.href = this.getAttribute('data-lref');
+        shadow.appendChild(l);
+        shadow.appendChild(im);
+      }
+    }
+
+    class ACIDFP extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var p = document.createElement('p');
+        p.style = 'margin-bottom: 1.0em; padding: 0; clear: both;';
+        p.innerHTML = `
            This page was setup to test the capabilities and shortcomings of archival web crawlers.
       More information about the rationale and individual tests can be found
       <acid-a data-ref="#moreInfo" data-content="below"></acid-a>.
       For questions/comments contact
       <acid-a data-ref="mailto:archiveacidtest@matkelly.com?subject=Archive Acid test comment" data-content="Mat Kelly"></acid-a>.
           `
-      shadow.appendChild(p);
+        shadow.appendChild(p);
+      }
     }
-  }
 
-  class ACIDBasic extends HTMLElement {
-    constructor () {
-      super()
-      var shadow = this.attachShadow({mode: 'open'});
-      var d = document.createElement('div');
-      d.id = this.getAttribute('data-id');
-      d.style= 'width: 55px;height: 10px; border: 1px solid black; padding: 1px 0 1px 1px;'
-      d.innerHTML = `
+    class ACIDBasic extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var d = document.createElement('div');
+        d.id = this.getAttribute('data-id');
+        d.style = 'width: 66px;height: 10px; border: 1px solid black; padding: 1px 0 1px 1px;'
+        d.innerHTML = `
         <acid-img data-im="${this.getAttribute('data-im1')}" data-title="${this.getAttribute('data-title1')}"></acid-img>
         <acid-img data-im="${this.getAttribute('data-im2')}" data-title="${this.getAttribute('data-title2')}"></acid-img>
         <acid-img data-im="${this.getAttribute('data-im3')}"  data-title="${this.getAttribute('data-title3')}"></acid-img>
         <acid-img data-im="${this.getAttribute('data-im4')}" data-title="${this.getAttribute('data-title4')}"></acid-img>
         <acid-img data-im="${this.getAttribute('data-im5')}" data-title="${this.getAttribute('data-title5')}"></acid-img>
+        <acid-imgwl data-im="${this.getAttribute('data-im6')}" data-title="${this.getAttribute('data-title6')}"
+        data-class="${this.getAttribute('data-im6-class')}" data-lref="${this.getAttribute('data-im6-style')}"
+        data-id="${this.getAttribute('data-im6-id')}" data-lrel="stylesheet" data-ltype="text/css"
+        ></acid-imgwl>
       `
-      shadow.appendChild(d);
+        shadow.appendChild(d);
+      }
     }
-  }
 
-  class ACIDJS extends HTMLElement {
-    constructor () {
-      super()
-      var shadow = this.attachShadow({mode: 'open'});
-      var d = document.createElement('div');
-      d.id = this.getAttribute('data-id');
-      d.style= 'width: 77px;height: 10px; border: 1px solid black; padding: 1px 0 1px 1px;';
-      shadow.appendChild(d);
-      var s1 = document.createElement('script');
-      s1.src = this.getAttribute('data-t1-script');
-      s1.id = this.getAttribute('data-t1-id');
-      s1.type = "text/javascript";
-      d.appendChild(s1);
-      var s2 = document.createElement('script');
-      s2.src = this.getAttribute('data-t2-script');
-      s2.id = this.getAttribute('data-t2-id');
-      s2.type = "text/javascript";
-      d.appendChild(s2);
-      d.appendChild(document.getElementById('acid-js-script').content);
+    class ACIDJS extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var d = document.createElement('div');
+        d.id = this.getAttribute('data-id');
+        d.style = 'width: 88px;height: 10px; border: 1px solid black; padding: 1px 0 1px 1px;';
+        shadow.appendChild(d);
+        var s1 = document.createElement('script');
+        s1.src = this.getAttribute('data-t1-script');
+        s1.id = this.getAttribute('data-t1-id');
+        s1.type = "text/javascript";
+        d.appendChild(s1);
+        var s2 = document.createElement('script');
+        s2.src = this.getAttribute('data-t2-script');
+        s2.id = this.getAttribute('data-t2-id');
+        s2.type = "text/javascript";
+        d.appendChild(s2);
+        var cloned = document.importNode(document.getElementById('acid-js-script').content, true);
+        d.appendChild(cloned);
+      }
     }
-  }
 
-  window.customElements.define('acid-h', ACIDH);
-  window.customElements.define('acid-a', ACIDA);
-  window.customElements.define('acid-p', ACIDP);
-  window.customElements.define('acid-img', ACIDIM);
-  window.customElements.define('acid-fp', ACIDFP);
-  window.customElements.define('acid-basic', ACIDBasic);
-  window.customElements.define('acid-js', ACIDJS);
+    class ACIDAdvanced extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var d = document.createElement('div');
+        d.id = this.getAttribute('data-id');
+        d.style = 'width: 44px; height: 10px; border: 1px solid black; padding: 1px 0 1px 1px;';
+        shadow.appendChild(d);
+        var cloned = document.importNode(document.getElementById('advancedScript').content, true);
+        d.appendChild(cloned);
+      }
+    }
+
+    class ACIDUl extends HTMLElement {
+      constructor () {
+        super()
+        var shadow = this.attachShadow({mode: 'open'});
+        var ul = document.createElement('ul');
+        ul.style = 'margin: 0.5em auto; padding-top: 0; list-style-type: none;';
+        ul.innerHTML = this.getAttribute('data-li').trim()
+          .split(';').map((lis) => `<li style="font-style: italic;">${lis}</li>`).join('');
+        shadow.appendChild(ul);
+      }
+    }
+
+    class ACIDHeight extends HTMLElement {
+      connectedCallback () {
+        this.innerHTML = '<p id="test2iHeightAssurance">&nbsp;</p>'
+      }
+    }
+
+    window.customElements.define('acid-h', ACIDH);
+    window.customElements.define('acid-a', ACIDA);
+    window.customElements.define('acid-p', ACIDP);
+    window.customElements.define('acid-img', ACIDIM);
+    window.customElements.define('acid-imgwl', ACIDIMWl);
+    window.customElements.define('acid-fp', ACIDFP);
+    window.customElements.define('acid-basic', ACIDBasic);
+    window.customElements.define('acid-js', ACIDJS);
+    window.customElements.define('acid-advanced', ACIDAdvanced);
+    window.customElements.define('acid-ul', ACIDUl);
+    window.customElements.define('acid-height', ACIDHeight);
+  }
 </script>
 </body>
 </html>
