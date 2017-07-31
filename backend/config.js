@@ -1,3 +1,4 @@
+const path = require('path')
 const ONE_DAY = 60 * 60 * 24 * 1000
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
       secure: process.env.NODE_ENV === 'production'
     }
   },
-  port: 8090
+  port: 8090,
+  dbPath: path.join(__dirname,'..', 'dbs')
 }

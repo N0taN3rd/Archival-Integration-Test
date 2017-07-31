@@ -1,5 +1,8 @@
-const {resolve} = require('path')
+const path = require('path')
 const webpack = require('webpack')
+
+const cwd = process.cwd()
+
 
 module.exports = {
   entry: [
@@ -10,13 +13,13 @@ module.exports = {
     filename: 'cors.js',
     // the output bundle
 
-    path: '/home/john/Archival-Acid-Test-2.0/apps/cors/simpleTest',
+    path: path.join(cwd,'apps/cors/simpleTest'),
 
     publicPath: '/'
     // necessary for HMR to know where to load the hot update chunks
   },
 
-  context: '/home/john/Archival-Acid-Test-2.0/apps/cors/simpleTest',
+  context: path.join(cwd,'apps/cors/simpleTest'),
 
   devtool: 'inline-source-map',
   module: {

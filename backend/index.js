@@ -12,9 +12,10 @@ const http = require('http')
 
 const config = require('./config')
 const redirectionRouter = require('./routes/redirection')
+const dbService = require('./services/db')
 
 const app = feathers(express())
-
+console.log(config)
 app.set('config', config)
   .set('views', path.join(__dirname, '..', 'pug'))
   .set('view engine', 'pug')
