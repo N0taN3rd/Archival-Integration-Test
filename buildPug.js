@@ -1,6 +1,18 @@
+const fs = require('fs-extra')
+const rp = require('request-promise')
+const ims = fs.readJsonSync('ims.json')
+var options = {
+  method: 'POST',
+  uri: 'http://localhost:8091/images',
+  body: ims.photos.photo,
+  json: true // Automatically stringifies the body to JSON
+}
+rp(options).then((res) => {
+  console.log(res)
+}).catch(error => {
+ console.error(error)
+})
 
-
-// const fs = require('fs-extra')
 // const pug = require('pug')
 //
 // const cwd = process.cwd()

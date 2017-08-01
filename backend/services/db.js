@@ -4,9 +4,16 @@ const service = require('feathers-nedb')
 
 module.exports = function configDb (app) {
   const {dbPath} = app.get('config')
-  const apiKeys = new DB({
-    filename: path.join(dbPath, 'apikeys.db'),
-    autoload: true
-  })
-  app.use('/apikeys', service({Model: apiKeys}))
+  app.use('/apikeys', service({
+    Model: new DB({
+      filename: path.join(dbPath, 'apikeys.db'),
+      autoload: true
+    })
+  }))
+  app.use('/images', service({
+    Model: new DB({
+      filename: path.join(dbPath, 'images.db'),
+      autoload: true
+    })
+  }))
 }

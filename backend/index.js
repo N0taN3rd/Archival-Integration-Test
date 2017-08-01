@@ -21,18 +21,17 @@ app
   .set('config', config)
   .set('views', config.viewsPath)
   .set('view engine', config.viewEngine)
-  .use(express.static(config.staticPath))
   .use(cookieParser())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({extended: true}))
-  .configure(rest())
+  .use(express.static(config.staticPath))
   .use('/redirection', redirectionRouter)
   .use(errorHandler())
 
-const server = new http.Server(app)
+// const server = new http.Server(app)
 
 if (config.port) {
-  server.listen(config.port, err => {
+  app.listen(config.port, err => {
     if (err) {
       console.error(err);
     }

@@ -1,10 +1,7 @@
-const conf = require('../config')
 const router = require('express').Router()
 const useragent = require('express-useragent')
+const randy = require('../util/randy')
 
-function randy (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
 
 const counterCookie = {
   httpOnly: true
