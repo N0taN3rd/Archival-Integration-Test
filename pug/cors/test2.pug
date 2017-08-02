@@ -1,0 +1,60 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(charset='utf-8')
+        title AATv2.0 Complex CORS Test
+        link(href='../css/uikit.min.css' rel='stylesheet')
+    body
+        nav.uk-navbar-container(uk-navbar)
+            .uk-navbar-left
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='/') Archival Acid Test 2.0
+                    li.uk-parent
+                        a(href='/cors') CORS
+                    li
+                        a(href='')
+            .uk-navbar-right
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='') Complex CORS Test
+                    li
+        .uk-section.uk-section-default
+            .uk-container
+                h1.uk-heading-divider.uk-text-center#cauthHead CORS AUTH
+                .uk-grid-small.uk-grid-match(class='uk-child-width-1-3@m', uk-grid uk-height-match="target: > div > .uk-card")
+                    div
+                        .uk-card.uk-card-default.uk-card-body
+                            h3.uk-card-title Auth With Server?
+                            p.uk-text-danger.uk-text-bold#auth No!
+                    div
+                        .uk-card.uk-card-default.uk-card-body
+                            h3.uk-card-title Validate Our Token?
+                            p.uk-text-danger.uk-text-bold#tokenValid No!
+                    div
+                        .uk-card.uk-card-default.uk-card-body
+                            h3.uk-card-title Get The Current User?
+                            p.uk-text-danger.uk-text-bold#getUsr No!
+                span.uk-clearfix
+                .uk-flex.uk-flex-center.uk-flex-auto
+                    .uk-card.uk-card-default.uk-card-large
+                        .uk-card-body#authErrorOrUser
+                            h3.uk-card-title State
+                        .uk-card-footer
+                            p#authState
+
+        .uk-section.uk-section-default
+            .uk-container
+                h1.uk-heading-divider.uk-text-center CORS AUTH Using Cookie
+                #photos-acid1
+                    h3 Loading photos...
+        .uk-section.uk-section-default
+            .uk-container
+                h1.uk-heading-divider.uk-text-center Request With Credential
+                #photos-acid2
+                    h3 Loading photos...
+        .uk-section.uk-section-default.uk-invisible#errorContainer
+            .uk-container#errors
+        script(src=scriptLoc)

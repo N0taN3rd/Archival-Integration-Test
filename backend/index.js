@@ -14,18 +14,24 @@ const http = require('http')
 
 const config = require('./config')
 const redirectionRouter = require('./routes/redirection')
+const cookies = require('./constants/cookies')
+const corsRouter = require('./routes/cors')
 
 const app = feathers(express())
 
 app
   .set('config', config)
-  .set('views', config.viewsPath)
   .set('view engine', config.viewEngine)
+  .set('views', config.viewsPath)
   .use(cookieParser())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({extended: true}))
   .use(express.static(config.staticPath))
   .use('/redirection', redirectionRouter)
+  .get('/cors', (req, res, next) => {
+    res.cookie('acidApiAuth', 'acid:tabs', cookies.httpDom)
+    res.render('cors/test1', {scriptLoc: 'http://localhost:9000/cors.js'})
+  })
   .use(errorHandler())
 
 // const server = new http.Server(app)

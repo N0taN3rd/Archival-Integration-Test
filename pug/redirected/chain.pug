@@ -5,6 +5,30 @@ html(lang='eng')
         meta(name='viewport' content='width=device-width, initial-scale=1.0')
         meta(charset='utf-8')
         title= title
+        link(href='/css/uikit.min.css' rel='stylesheet')
     body
-        h1= message
-
+        nav.uk-navbar-container(uk-navbar)
+            .uk-navbar-left
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='/') Archival Acid Test 2.0
+                    li.uk-parent
+                        a(href='/redirection') Redirection
+                    li
+                        a(href='')
+            .uk-navbar-right
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='#') Redirection Chain
+                    li
+        .uk-section.uk-section-default
+            .uk-container
+                h1.uk-heading-divider.uk-text-center= message
+                .uk-card.uk-card-default.uk-card-hover
+                    .uk-card-body
+                        .uk-card-header
+                            h3.uk-card-title User Agent At Archival Time
+                        .uk-card-badge.uk-label Winning!
+                        .uk-card-body
+                            p !{ua}
+        script(src='/js/chain-bundle.js')

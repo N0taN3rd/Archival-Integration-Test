@@ -1,31 +1,36 @@
 const router = require('express').Router()
 const useragent = require('express-useragent')
 const randy = require('../util/randy')
-
+const random = require('lodash/random')
 
 const counterCookie = {
-  httpOnly: true
+  httpOnly: true,
+  path: '/redirection'
 }
 const finCookie = {
-  httpOnly: false
+  httpOnly: false,
+  path: '/redirection'
 }
 
 router.get('/chain', (req, res) => {
-  res.redirect('/redirection/chain/1')
+  let times = randy(2, 5)
+  res.redirect(`/redirection/chain/${times}/1`)
 })
 
-router.get('/chain/:n(\\d+)', (req, res) => {
-  if (req.params.n <= 4) {
-    res.redirect(`/redirection/chain/${req.params.n + 1}`)
+router.get('/chain/:n(\\d+)/:c(\\d+)', (req, res) => {
+  let n = parseInt(req.params.n)
+  let c = parseInt(req.params.n) + 1
+  if (c <= n) {
+    res.redirect(`/redirection/chain/${req.params.n}/${c}`)
   } else {
-    res.redirect(`/redirection/chain/fin`)
+    res.redirect(`/redirection/chain/${req.params.n}/fin`)
   }
 })
 
-router.get('/chain/fin', (req, res) => {
+router.get('/chain/:n(\\d+)/fin', (req, res) => {
   res.render('redirected/chain', {
     title: `Final Redirection`,
-    message: `Made It Past 4 Redirections`,
+    message: `Made It Past ${req.params.n} Redirections`,
     ua: req.headers['user-agent']
   })
 })
@@ -64,7 +69,10 @@ router.get('/cookie/fin', (req, res) => {
   res.render('redirected/cookie', {
     title: `Final Redirection`,
     message: `The cookie accessible via 'document.cookie' you should have is ${rmc}`,
-    ua: req.headers['user-agent']
+    json: JSON.stringify({
+      expectedCookie: rmc,
+      ua: req.headers['user-agent']
+    })
   })
 })
 

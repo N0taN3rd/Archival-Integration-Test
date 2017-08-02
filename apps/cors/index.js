@@ -1,7 +1,7 @@
 import 'babel-polyfill'
+import $ from 'jquery'
 import UIkit from 'uikit'
 import Icons from 'uikit/dist/js/uikit-icons'
-import $ from 'jquery'
 import Promise from 'bluebird'
 import axios from 'axios'
 import feathers from 'feathers/client'
@@ -9,12 +9,12 @@ import auth from 'feathers-authentication-client'
 import rest from 'feathers-rest/client'
 import hooks from 'feathers-hooks'
 import localStorage from 'localstorage-memory'
-import Cookies from 'js-cookie'
-import { simple, acidApi1, acidApi2 } from '../jqTemplates'
+import { simple, acidApi1, acidApi2 } from './jqTemplates'
 
+UIkit.use(Icons)
 
 function loadPhotosJQ () {
-  let {apiKey,meth,url} = $.parseJSON($('#flik').text())
+  let {apiKey, meth, url} = $.parseJSON($('#flik').text())
   url = url + apiKey
   return new Promise((resolve, reject) => {
     let photos = $('#photos')
@@ -246,34 +246,6 @@ function loadPhotosApi1 () {
   })
 }
 
-function feathersAuth () {
-  const client = feathers()
-  client.configure(hooks())
-    .configure(rest('http://localhost:8091').axios(axios))
-    .configure(auth({storage: localStorage}))
-
-  client.authenticate({
-    strategy: 'acid-local',
-    email: 'rivalDealer@acid.test',
-    password: 'InfectedMushroom'
-  })
-    .then(response => {
-      console.log('Authenticated!', response);
-      return client.passport.verifyJWT(response.accessToken)
-    })
-    .then(payload => {
-      console.log('JWT Payload', payload);
-      return client.service('users').get(payload.userId)
-    })
-    .then(user => {
-      client.set('user', user);
-      console.log('User', client.get('user'))
-    })
-    .catch(function (error) {
-      console.error('Error authenticating!', error)
-    })
-}
-
 function loadPhotosApi2 () {
   let instance = axios.create()
   instance.defaults.headers.common['Accept'] = 'application/acid.cors-ims-lookup.2'
@@ -444,20 +416,104 @@ function loadPhotosApi2 () {
   })
 }
 
+function feathersAuth () {
+  const client = feathers()
+  client.configure(hooks())
+    .configure(rest('http://localhost:8091').axios(axios))
+    .configure(auth({storage: localStorage}))
+  return new Promise((resolve, reject) => {
+    let state = 'Making Auth Request'
+    $('#authState').text(state)
+    client.authenticate({
+      strategy: 'acid-local',
+      email: 'rivalDealer@acid.test',
+      password: 'InfectedMushroom'
+    })
+      .then(response => {
+        console.log('Authenticated!', response)
+        state = 'Verifying Token'
+        $('#authState').text(state)
+        $('#auth').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
+        return client.passport.verifyJWT(response.accessToken)
+      })
+      .then(payload => {
+        state = 'Retrieving User'
+        $('#authState').text(state)
+        console.log('JWT Payload', payload);
+        $('#tokenValid').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
+        return client.service('users').get(payload.userId)
+      })
+      .then(user => {
+        state = 'Got User'
+        $('#authState').addClass('uk-text-success').text(state)
+        client.set('user', user);
+        $('#getUsr').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
+        let puser = client.get('user')
+        console.log('User', puser)
+        $('#authErrorOrUser').append($(`<div class="uk-card-badge uk-label">Winning!</div>`))
+          .append($(`<p>
+             userId: ${puser.id}<br/>   
+             email: ${puser.email}<br/>   
+             permissions: ${puser.permissions.join('')}<br/>   
+        </p>`))
+        resolve()
+      })
+      .catch(function (error) {
+        $('#authState').addClass('uk-text-danger').text(`Error! ${state}`)
+        $('#cauthHead').addClass('uk-text-danger')
+        if (error.code) {
+          $('#authErrorOrUser').append($(`<div class="uk-card-badge uk-label uk-label-danger">HTTP ${error.code}</div>`))
+            .append($(`<p>
+        ${error.name}: ${error.message}
+      </p>`))
+        } else {
+          $('#authErrorOrUser').append($(`<div class="uk-card-badge uk-label uk-label-danger">Bad JUJU</div>`))
+            .append($(`<p>${error instanceof Error ? error : JSON.stringify(error)}</p>`))
+        }
+        console.error('Error authenticating!', error)
+        resolve()
+      })
+  })
+}
+
 $(document).ready(() => {
-  loadPhotosJQ().then(() =>{})
-    .catch(error => {
-      $('#errorContainer').removeClass('uk-invisible')
-      $('#errors').append(`<p class="uk-text-break uk-text-danger">Request To Another Domain api.flickr.com ${error}</p>`)
-    })
-  loadPhotosApi1().then(() =>{})
-    .catch(error => {
-      $('#errorContainer').removeClass('uk-invisible')
-      $('#errors').append(`<p class="uk-text-break uk-text-danger">Request With Custom Accept Value and X Header ${error}</p>`)
-    })
-  loadPhotosApi2().then(() =>{})
-    .catch(error => {
-      $('#errorContainer').removeClass('uk-invisible')
-      $('#errors').append(`<p class="uk-text-break uk-text-danger">Request With Credential ${error}</p>`)
-    })
+  // I do not want to use babel for async!
+  // I got reasons yo
+  Promise.map([1, 2, 3, 4], (idx) => new Promise((resolve, reject) => {
+    if (idx === 1) {
+      return loadPhotosJQ().then(() => resolve())
+        .catch(error => {
+          $('#errorContainer').removeClass('uk-invisible')
+          $('#errors').append(`<p class="uk-text-break uk-text-danger">Request To Another Domain api.flickr.com ${error}</p>`)
+          resolve()
+        })
+    } else if (idx === 2) {
+      return loadPhotosApi1().then(() => resolve())
+        .catch(error => {
+          $('#errorContainer').removeClass('uk-invisible')
+          $('#errors').append(`<p class="uk-text-break uk-text-danger">Request With Custom Accept Value and X Header ${error}</p>`)
+          resolve()
+        })
+    } else if (idx === 3) {
+      return loadPhotosApi2().then(() => resolve())
+        .catch(error => {
+          $('#errorContainer').removeClass('uk-invisible')
+          $('#errors').append(`<p class="uk-text-break uk-text-danger">Request With Credential ${error}</p>`)
+          resolve()
+        })
+    } else if (idx === 4) {
+      return feathersAuth().then(() => resolve())
+        .catch(error => {
+          $('#errorContainer').removeClass('uk-invisible')
+          $('#errors').append(`<p class="uk-text-break uk-text-danger">Authing ${error}</p>`)
+          resolve()
+        })
+    } else {
+      resolve()
+    }
+  }), {concurrency: 1}).then(() => {
+    console.log('Done!')
+  }).catch(error => {
+    console.error(error)
+  })
 })

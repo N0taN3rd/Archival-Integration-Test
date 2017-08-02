@@ -3,23 +3,21 @@ const webpack = require('webpack')
 
 const cwd = process.cwd()
 
-
 module.exports = {
-  entry: [
-    './index.js'
-    // the entry point of our app
-  ],
+  entry: {
+    chain: './chain.js',
+    cookie: './cookie.js',
+    default: '../default.js',
+  },
   output: {
-    filename: 'cors.js',
-    // the output bundle
-
-    path: path.join(cwd,'apps/cors/complexTest'),
-
+    filename: '[name]-bundle.js',
+    chunkFilename: '[name]-chunk.js',
+    path: path.join(cwd, 'public/js'),
     publicPath: '/'
     // necessary for HMR to know where to load the hot update chunks
   },
 
-  context: path.join(cwd,'apps/cors/complexTest'),
+  context: path.join(cwd, 'apps/redirection'),
   module: {
     rules: [
       {
@@ -55,13 +53,13 @@ module.exports = {
     ],
   },
   plugins: [
-    // enable HMR globally
-    new webpack.NoEmitOnErrorsPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+    }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
 
   ],
 }

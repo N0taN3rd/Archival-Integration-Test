@@ -17,7 +17,10 @@ module.exports = function () {
     this.service('authentication').hooks({
       before: {
         create: [
-          auth.hooks.authenticate('local')
+          auth.hooks.authenticate(['jwt', 'acid-local'])
+        ],
+        remove: [
+          auth.hooks.authenticate('jwt')
         ]
       }
     })
@@ -26,8 +29,12 @@ module.exports = function () {
 // the password with a hash of the password before saving it.
     this.service('users').hooks({
       before: {
-        get: auth.hooks.authenticate('jwt'),
-        create: local.hooks.hashPassword()
+        find: [
+          auth.hooks.authenticate('jwt')
+        ],
+        create: [
+          local.hooks.hashPassword({ passwordField: 'password' })
+        ]
       }
     })
     this.service('users').create(superUser)

@@ -5,21 +5,16 @@ const cwd = process.cwd()
 
 
 module.exports = {
-  entry: [
-    './index.js'
-    // the entry point of our app
-  ],
-  output: {
-    filename: 'cors.js',
-    // the output bundle
-
-    path: path.join(cwd,'apps/cors/complexTest'),
-
-    publicPath: '/'
-    // necessary for HMR to know where to load the hot update chunks
+  entry:{
+   combined: './index.js'
   },
-
-  context: path.join(cwd,'apps/cors/complexTest'),
+  output: {
+    filename: 'cors-[name]-bundle.js',
+    chunkFilename: 'cors-[name]-chunk.js',
+    path: path.join(cwd, 'public/js'),
+    publicPath: '/'
+  },
+  context: path.join(cwd,'apps/cors'),
   module: {
     rules: [
       {
@@ -55,13 +50,20 @@ module.exports = {
     ],
   },
   plugins: [
-    // enable HMR globally
-    new webpack.NoEmitOnErrorsPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: "cors-commons.js",
+      minChunks(module, count) {
+        const context = module.context
+        return context && context.indexOf('node_modules') >= 0
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+    }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
-
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
   ],
 }

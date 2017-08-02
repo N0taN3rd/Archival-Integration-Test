@@ -1,17 +1,13 @@
 const fs = require('fs-extra')
 const rp = require('request-promise')
 const ims = fs.readJsonSync('ims.json')
-var options = {
-  method: 'POST',
-  uri: 'http://localhost:8091/images',
-  body: ims.photos.photo,
-  json: true // Automatically stringifies the body to JSON
-}
-rp(options).then((res) => {
-  console.log(res)
-}).catch(error => {
- console.error(error)
-})
+
+const apiKey = '3e75fa0fe8a8ea56a70bfb66a53e9220'
+const meth = 'GET'
+const url = `https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&user_id=32951986%40N05&extras=url_q&format=json&nojsoncallback=1&api_key=`
+
+const it = {apiKey, meth, url}
+fs.writeJSONSync('flick.json', it)
 
 // const pug = require('pug')
 //
