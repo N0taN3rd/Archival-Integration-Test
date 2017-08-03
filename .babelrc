@@ -5,13 +5,20 @@
       {
         "targets": {
           "browsers": [
-            "last 1 versions"
+            "last 7 versions"
           ]
         },
-        "modules": false,
-        "useBuiltIns": true,
-        "debug": true
+        "modules": false
       }
-    ]
-  ]
+    ],
+    "stage-0",
+    "react"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
 }

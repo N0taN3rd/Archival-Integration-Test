@@ -1,0 +1,63 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(charset='utf-8')
+        title AATv2.0 Iframe Madness
+        link(rel='stylesheet' href='/css/iframeMadness.css')
+    body
+        iframe.acidFrame(src='/highlyDynamic/iframeMadness/navHeader.html')
+        .testBody
+            .uk-flex.uk-flex-around
+                p.uk-text-break.uk-text-small
+                    | 1. This Test is to determine who well the archival and replay system is at handling extremely dynamic content.
+                    br
+                    |             2. The header above me was loaded from an Iframe[src] not obfuscated.
+                    br
+                    |             3. This page will be eval injecting an Iframe[src=obfuscated] who will tell the parent page(this one) the correct domain we should be on.
+                    br
+                    |             4. It will also be used to make a request for another page that generates random numbers.
+                    br
+                p.uk-text-break.uk-text-small
+                    | 5. The parent page will rewrite those links to work on this page.
+                    br
+                    |             6. If we can detect we are not on the correct domain the page will attempt to correct any URLs used to requested for if they are rewritten.
+                    br
+                    |             7. But most links are obfuscated so unless JavaScript is executed at archival time, zombies will invade or 404 errors.
+                    br
+                    |             8. The two images in this test are retrieved using the text of their containing HTML elements for the URL
+            .uk-container
+                p#hostNotif
+                .flexer.evalInjectContainer
+                    #evalInject.evalInjectedDiv
+                    #randyNums.randyNumsScoller
+                .corsMEContainer
+                    #corsMe.corsME
+                        p#coresMeURL #{apiLoremPixelEncoded}
+                        #coresMeImDiv
+                    #corsMe2.corsME2
+                        p
+                            | This is the same url but I will play nice. Still going to use it to make a request to the live web. :)
+                        a#coresMeUR2L(href=apiLoremPixel) #{apiLoremPixel}
+                        #coresMeImDiv2
+                p#heheh(style='display: none') L2hpZ2hseUR5bmFtaWMvaWZyYW1lTWFkbmVzcy9ldmFsSW5qZWN0ZWRJZnJhbWUyLmh0bWw=
+            .uk-panel(style='margin: 20px;')
+                .uk-flex.uk-flex-row.uk-flex-around.uk-flex-wrap
+                    div
+                        #_infoEvalInjected
+                        #_infoGotRandy
+                    div
+                        #_infoCors1
+                        #_infoCors2
+            script(src='/js/iframeMadness-bundle.js')
+            // <script src="http://localhost:9000/iframeMadness-bundle.js"></script>
+            script.
+              function receiveMessage (event) {
+                if (event.data.type === 'goHome') {
+                  window.location = '/'
+                } else if (event.data.type === 'goDynam') {
+                  window.location = '/highlyDynamic'
+                }
+              }
+              window.addEventListener("message", receiveMessage, false)

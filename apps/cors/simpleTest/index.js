@@ -12,9 +12,8 @@ import localStorage from 'localstorage-memory'
 import Cookies from 'js-cookie'
 import { simple, acidApi1, acidApi2 } from '../jqTemplates'
 
-
 function loadPhotosJQ () {
-  let {apiKey,meth,url} = $.parseJSON($('#flik').text())
+  let {apiKey, meth, url} = $.parseJSON($('#flik').text())
   url = url + apiKey
   return new Promise((resolve, reject) => {
     let photos = $('#photos')
@@ -240,9 +239,8 @@ function loadPhotosApi1 () {
       // console.log('Error', error.message);
       acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Really Bad JUJU</div>`))
       acid1Status.append($(`<p class="uk-text-break">${error.message}</p>`))
-
     }
-    console.log(error.config);
+    console.log(error.config)
   })
 }
 
@@ -258,15 +256,15 @@ function feathersAuth () {
     password: 'InfectedMushroom'
   })
     .then(response => {
-      console.log('Authenticated!', response);
+      console.log('Authenticated!', response)
       return client.passport.verifyJWT(response.accessToken)
     })
     .then(payload => {
-      console.log('JWT Payload', payload);
+      console.log('JWT Payload', payload)
       return client.service('users').get(payload.userId)
     })
     .then(user => {
-      client.set('user', user);
+      client.set('user', user)
       console.log('User', client.get('user'))
     })
     .catch(function (error) {
@@ -406,9 +404,9 @@ function loadPhotosApi2 () {
     if (error.response) {
       // // The request was made and the server responded with a status code
       // // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
+      console.log(error.response.data)
+      console.log(error.response.status)
+      console.log(error.response.headers)
       let head = ''
       for (let [k, v] of Object.entries(error.response.headers)) {
         head += `${k}: ${v}<br/>`
@@ -435,7 +433,7 @@ function loadPhotosApi2 () {
       acid1Status.append($(`<p class="uk-text-break">Why You Gotta Be Like This Smalls</p>`))
     } else {
       //   // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
+      console.log('Error', error.message)
       acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Really Bad JUJU</div>`))
       acid1Status.append($(`<p class="uk-text-break">${error.message}</p>`))
       //
@@ -445,17 +443,17 @@ function loadPhotosApi2 () {
 }
 
 $(document).ready(() => {
-  loadPhotosJQ().then(() =>{})
+  loadPhotosJQ().then(() => {})
     .catch(error => {
       $('#errorContainer').removeClass('uk-invisible')
       $('#errors').append(`<p class="uk-text-break uk-text-danger">Request To Another Domain api.flickr.com ${error}</p>`)
     })
-  loadPhotosApi1().then(() =>{})
+  loadPhotosApi1().then(() => {})
     .catch(error => {
       $('#errorContainer').removeClass('uk-invisible')
       $('#errors').append(`<p class="uk-text-break uk-text-danger">Request With Custom Accept Value and X Header ${error}</p>`)
     })
-  loadPhotosApi2().then(() =>{})
+  loadPhotosApi2().then(() => {})
     .catch(error => {
       $('#errorContainer').removeClass('uk-invisible')
       $('#errors').append(`<p class="uk-text-break uk-text-danger">Request With Credential ${error}</p>`)

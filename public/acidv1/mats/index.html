@@ -103,7 +103,7 @@ SUVORK5CYII=" title="test1d" />
 
       //Test 2d init AJAX
       var xhr = new XMLHttpRequest();
-      xhr.open('GET','http://acid.matkelly.com/pixel.png',true);
+      xhr.open('GET','https://crossorigin.me/http://acid.matkelly.com/pixel.png',true);
       xhr.responseType = 'arraybuffer';
       xhr.onload = function(e) {
         document.getElementById('test2d').src = "data:image/png;base64,"+base64ArrayBuffer(e.currentTarget.response);
@@ -125,7 +125,7 @@ SUVORK5CYII=" title="test1d" />
 
       //Test 10 init AJAX
       var xhr = new XMLHttpRequest();
-      xhr.open('GET','http://acid.matkelly.com/pixel.png',true);
+      xhr.open('GET','https://crossorigin.me/http://acid.matkelly.com/pixel.png',true);
       try{
         xhr.responseType = 'arraybuffer';	//response type of synchronous request should not be changeable, INVALID_ACCESS_ERR: DOM Exception 15
         xhr.onload = function(e) {
@@ -392,15 +392,6 @@ SUVORK5CYII=" title="test1d" />
     });
   });
 </script>
-
-<h3>Metadata</h3>
-<ul>
-  <li>Reported User-Agent string: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36</li>
-  <li>Detected User-Agent: <span id="detectedBrowser"></span></li>
-  <li>Access Time: 2017-07-29 12:56:57</li>
-</ul>
-
-
 
 </body>
 </html>

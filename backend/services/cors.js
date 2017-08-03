@@ -23,7 +23,6 @@ class CORService {
         return this._ims.get({query: {$limit: 1}})
     }
     // return rp(flickr).then((res) => res)
-
   }
 
   find (id, params) {
@@ -59,7 +58,6 @@ function badAcceptType (accept, types) {
   }
   return !accept.includes(types)
 }
-
 
 const checkRanyIm = new Set(['/serviceCors/randyIm', '/serviceCors/randyImCred'])
 const checkCred = '/serviceCors/randyImCred'

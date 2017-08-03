@@ -37,4 +37,3 @@ fs.writeJSONSync('flick.json', it)
 //   .catch(error => {
 //     console.error(error)
 //   })
-

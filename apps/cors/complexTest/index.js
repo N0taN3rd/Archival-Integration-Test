@@ -36,14 +36,14 @@ function feathersAuth () {
     .then(payload => {
       state = 'Retrieving User'
       $('#authState').text(state)
-      console.log('JWT Payload', payload);
+      console.log('JWT Payload', payload)
       $('#tokenValid').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
       return client.service('users').get(payload.userId)
     })
     .then(user => {
       state = 'Got User'
       $('#authState').addClass('uk-text-success').text(state)
-      client.set('user', user);
+      client.set('user', user)
       $('#getUsr').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
       let puser = client.get('user')
       console.log('User', puser)

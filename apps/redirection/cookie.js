@@ -3,6 +3,7 @@ import $ from 'jquery'
 import UIkit from 'uikit'
 import Icons from 'uikit/dist/js/uikit-icons'
 import Cookies from 'js-cookie'
+UIkit.use(Icons)
 
 $(document).ready(() => {
   const embedJson = $.parseJSON($('#json').text())

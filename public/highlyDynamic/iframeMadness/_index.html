@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>AATv2.0 Iframe Madness</title>
+    <style>
+        html, body {
+            background: #e2e1e0;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            overflow: hidden;
+        }
+
+        .alert {
+            padding: 20px;
+            background-color: #f44336; /* Red */
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            background-color: #4CAF50;
+        }
+
+        .flexer {
+            display: flex;
+        }
+
+        .evalInjectContainer {
+            background: #fff;
+            border-radius: 2px;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .randyNumsScoller {
+            overflow-Y: auto;
+            overflow-x: auto;
+            max-height: 250px;
+            width: 70%;
+            padding: 25px;
+        }
+
+        .evalInjectedDiv {
+            width: 30%;
+        }
+
+        .corsMEContainer {
+            width: 100%;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .corsME {
+            text-align: center;
+            margin: 1rem;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .corsME::before {
+            content: 'This is an url and will be using it to make a request to the live web. :)';
+        }
+
+        .corsME2 {
+            text-align: center;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .acidFrame {
+            width: 100%;
+            height: 80px;
+            border: none;
+            padding: 0;
+        }
+
+        .testBody {
+            height: 100%;
+            width: 100%;
+            max-width: calc(100% -  5px);
+            max-height: calc(100% - 80px);
+            overflow: auto;
+        }
+
+        .uk-container {
+            box-sizing: content-box;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px
+        }
+
+        @media (min-width: 640px) {
+            .uk-container {
+                padding-left:30px;
+                padding-right: 30px
+            }
+        }
+
+        @media (min-width: 960px) {
+            .uk-container {
+                padding-left:40px;
+                padding-right: 40px
+            }
+        }
+
+        .uk-container::after,.uk-container::before {
+            content: "";
+            display: table
+        }
+
+        .uk-container::after {
+            clear: both
+        }
+
+        .uk-container>:last-child {
+            margin-bottom: 0
+        }
+
+        .uk-container .uk-container {
+            padding-left: 0;
+            padding-right: 0
+        }
+
+        .uk-container-small {
+            max-width: 900px
+        }
+
+        .uk-container-large {
+            max-width: 1600px
+        }
+
+        .uk-container-expand {
+            max-width: none
+        }
+
+        @media (min-width: 960px) {
+            .uk-section {
+                padding-top: 70px;
+                padding-bottom: 70px
+            }
+        }
+
+        .uk-section {
+            box-sizing: border-box;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        .uk-panel {
+            position: relative;
+            box-sizing: border-box;
+        }
+        /*
+         * Micro clearfix
+         */
+        .uk-panel::before,
+        .uk-panel::after {
+            content: "";
+            display: table;
+        }
+        .uk-panel::after {
+            clear: both;
+        }
+        /*
+         * Remove margin from the last-child
+         */
+        .uk-panel > :last-child {
+            margin-bottom: 0;
+        }
+        /*
+         * Scrollable
+         */
+        .uk-panel-scrollable {
+            height: 500px;
+            padding: 10px;
+            border: 1px solid;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            resize: both;
+        }
+        .uk-text-break {
+            /* 1 */
+            overflow-wrap: break-word;
+            /* 2 */
+            word-wrap: break-word;
+            /* 3 */
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
+        }
+        .uk-flex {
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+        .uk-flex-inline {
+            display: -ms-inline-flexbox;
+            display: -webkit-inline-flex;
+            display: inline-flex;
+        }
+        /*
+         * Remove pseudo elements created by micro clearfix as precaution
+         */
+        .uk-flex::before,
+        .uk-flex::after,
+        .uk-flex-inline::before,
+        .uk-flex-inline::after {
+            display: none;
+        }
+        /* Alignment
+         ========================================================================== */
+        /*
+         * Align items along the main axis of the current line of the flex container
+         * Row: Horizontal
+         */
+        .uk-flex-left {
+            -ms-flex-pack: start;
+            -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+        }
+        .uk-flex-center {
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+        .uk-flex-right {
+            -ms-flex-pack: end;
+            -webkit-justify-content: flex-end;
+            justify-content: flex-end;
+        }
+        .uk-flex-between {
+            -ms-flex-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+        .uk-flex-around {
+            -ms-flex-pack: distribute;
+            -webkit-justify-content: space-around;
+            justify-content: space-around;
+        }
+        /* Phone landscape and bigger */
+        @media (min-width: 640px) {
+            .uk-flex-left\@s {
+                -ms-flex-pack: start;
+                -webkit-justify-content: flex-start;
+                justify-content: flex-start;
+            }
+            .uk-flex-center\@s {
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+            .uk-flex-right\@s {
+                -ms-flex-pack: end;
+                -webkit-justify-content: flex-end;
+                justify-content: flex-end;
+            }
+            .uk-flex-between\@s {
+                -ms-flex-pack: justify;
+                -webkit-justify-content: space-between;
+                justify-content: space-between;
+            }
+            .uk-flex-around\@s {
+                -ms-flex-pack: distribute;
+                -webkit-justify-content: space-around;
+                justify-content: space-around;
+            }
+        }
+        /* Tablet landscape and bigger */
+        @media (min-width: 960px) {
+            .uk-flex-left\@m {
+                -ms-flex-pack: start;
+                -webkit-justify-content: flex-start;
+                justify-content: flex-start;
+            }
+            .uk-flex-center\@m {
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+            .uk-flex-right\@m {
+                -ms-flex-pack: end;
+                -webkit-justify-content: flex-end;
+                justify-content: flex-end;
+            }
+            .uk-flex-between\@m {
+                -ms-flex-pack: justify;
+                -webkit-justify-content: space-between;
+                justify-content: space-between;
+            }
+            .uk-flex-around\@m {
+                -ms-flex-pack: distribute;
+                -webkit-justify-content: space-around;
+                justify-content: space-around;
+            }
+        }
+        /* Desktop and bigger */
+        @media (min-width: 1200px) {
+            .uk-flex-left\@l {
+                -ms-flex-pack: start;
+                -webkit-justify-content: flex-start;
+                justify-content: flex-start;
+            }
+            .uk-flex-center\@l {
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+            .uk-flex-right\@l {
+                -ms-flex-pack: end;
+                -webkit-justify-content: flex-end;
+                justify-content: flex-end;
+            }
+            .uk-flex-between\@l {
+                -ms-flex-pack: justify;
+                -webkit-justify-content: space-between;
+                justify-content: space-between;
+            }
+            .uk-flex-around\@l {
+                -ms-flex-pack: distribute;
+                -webkit-justify-content: space-around;
+                justify-content: space-around;
+            }
+        }
+        /* Large screen and bigger */
+        @media (min-width: 1600px) {
+            .uk-flex-left\@xl {
+                -ms-flex-pack: start;
+                -webkit-justify-content: flex-start;
+                justify-content: flex-start;
+            }
+            .uk-flex-center\@xl {
+                -ms-flex-pack: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+            .uk-flex-right\@xl {
+                -ms-flex-pack: end;
+                -webkit-justify-content: flex-end;
+                justify-content: flex-end;
+            }
+            .uk-flex-between\@xl {
+                -ms-flex-pack: justify;
+                -webkit-justify-content: space-between;
+                justify-content: space-between;
+            }
+            .uk-flex-around\@xl {
+                -ms-flex-pack: distribute;
+                -webkit-justify-content: space-around;
+                justify-content: space-around;
+            }
+        }
+        .uk-flex-wrap {
+            -ms-flex-wrap: wrap;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        .uk-flex-row {
+            -ms-flex-direction: row;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+        }
+        .uk-text-small {
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+<iframe class="acidFrame" src="/highlyDynamic/iframeMadness/navHeader.html"></iframe>
+<div class="testBody">
+    <div class="uk-flex uk-flex-around">
+        <p class="uk-text-break uk-text-small">
+            1. This Test is to determine who well the archival and replay system is at handling extremely dynamic content.<br/>
+            2. The header above me was loaded from an Iframe[src] not obfuscated.<br/>
+            3. This page will be eval injecting an Iframe[src=obfuscated] who will tell the parent page(this one) the correct domain we should be on.<br/>
+            4. It will also be used to make a request for another page that generates random numbers.<br/>
+        </p>
+        <p class="uk-text-break uk-text-small">
+            5. The parent page will rewrite those links to work on this page.<br/>
+            6. If we can detect we are not on the correct domain the page will attempt to correct any URLs used to requested for if they are rewritten.<br/>
+            7. But most links are obfuscated so unless JavaScript is executed at archival time, zombies will invade or 404 errors.<br/>
+            8. The two images in this test are retrieved using the text of their containing HTML elements for the URL
+        </p>
+    </div>
+    <div class="uk-container">
+        <p id="hostNotif"></p>
+        <div class="flexer evalInjectContainer">
+            <div class="evalInjectedDiv" id="evalInject"></div>
+            <div class="randyNumsScoller" id="randyNums"></div>
+        </div>
+        <div class="corsMEContainer">
+            <div class="corsME" id="corsMe">
+                <p id="coresMeURL">aHR0cDovL2xvY2FsaG9zdDo4MDkxL2xvcmVtcGl4ZWw=</p>
+                <div id="coresMeImDiv"></div>
+            </div>
+            <div class="corsME2" id="corsMe2">
+                <p>This the same url but I will play nice. Still going to use it to make a request to the live web. :)</p>
+                <a id="coresMeUR2L" href="http://localhost:8091/lorempixel">http://localhost:8091/lorempixel</a>
+                <div id="coresMeImDiv2"></div>
+            </div>
+        </div>
+        <p style="display: none" id="heheh">L2hpZ2hseUR5bmFtaWMvaWZyYW1lTWFkbmVzcy9ldmFsSW5qZWN0ZWRJZnJhbWUyLmh0bWw=</p>
+    </div>
+    <div class="uk-panel" style="margin: 20px;">
+        <div class="uk-flex uk-flex-row uk-flex-around uk-flex-wrap">
+            <div>
+                <div id="_infoEvalInjected">
+
+                </div>
+                <div id="_infoGotRandy">
+
+                </div>
+            </div>
+            <div>
+                <div id="_infoCors1">
+
+                </div>
+                <div id="_infoCors2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/iframeMadness-bundle.js"></script>
+    <!--<script src="http://localhost:9000/iframeMadness-bundle.js"></script>-->
+    <script>
+      function receiveMessage (event) {
+        if (event.data.type === 'goHome') {
+          window.location = '/'
+        } else if (event.data.type === 'goDynam') {
+          window.location = '/highlyDynamic'
+        }
+      }
+
+      window.addEventListener("message", receiveMessage, false)
+    </script>
+</div>
+</body>
+</html>

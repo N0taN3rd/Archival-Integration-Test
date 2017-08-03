@@ -5,11 +5,14 @@ const random = require('lodash/random')
 
 const counterCookie = {
   httpOnly: true,
-  path: '/redirection'
+  path: '/redirection',
+  secure: false
 }
+
 const finCookie = {
   httpOnly: false,
-  path: '/redirection'
+  path: '/redirection',
+  secure: false
 }
 
 router.get('/chain', (req, res) => {

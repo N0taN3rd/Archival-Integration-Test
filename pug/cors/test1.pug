@@ -5,7 +5,7 @@ html(lang='en')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         meta(charset='utf-8')
         title AATv2.0 Simple CORS Test
-        link(href='../css/uikit.min.css' rel='stylesheet')
+        link(href='/css/uikit.min.css' rel='stylesheet')
     body
         nav.uk-navbar-container(uk-navbar)
             .uk-navbar-left
@@ -61,7 +61,9 @@ html(lang='en')
                             p#authState
         .uk-section.uk-section-default.uk-invisible#errorContainer
             .uk-container#errors
+        script.
+            var ACID = ACID || {};
+            ACID.api = '#{acidApiLoc}';
         script#flik(type='application/json').
             {"apiKey":"3e75fa0fe8a8ea56a70bfb66a53e9220","meth":"GET","url":"https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&user_id=32951986%40N05&extras=url_q&format=json&nojsoncallback=1&api_key="}
-        script(src='/js/cors-commons.js')
-        script(src='/js/cors-combined-bundle.js')
+        script(src='/js/cors-bundle.js')

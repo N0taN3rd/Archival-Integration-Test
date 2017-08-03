@@ -13,6 +13,8 @@ import { simple, acidApi1, acidApi2 } from './jqTemplates'
 
 UIkit.use(Icons)
 
+const apiEndPoint = ACID.api
+
 function loadPhotosJQ () {
   let {apiKey, meth, url} = $.parseJSON($('#flik').text())
   url = url + apiKey
@@ -29,34 +31,20 @@ function loadPhotosJQ () {
       let jqPhotos = $('#jqPhotos')
       let jqStatus = $('#jqStatus')
       if (data.stat === 'ok') {
-        jqStatus.append($(`
-         <div class="uk-card-badge uk-label">HTTP 200 OK</div>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${jqXHR.getAllResponseHeaders().trim().split('\n').join('<br/>')}</p>
-      `))
+        jqStatus.append($(`<div class="uk-card-badge uk-label">HTTP 200 OK</div><h3>HTTP Headers</h3><p class="uk-text-break">${jqXHR.getAllResponseHeaders().trim().split('\n').join('<br/>')}</p>`))
 
         let ims = data.photos.photo
         let i = 0
         let len = ims.length
         for (; i < len; i++) {
-          jqPhotos.append($(`<div>
-            <a class="uk-inline" href="${ims[i].url_q}">
-                    <img src="${ims[i].url_q}">
-            </a>  
-            </div>   
-        `)
-          )
+          jqPhotos.append($(`<div><a class="uk-inline" href="${ims[i].url_q}"><img src="${ims[i].url_q}"></a></div>`))
         }
       } else {
         $('#test1').removeClass('uk-alert-success').addClass('uk-alert-warning')
         jqPhotos.replaceWith(`<p>${data.message}</p>`)
         let head = jqXHR.getAllResponseHeaders().trim()
         head = head.length > 0 ? head.split('\n').join('<br/>') : "No Headers :'("
-        jqStatus.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">${data.stat}</div>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head.join('<br/>')}</p>
-      `))
+        jqStatus.append($(`<div class="uk-card-badge uk-label uk-label-danger">${data.stat}</div><h3>HTTP Headers</h3><p class="uk-text-break">${head.join('<br/>')}</p>`))
       }
       resolve()
       // bowfinben@cs.com
@@ -82,7 +70,7 @@ function loadPhotosApi1 () {
   instance.defaults.headers.common['Accept'] = 'application/acid.cors-ims-lookup.1'
   return instance({
     method: 'GET',
-    baseURL: 'http://localhost:8091',
+    baseURL: apiEndPoint,
     url: `/serviceCors/randyIm?$skip=5&$limit=5`,
     headers: {
       'X-Acid-Request': 'acid-cors-photo-api-1',
@@ -115,12 +103,7 @@ function loadPhotosApi1 () {
           head += `${k}: ${v}<br/>`
         }
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">Wrong Content-X</div>
-         <p>HTTP ${response.status} ${response.statusText}</p>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Wrong Content-X</div><p>HTTP ${response.status} ${response.statusText}</p><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
       if (!response.headers['content-length']) {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Length</p>'))
       }
@@ -141,12 +124,7 @@ function loadPhotosApi1 () {
           head += `${k}: ${v}<br/>`
         }
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Length</div>
-         <p>HTTP ${response.status} ${response.statusText}</p>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Length</div><p>HTTP ${response.status} ${response.statusText}</p><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
       if (!response.headers['content-length']) {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Length</p>'))
       }
@@ -164,12 +142,7 @@ function loadPhotosApi1 () {
           head += `${k}: ${v}<br/>`
         }
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Type</div>
-         <p>HTTP ${response.status} ${response.statusText}</p>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Type</div><p>HTTP ${response.status} ${response.statusText}</p><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
       if (!response.headers['content-type']) {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Type</p>'))
       }
@@ -178,23 +151,13 @@ function loadPhotosApi1 () {
       for (let [k, v] of Object.entries(response.headers)) {
         head += `${k}: ${v}<br/>`
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label">HTTP ${response.status} ${response.statusText}</div>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label">HTTP ${response.status} ${response.statusText}</div><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
 
       let ims = data
       let i = 0
       let len = ims.length
       for (; i < len; i++) {
-        acid1Photos.append($(`<div>
-            <a class="uk-inline" href="${ims[i].url_q}">
-                    <img src="${ims[i].url_q}">
-            </a>  
-            </div>   
-        `)
-        )
+        acid1Photos.append($(`<div><a class="uk-inline" href="${ims[i].url_q}"><img src="${ims[i].url_q}"></a></div>`))
       }
     }
   }).catch(error => {
@@ -215,22 +178,7 @@ function loadPhotosApi1 () {
       for (let [k, v] of Object.entries(error.response.headers)) {
         head += `${k}: ${v}<br/>`
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">HTTP ${error.response.status} ${error.response.statusText}</div>
-        <div class="uk-child-width-1-2@s" uk-grid>
-        <div>
-            <div class="uk-panel">  
-                <h3>HTTP Headers Response</h3>
-                <p class="uk-text-break">${head}</p></div>
-            </div>
-            <div>
-                <div class="uk-panel">
-                <h3>${error.response.data.reason}</h3>
-                  <p class="uk-text-break">${error.response.data.message}</p>
-                </div>
-            </div>
-        </div>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">HTTP ${error.response.status} ${error.response.statusText}</div><div class="uk-child-width-1-2@s" uk-grid><div><div class="uk-panel"><h3>HTTP Headers Response</h3><p class="uk-text-break">${head}</p></div></div><div><div class="uk-panel"><h3>${error.response.data.reason}</h3><p class="uk-text-break">${error.response.data.message}</p></div></div></div>`))
     } else if (error.request) {
       // console.log(error.request)
       acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">No Response</div>`))
@@ -240,9 +188,8 @@ function loadPhotosApi1 () {
       // console.log('Error', error.message);
       acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Really Bad JUJU</div>`))
       acid1Status.append($(`<p class="uk-text-break">${error.message}</p>`))
-
     }
-    console.log(error.config);
+    console.log(error.config)
   })
 }
 
@@ -251,7 +198,7 @@ function loadPhotosApi2 () {
   instance.defaults.headers.common['Accept'] = 'application/acid.cors-ims-lookup.2'
   return instance({
     method: 'GET',
-    baseURL: 'http://localhost:8091',
+    baseURL: apiEndPoint,
     url: `/serviceCors/randyImCred?$limit=${1}`,
     headers: {
       'X-Acid-Request': 'acid-cors-photo-api-2',
@@ -283,12 +230,7 @@ function loadPhotosApi2 () {
           head += `${k}: ${v}<br/>`
         }
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">Wrong Content-X</div>
-         <p>HTTP ${response.status} ${response.statusText}</p>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Wrong Content-X</div><p>HTTP ${response.status} ${response.statusText}</p><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
       if (!response.headers['content-length']) {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Length</p>'))
       }
@@ -309,12 +251,7 @@ function loadPhotosApi2 () {
           head += `${k}: ${v}<br/>`
         }
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Length</div>
-         <p>HTTP ${response.status} ${response.statusText}</p>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Length</div><p>HTTP ${response.status} ${response.statusText}</p><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
       if (!response.headers['content-length']) {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Length</p>'))
       }
@@ -332,12 +269,7 @@ function loadPhotosApi2 () {
           head += `${k}: ${v}<br/>`
         }
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Type</div>
-         <p>HTTP ${response.status} ${response.statusText}</p>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Wrong Content-Type</div><p>HTTP ${response.status} ${response.statusText}</p><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
       if (!response.headers['content-type']) {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Type</p>'))
       }
@@ -348,22 +280,12 @@ function loadPhotosApi2 () {
       for (let [k, v] of Object.entries(response.headers)) {
         head += `${k}: ${v}<br/>`
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label">HTTP ${response.status} ${response.statusText}</div>
-         <h3>HTTP Headers</h3>
-        <p class="uk-text-break">${head}</p>
-      `))
-
+      acid1Status.append($(`<div class="uk-card-badge uk-label">HTTP ${response.status} ${response.statusText}</div><h3>HTTP Headers</h3><p class="uk-text-break">${head}</p>`))
       let ims = data
       let i = 0
       let len = ims.length
       for (; i < len; i++) {
-        acid1Photos.append($(`<div>
-            <a class="uk-inline" href="${ims[i].url_q}">
-                    <img src="${ims[i].url_q}">
-            </a>
-            </div>
-        `)
+        acid1Photos.append($(`<div><a class="uk-inline" href="${ims[i].url_q}"><img src="${ims[i].url_q}"></a></div>`)
         )
       }
     }
@@ -378,36 +300,21 @@ function loadPhotosApi2 () {
     if (error.response) {
       // // The request was made and the server responded with a status code
       // // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
+      console.log(error.response.data)
+      console.log(error.response.status)
+      console.log(error.response.headers)
       let head = ''
       for (let [k, v] of Object.entries(error.response.headers)) {
         head += `${k}: ${v}<br/>`
       }
-      acid1Status.append($(`
-         <div class="uk-card-badge uk-label uk-label-danger">HTTP ${error.response.status} ${error.response.statusText}</div>
-        <div class="uk-child-width-1-2@s" uk-grid>
-        <div>
-            <div class="uk-panel">
-                <h3>HTTP Headers Response</h3>
-                <p class="uk-text-break">${head}</p></div>
-            </div>
-            <div>
-                <div class="uk-panel">
-                <h3>${error.response.data.reason}</h3>
-                  <p class="uk-text-break">${error.response.data.message}</p>
-                </div>
-            </div>
-        </div>
-      `))
+      acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">HTTP ${error.response.status} ${error.response.statusText}</div><div class="uk-child-width-1-2@s" uk-grid><div><div class="uk-panel"><h3>HTTP Headers Response</h3><p class="uk-text-break">${head}</p></div></div><div><div class="uk-panel"><h3>${error.response.data.reason}</h3><p class="uk-text-break">${error.response.data.message}</p></div></div></div>`))
     } else if (error.request) {
       console.log(error.request)
       acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">No Response</div>`))
       acid1Status.append($(`<p class="uk-text-break">Why You Gotta Be Like This Smalls</p>`))
     } else {
       //   // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
+      console.log('Error', error.message)
       acid1Status.append($(`<div class="uk-card-badge uk-label uk-label-danger">Really Bad JUJU</div>`))
       acid1Status.append($(`<p class="uk-text-break">${error.message}</p>`))
       //
@@ -419,7 +326,7 @@ function loadPhotosApi2 () {
 function feathersAuth () {
   const client = feathers()
   client.configure(hooks())
-    .configure(rest('http://localhost:8091').axios(axios))
+    .configure(rest(apiEndPoint).axios(axios))
     .configure(auth({storage: localStorage}))
   return new Promise((resolve, reject) => {
     let state = 'Making Auth Request'
@@ -439,23 +346,19 @@ function feathersAuth () {
       .then(payload => {
         state = 'Retrieving User'
         $('#authState').text(state)
-        console.log('JWT Payload', payload);
+        console.log('JWT Payload', payload)
         $('#tokenValid').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
         return client.service('users').get(payload.userId)
       })
       .then(user => {
         state = 'Got User'
         $('#authState').addClass('uk-text-success').text(state)
-        client.set('user', user);
+        client.set('user', user)
         $('#getUsr').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
         let puser = client.get('user')
         console.log('User', puser)
         $('#authErrorOrUser').append($(`<div class="uk-card-badge uk-label">Winning!</div>`))
-          .append($(`<p>
-             userId: ${puser.id}<br/>   
-             email: ${puser.email}<br/>   
-             permissions: ${puser.permissions.join('')}<br/>   
-        </p>`))
+          .append($(`<p>userId: ${puser.id}<br/>email: ${puser.email}<br/>permissions: ${puser.permissions.join('')}<br/></p>`))
         resolve()
       })
       .catch(function (error) {
@@ -463,9 +366,7 @@ function feathersAuth () {
         $('#cauthHead').addClass('uk-text-danger')
         if (error.code) {
           $('#authErrorOrUser').append($(`<div class="uk-card-badge uk-label uk-label-danger">HTTP ${error.code}</div>`))
-            .append($(`<p>
-        ${error.name}: ${error.message}
-      </p>`))
+            .append($(`<p>${error.name}: ${error.message}</p>`))
         } else {
           $('#authErrorOrUser').append($(`<div class="uk-card-badge uk-label uk-label-danger">Bad JUJU</div>`))
             .append($(`<p>${error instanceof Error ? error : JSON.stringify(error)}</p>`))

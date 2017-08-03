@@ -14,19 +14,26 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const path = require('path')
 const http = require('http')
+const request = require('request')
 
 const config = require('./config')
 const services = require('./services')
 
 const corsOptions = {
   allowedHeaders: ['X-Acid-Request', 'X-Requested-With', 'Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Length', 'Connection', 'Pragma', 'X-Powered-By', 'Vary'],
-  methods: ['GET', 'POST', 'OPTIONS'],
+  exposedHeaders: ['Access-Control-Allow-Methods', 'Content-Length', 'Connection', 'Pragma', 'X-Powered-By', 'Vary'],
+  methods: ['GET,HEAD,PUT,PATCH,POST,DELETE', 'OPTIONS'],
   origin: true,
   credentials: true
 }
-
+/*
+ case 'lorempixel':
+        return rp('http://lorempixel.com/400/200/')
+ */
 const app = feathers(express())
+
+const HOST = process.env.USE_HOST || '0.0.0.0'
+
 
 app.configure(rest((req, res) => {
   res.format({
@@ -51,7 +58,8 @@ app.configure(rest((req, res) => {
     secret: 'ImACopYouIdiot',
     cookie: {
       enabled: true,
-      name: 'acid-auth'
+      name: 'acid-auth',
+      secure: false
     }
   }))
   .configure(local({
@@ -60,43 +68,51 @@ app.configure(rest((req, res) => {
   }))
   .configure(jwt())
   .use('/users', memory())
-  // .use((req, res, next) => {
-  //   req.feathers.fromMiddleware = {
-  //     xhr: req.xhr,
-  //     head: req.headers
-  //   }
-  //   next()
-  // })
   .configure(services())
   .post('/login', auth.express.authenticate('acid-local', {
     failureRedirect: '/login'
   }))
   .get('/login', (req, res, next) => {
-    res.json({success: false});
+    res.json({success: false})
+  })
+  .get('/lorempixel', (req, res, next) => {
+    // res.status(404)
+    // res.send('<p>boo</p>')
+    request.get('http://lorempixel.com/400/200/').pipe(res)
+  })
+  .get('/httpTest', (req, res, next) => {
+    res.send('<p>You Get Me!</p>')
+  })
+  .post('/httpTest', (req, res, next) => {
+    res.json(JSON.stringify({movie: 'The Postman Always Rings Twice'}))
+  })
+  .put('/httpTest', (req, res, next) => {
+    res.json(JSON.stringify({no: 'Do Not Put It There!'}))
+  })
+  .delete('/httpTest', (req, res, next) => {
+    res.json(JSON.stringify({'Rick Deckard': 'Replicants are like any other machine, are either a benefit or a hazard. If they\'re a benefit it\'s not my problem.'}))
   })
   .use(errorHandler({
     html (error, req, res, next) {
       console.log(error)
       // render your error view with the error object
-      res.render('error', error);
+      res.render('error', error)
     },
     json (error, req, res, next) {
       console.log(error)
       // render your error view with the error object
-      res.send(error);
+      res.send(error)
     }
   }))
 
-const authOpts = Object.assign({}, app.get('authentication'), {jwt: {expiresIn: '1m'}})
-
-if (config.apiPort) {
-  app.listen(config.apiPort, err => {
+if (process.env.LISTENPORT) {
+  app.listen(process.env.LISTENPORT, HOST, err => {
     if (err) {
-      console.error(err);
+      console.error(err)
     }
     console.info('----\n==> ✅ is running, talking to API server on')
-    console.info(`==> 💻  Open http://localhost:${config.apiPort} in a browser to view the app.`)
+    console.info(`==> 💻  Open http://${HOST}:${process.env.LISTENPORT} in a browser to view the app.`)
   })
 } else {
-  console.error('==>     ERROR: No PORT environment variable has been specified')
+  console.error('==>     ERROR: No LISTENPORT environment variable has been specified')
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Archival Acid Test 2.0</title>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  var Replay_Test = Replay_Test || {};
+  Replay_Test.api = 'http://localhost:8091'
+  Replay_Test.location = 'Funky Town';
+  Replay_Test.postMessage = function () {
+    return 'Going off the rails on a crazy train';
+  };
+  Replay_Test.poster = {
+    "postMessage": function () {
+      console.log(Replay_Test.postMessage());
+    }
+  };
+</script>
+<script src="http://localhost:9000/bundle.js"></script>
+<p>The one bit of none JavaScript generated html</p>
+</body>
+</html>
