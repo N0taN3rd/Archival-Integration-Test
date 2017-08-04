@@ -8,7 +8,7 @@ const enhance = compose(
 
 const canSet = () => {
   try {
-    window.document.domain = window.location.hostname
+    window.document.domain = Replay_Test.expectedDomain
   } catch (err) {
     return {
       display: 'none'

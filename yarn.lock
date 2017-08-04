@@ -2601,7 +2601,7 @@ feathers-authentication-local@^0.4.3:
     lodash.pick "^4.4.0"
     passport-local "^1.0.0"
 
-feathers-authentication@pre:
+feathers-authentication@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/feathers-authentication/-/feathers-authentication-1.2.7.tgz#8cc5c0047f04fabfafcdf6eb392c72038817bf05"
   dependencies:
