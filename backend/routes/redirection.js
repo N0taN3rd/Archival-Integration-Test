@@ -15,6 +15,10 @@ const finCookie = {
   secure: false
 }
 
+router.get('/', (req, res) => {
+  res.render('aatv2')
+})
+
 router.get('/chain', (req, res) => {
   let times = randy(2, 5)
   res.redirect(`/redirection/chain/${times}/1`)

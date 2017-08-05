@@ -16,26 +16,19 @@ const redirectionRouter = require('./routes/redirection')
 
 const app = feathers(express())
 
-const corsAuthCookie = {
-  httpOnly: false,
-  path: '/cors'
-}
-
-const corsTestApiLoc = {acidApiLoc: process.env.API_ENDPOINT}
+const corsTestApiLoc = {acidApiLoc: config.apiEndPoint}
 const dynamicIFramesApiLoc = {
-  apiLoremPixel: `${process.env.API_ENDPOINT}/lorempixel`,
-  apiLoremPixelEncoded: Buffer.from(`${process.env.API_ENDPOINT}/lorempixel`, 'utf8').toString('base64')
+  apiLoremPixel: `${config.apiEndPoint}/lorempixel`,
+  apiLoremPixelEncoded: Buffer.from(`${config.apiEndPoint}/lorempixel`, 'utf8').toString('base64')
 }
 const dynamicReactApiLoc = {
-  apiLoc: process.env.API_ENDPOINT
+  apiLoc: config.apiEndPoint
 }
 
-console.log(process.env.API_ENDPOINT)
-
-const HOST = process.env.USE_HOST || '0.0.0.0'
-
+console.log(config.apiEndPoint)
 
 app
+  .engine(config.viewEngine, require(config.viewEngine).__express)
   .set('config', config)
   .set('view engine', config.viewEngine)
   .set('views', config.viewsPath)
@@ -51,8 +44,14 @@ app
   })
   .use(express.static(config.staticPath))
   .use('/redirection', redirectionRouter)
+  .get('/', (req, res) => {
+    res.render('aatv2')
+  })
+  .get('/highlyDynamic', (req, res) => {
+    res.render('aatv2')
+  })
   .get('/cors', (req, res, next) => {
-    res.cookie('acidApiAuth', 'acid:tabs', corsAuthCookie)
+    res.cookie('acidApiAuth', 'acid:tabs', config.corsAuthCookie)
     res.render('cors/test1', corsTestApiLoc)
   })
   .get('/highlyDynamic/iframeMadness', (req, res, next) => {
@@ -63,13 +62,13 @@ app
   })
   .use(errorHandler())
 
-if (process.env.LISTENPORT) {
-  app.listen(process.env.LISTENPORT, HOST, err => {
+if (config.port) {
+  app.listen(config.port, config.host, err => {
     if (err) {
       console.error(err)
     }
     console.info('----\n==> ✅ is running, talking to frontend server on')
-    console.info(`==> 💻  Open http://${HOST}:${process.env.LISTENPORT} in a browser to view the app.`)
+    console.info(`==> 💻  Open http://${config.host}:${config.port} in a browser to view the app.`)
   })
 } else {
   console.error('==>     ERROR: No LISTENPORT environment variable has been specified')

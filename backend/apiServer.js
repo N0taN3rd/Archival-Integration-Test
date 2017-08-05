@@ -34,7 +34,6 @@ const app = feathers(express())
 
 const HOST = process.env.USE_HOST || '0.0.0.0'
 
-
 app.configure(rest((req, res) => {
   res.format({
     'application/acid.cors-ims-lookup.1': () => {
@@ -54,14 +53,7 @@ app.configure(rest((req, res) => {
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({extended: true}))
   .use(cors(corsOptions))
-  .configure(auth({
-    secret: 'ImACopYouIdiot',
-    cookie: {
-      enabled: true,
-      name: 'acid-auth',
-      secure: false
-    }
-  }))
+  .configure(auth(config.auth))
   .configure(local({
     name: 'acid-local',
     entity: 'user'
@@ -105,13 +97,13 @@ app.configure(rest((req, res) => {
     }
   }))
 
-if (process.env.LISTENPORT) {
-  app.listen(process.env.LISTENPORT, HOST, err => {
+if (config.port) {
+  app.listen(config.port, config.host, err => {
     if (err) {
       console.error(err)
     }
     console.info('----\n==> ✅ is running, talking to API server on')
-    console.info(`==> 💻  Open http://${HOST}:${process.env.LISTENPORT} in a browser to view the app.`)
+    console.info(`==> 💻  Open http://${config.host}:${config.port} in a browser to view the app.`)
   })
 } else {
   console.error('==>     ERROR: No LISTENPORT environment variable has been specified')
