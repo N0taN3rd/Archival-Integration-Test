@@ -16,13 +16,16 @@ const redirectionRouter = require('./routes/redirection')
 
 const app = feathers(express())
 
-const corsTestApiLoc = {acidApiLoc: config.apiEndPoint}
+const corsTestApiLoc = { acidApiLoc: config.apiEndPoint }
+
 const dynamicIFramesApiLoc = {
   apiLoremPixel: `${config.apiEndPoint}/lorempixel`,
   apiLoremPixelEncoded: Buffer.from(`${config.apiEndPoint}/lorempixel`, 'utf8').toString('base64')
 }
+
 const dynamicReactApiLoc = {
-  apiLoc: config.apiEndPoint
+  apiLoc: config.apiEndPoint,
+  expectedDomain: config.frontEndDomain
 }
 
 console.log(config.apiEndPoint)
@@ -34,7 +37,7 @@ app
   .set('views', config.viewsPath)
   .use(cookieParser())
   .use(bodyParser.json())
-  .use(bodyParser.urlencoded({extended: true}))
+  .use(bodyParser.urlencoded({ extended: true }))
   .get('*.js', (req, res, next) => {
     if (req.url.includes('bundle')) {
       req.url = req.url + '.gz'
@@ -45,19 +48,22 @@ app
   .use(express.static(config.staticPath))
   .use('/redirection', redirectionRouter)
   .get('/', (req, res) => {
-    res.render('aatv2')
+    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
   })
-  .get('/highlyDynamic', (req, res) => {
-    res.render('aatv2')
+  .get('/acidv1', (req, res) => {
+    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
   })
   .get('/cors', (req, res, next) => {
     res.cookie('acidApiAuth', 'acid:tabs', config.corsAuthCookie)
     res.render('cors/test1', corsTestApiLoc)
   })
-  .get('/highlyDynamic/iframeMadness', (req, res, next) => {
+  .get('/dynamic', (req, res) => {
+    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
+  })
+  .get('/dynamic/iframeMadness', (req, res, next) => {
     res.render('dynamic/iframes', dynamicIFramesApiLoc)
   })
-  .get('/highlyDynamic/react', (req, res, next) => {
+  .get('/dynamic/react', (req, res, next) => {
     res.render('dynamic/react', dynamicReactApiLoc)
   })
   .use(errorHandler())

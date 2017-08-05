@@ -36,5 +36,6 @@ module.exports = {
       tng: 'http://api.tvmaze.com/singlesearch/shows/491'
     },
     xFiles: 'http://api.tvmaze.com/singlesearch/shows/430'
-  }
+  },
+  acidRoutes: require('./routeInfo/acid')
 }

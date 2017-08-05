@@ -8,8 +8,11 @@ html(lang='en')
         link(href='/css/uikit.min.css', rel='stylesheet')
         style.
             html, body, #app { height: 100%; margin: 0 }
-            *, *:before, *:after { box-sizing: border-box; }
-        script(src='/js/av2vendor-bundle.js')
+
+        //script(src='/js/av2vendor-bundle.js')
     body
         #app
-        script(src='/js/av2-bundle.js')
+        script.
+              window.__ROUTE_INFO__ = !{embed};
+        script(src='http://localhost:9000/bundle.js')
+        //script(src='/js/av2-bundle.js')

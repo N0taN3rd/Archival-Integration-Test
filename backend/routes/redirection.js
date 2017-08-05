@@ -1,7 +1,6 @@
 const router = require('express').Router()
-const useragent = require('express-useragent')
 const randy = require('../util/randy')
-const random = require('lodash/random')
+const config = require('../config')
 
 const counterCookie = {
   httpOnly: true,
@@ -16,7 +15,7 @@ const finCookie = {
 }
 
 router.get('/', (req, res) => {
-  res.render('aatv2')
+  res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
 })
 
 router.get('/chain', (req, res) => {
@@ -38,7 +37,7 @@ router.get('/chain/:n(\\d+)/fin', (req, res) => {
   res.render('redirected/chain', {
     title: `Final Redirection`,
     message: `Made It Past ${req.params.n} Redirections`,
-    ua: req.headers['user-agent']
+    ua: req.headers[ 'user-agent' ]
   })
 })
 
@@ -50,7 +49,7 @@ router.get('/cookie', function (req, res) {
 
 router.get('/cookie/\\d+', (req, res) => {
   if (req.cookies.redirectMe) {
-    let [cur, times, done] = req.cookies.redirectMe.split('|')
+    let [ cur, times, done ] = req.cookies.redirectMe.split('|')
     if (done === 'false') {
       cur = parseInt(cur) + 1
       times = parseInt(times)
@@ -78,7 +77,7 @@ router.get('/cookie/fin', (req, res) => {
     message: `The cookie accessible via 'document.cookie' you should have is ${rmc}`,
     json: JSON.stringify({
       expectedCookie: rmc,
-      ua: req.headers['user-agent']
+      ua: req.headers[ 'user-agent' ]
     })
   })
 })
