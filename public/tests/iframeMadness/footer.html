@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Archival Acid Test 2.0</title>
+    <link href="/tests/iframeMadness/uikit.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="uk-heading-divider"></div>
+<div class="uk-section uk-section-muted">
+    <div class="uk-container">
+        <div class="uk-child-width-1-2@s" uk-grid uk-height-match="target: > div > .uk-card">
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-box-shadow-xlarge">
+                    <div class="uk-card-body" id="infoEvalInjected">
+                        <h3 class="uk-card-title">Waiting</h3>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-box-shadow-xlarge">
+                    <div class="uk-card-body" id="infoAds">
+                        <h3 class="uk-card-title">Waiting</h3>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-box-shadow-xlarge">
+                    <div class="uk-card-body" id="infoGotRandy">
+                        <h3 class="uk-card-title">Waiting</h3>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-box-shadow-xlarge">
+                    <div class="uk-card-body" id="infoCors1">
+                        <h3 class="uk-card-title">Waiting</h3>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-box-shadow-xlarge">
+                    <div class="uk-card-body" id="infoCors2">
+                        <h3 class="uk-card-title">Waiting</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script src="/js/iframeMadnessFooter-bundle.js"></script>-->
+<script src="http://localhost:9000/iframeMadnessFooter-bundle.js"></script>
+<script>
+  window.parent.postMessage({type: 'alive'}, '*')
+</script>
+</body>
+</html>

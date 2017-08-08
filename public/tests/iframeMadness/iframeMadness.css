@@ -1,0 +1,428 @@
+html, body {
+    background: #e2e1e0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+.success {
+    background-color: #4CAF50;
+}
+
+.flexer {
+    display: flex;
+}
+
+.evalInjectContainer {
+    background: #fff;
+    border-radius: 2px;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.randyNumsScoller {
+    overflow-Y: auto;
+    overflow-x: auto;
+    max-height: 250px;
+    width: 70%;
+    padding: 25px;
+}
+
+.evalInjectedDiv {
+    width: 30%;
+}
+
+.corsMEContainer {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.corsME {
+    text-align: center;
+    margin: 1rem;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.corsME::before {
+    content: 'This is an url and will be using it to make a request to the live web. :)';
+}
+
+.corsME2 {
+    text-align: center;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.acidFrame {
+    width: 100%;
+    height: 80px;
+    border: none;
+    padding: 0;
+}
+
+#adContainer {
+    margin: 1rem;
+    text-align: center;
+}
+
+#footerContainer {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+}
+
+.footer {
+    width: inherit;
+    height: inherit;
+    border: none;
+    padding: 0;
+}
+
+.testBody {
+    height: 100%;
+    width: 100%;
+    max-width: calc(100% - 5px);
+    max-height: calc(100% - 80px);
+    overflow: auto;
+}
+
+.uk-container {
+    box-sizing: content-box;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+@media (min-width: 640px) {
+    .uk-container {
+        padding-left: 30px;
+        padding-right: 30px
+    }
+}
+
+@media (min-width: 960px) {
+    .uk-container {
+        padding-left: 40px;
+        padding-right: 40px
+    }
+}
+
+.uk-container::after, .uk-container::before {
+    content: "";
+    display: table
+}
+
+.uk-container::after {
+    clear: both
+}
+
+.uk-container > :last-child {
+    margin-bottom: 0
+}
+
+.uk-container .uk-container {
+    padding-left: 0;
+    padding-right: 0
+}
+
+.uk-container-small {
+    max-width: 900px
+}
+
+.uk-container-large {
+    max-width: 1600px
+}
+
+.uk-container-expand {
+    max-width: none
+}
+
+@media (min-width: 960px) {
+    .uk-section {
+        padding-top: 70px;
+        padding-bottom: 70px
+    }
+}
+
+.uk-section {
+    box-sizing: border-box;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.uk-panel {
+    position: relative;
+    box-sizing: border-box;
+}
+
+/*
+* Micro clearfix
+*/
+.uk-panel::before,
+.uk-panel::after {
+    content: "";
+    display: table;
+}
+
+.uk-panel::after {
+    clear: both;
+}
+
+/*
+* Remove margin from the last-child
+*/
+.uk-panel > :last-child {
+    margin-bottom: 0;
+}
+
+/*
+* Scrollable
+*/
+.uk-panel-scrollable {
+    height: 500px;
+    padding: 10px;
+    border: 1px solid;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    resize: both;
+}
+
+.uk-text-break {
+    /* 1 */
+    overflow-wrap: break-word;
+    /* 2 */
+    word-wrap: break-word;
+    /* 3 */
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.uk-flex {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.uk-flex-inline {
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+/*
+* Remove pseudo elements created by micro clearfix as precaution
+*/
+.uk-flex::before,
+.uk-flex::after,
+.uk-flex-inline::before,
+.uk-flex-inline::after {
+    display: none;
+}
+
+/* Alignment
+========================================================================== */
+/*
+* Align items along the main axis of the current line of the flex container
+* Row: Horizontal
+*/
+.uk-flex-left {
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.uk-flex-center {
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.uk-flex-right {
+    -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.uk-flex-between {
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.uk-flex-around {
+    -ms-flex-pack: distribute;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+/* Phone landscape and bigger */
+@media (min-width: 640px) {
+    .uk-flex-left\@s {
+        -ms-flex-pack: start;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+    }
+
+    .uk-flex-center\@s {
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    .uk-flex-right\@s {
+        -ms-flex-pack: end;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+
+    .uk-flex-between\@s {
+        -ms-flex-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }
+
+    .uk-flex-around\@s {
+        -ms-flex-pack: distribute;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    }
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+    .uk-flex-left\@m {
+        -ms-flex-pack: start;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+    }
+
+    .uk-flex-center\@m {
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    .uk-flex-right\@m {
+        -ms-flex-pack: end;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+
+    .uk-flex-between\@m {
+        -ms-flex-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }
+
+    .uk-flex-around\@m {
+        -ms-flex-pack: distribute;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    }
+}
+
+/* Desktop and bigger */
+@media (min-width: 1200px) {
+    .uk-flex-left\@l {
+        -ms-flex-pack: start;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+    }
+
+    .uk-flex-center\@l {
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    .uk-flex-right\@l {
+        -ms-flex-pack: end;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+
+    .uk-flex-between\@l {
+        -ms-flex-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }
+
+    .uk-flex-around\@l {
+        -ms-flex-pack: distribute;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    }
+}
+
+/* Large screen and bigger */
+@media (min-width: 1600px) {
+    .uk-flex-left\@xl {
+        -ms-flex-pack: start;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+    }
+
+    .uk-flex-center\@xl {
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    .uk-flex-right\@xl {
+        -ms-flex-pack: end;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+
+    .uk-flex-between\@xl {
+        -ms-flex-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }
+
+    .uk-flex-around\@xl {
+        -ms-flex-pack: distribute;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    }
+}
+
+.uk-flex-wrap {
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.uk-flex-row {
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.uk-text-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}

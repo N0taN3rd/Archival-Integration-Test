@@ -34,7 +34,12 @@ build/Release
 
 # Dependency directories
 node_modules/
+tests/polymer/build
 jspm_packages/
+
+apps/polymer/bower_components/
+apps/polymer/build/
+apps/polymer/node_modules/
 
 # Typescript v1 declaration files
 typings/
