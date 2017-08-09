@@ -1,6 +1,6 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import withRouter from 'react-router-dom/withRouter'
+import Link from 'react-router-dom/Link'
 
 function Nav ({location}) {
   const ninfo = window.__ROUTE_INFO__.navInfo[location.pathname]

@@ -7,9 +7,11 @@ const enhance = compose(
 )
 
 const canSet = () => {
+  console.log(`Attempting to set document.domain to ${Replay_Test.expectedDomain}`)
   try {
     window.document.domain = Replay_Test.expectedDomain
   } catch (err) {
+    console.error(err)
     return {
       display: 'none'
     }
@@ -27,7 +29,7 @@ export default enhance(() => {
           <div className='uk-card-body'>
             {!good && <div className='uk-card-badge uk-label uk-label-danger'>Fail!</div>}
             {good && <div className='uk-card-badge uk-label uk-label-success'>We Can!</div>}
-            <h3 className='uk-card-title'>Can I Set window.document.domain={window.location.hostname}</h3>
+            <h3 className='uk-card-title'>Can I Set window.document.domain={Replay_Test.expectedDomain}</h3>
             <p> This trick is used to avoid CORS when talking to a CDN or other services on a subdomain/superdomain of the
               current webpage.
               For more information consider this blog post <a

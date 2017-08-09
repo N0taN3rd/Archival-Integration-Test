@@ -4,7 +4,8 @@ html(lang='en')
         meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         meta(charset='utf-8')
-        title Archival Acid Test 2.0
+        title AATv2.0 Simple React
+        script(src='/rpTest/manifest-bundle.js')
     body
         #root
         script.
@@ -20,5 +21,9 @@ html(lang='en')
               console.log(Replay_Test.postMessage());
             }
           };
-        script(src='/js/replayTest-bundle.js')
+        //script(src='http://localhost:9000/bundle.js')
+        script(src='/rpTest/rpVend-bundle.js')
+        script(src='/rpTest/replayTest-bundle.js')
         p The one bit of none JavaScript generated html
+        noscript.
+            #[a(href='http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript') When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.<br/>Test Failed]

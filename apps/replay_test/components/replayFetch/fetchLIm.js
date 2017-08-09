@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { onlyUpdateForKeys, setDisplayName, compose } from 'recompose'
 import { doLocalImFetchGet } from '../../actions/fetchActions'
+import Fail from '../http/Fail'
 
 const stateToProps = state => ({
   fetchLIState: state.get('fetchLIState')
@@ -26,14 +27,39 @@ const FetchLIm = (props) => {
     </div>)
   } else {
     if (!props.fetchLIState.get('wasError')) {
+      let headers = []
+      let foundXpower = false
+      for (let [k, v] of props.fetchLIState.get('res').get('head').toJS()) {
+        headers.push(<li key={`${k}${v}`}>{k}: {v}</li>)
+        if (k === 'x-powered-by' && v === 'Express') {
+          foundXpower = true
+        }
+      }
+      let blobUrl
+      let fail = false
+      try {
+        blobUrl = <img src={URL.createObjectURL(props.fetchLIState.get('body'))}/>
+      } catch (error) {
+        blobUrl = <Fail/>
+        fail = true
+      }
       return (
         <div>
-          <div className='uk-card-badge uk-label uk-label-success'>Yes!</div>
-          <img src={URL.createObjectURL(props.fetchLIState.get('body'))} />
+          {!fail && <div className='uk-card-badge uk-label uk-label-success'>Yes!</div>}
+          {fail && <div className='uk-card-badge uk-label uk-label-danger'>No!</div>}
+          {blobUrl}
+          <p>Headers</p>
+          <ul className='uk-list uk-list-bullet uk-overflow-auto'>
+            {headers}
+          </ul>
+          {!foundXpower && <p className="uk-text-danger">Where Is My X-Powered-By: Express Header?</p>}
         </div>
       )
     } else {
-      return (<p>Was Error: {String(props.fetchLIState.get('err'))}</p>)
+      return (<div><p>
+        Was Error: {String(props.fetchLIState.get('err'))}
+      </p>  <Fail/>
+      </div>)
     }
   }
 }

@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { onlyUpdateForKeys, setDisplayName, compose } from 'recompose'
-import MyAutoSizer from '../util/myAutoSizer'
 import * as fA from '../../actions/fetchActions'
 import numeral from 'numeral'
+import Fail from '../http/Fail'
 
 const stateToProps = state => ({
   fetchState: state.get('fetchState')
@@ -18,18 +18,6 @@ const enhance = compose(
   onlyUpdateForKeys(['fetchState'])
 )
 
-// doFetch('https://api.github.com/repos/N0taN3rd/wail')
-
-function * percenter (data) {
-  const vals = Array.from(Object.entries(data.toJS()))
-  let total = 0
-  for (const [l, b] of vals) {
-    total += b
-  }
-  for (const [l, b] of vals) {
-    yield {l, p: numeral(b / total).format('0.00%')}
-  }
-}
 
 const doSum = data => {
   const vals = Array.from(Object.entries(data.toJS()))
@@ -63,11 +51,31 @@ const DoFetch = (props) => {
     </div>)
   } else {
     if (!props.fetchState.get('wasError')) {
+      let headers = []
+      for (let [k, v] of props.fetchState.get('res').get('head').toJS()) {
+        headers.push(<li key={`${k}${v}`}>{k}: {v}</li>)
+      }
+      let list
+      let fail = false
+      try  {
+        let sum =  doSum(props.fetchState.get('body'))
+        list = (
+          <ul className='uk-list uk-list-bullet uk-overflow-auto'>
+            {sum}
+          </ul>
+        )
+      } catch (error) {
+        fail = true
+        list = <Fail/>
+      }
       return (
         <div>
-          <div className='uk-card-badge uk-label uk-label-success'>Yes!</div>
+          {!fail && <div className='uk-card-badge uk-label uk-label-success'>Yes!</div>}
+          {fail && <div className='uk-card-badge uk-label uk-label-danger'>No!</div>}
+          {list}
+          <p>Headers</p>
           <ul className='uk-list uk-list-bullet uk-overflow-auto'>
-            {doSum(props.fetchState.get('body'))}
+            {headers}
           </ul>
         </div>
       )
@@ -75,6 +83,7 @@ const DoFetch = (props) => {
       return (<div>
         <div className='uk-card-badge uk-label uk-label-danger'>No!</div>
         <p>Was Error: {String(props.fetchState.get('err'))}</p>
+        <Fail/>
       </div>)
     }
   }

@@ -4,16 +4,14 @@ const CompressionPlugin = require('compression-webpack-plugin')
 
 const cwd = process.cwd()
 
+const ei = Buffer.from('http://localhost:8090/tests/iframeMadness/funtimes.js', 'utf8').toString('base64')
 
-const ei = Buffer.from('http://wsdl-docker.cs.odu.edu:8080/tests/iframeMadness/funtimes.js', 'utf8').toString('base64')
-Buffer.from('http://localhost:8090/tests/iframeMadness/funtimes.js', 'utf8').toString('base64')
-
-
-//http://localhost:8090/tests/simpleReact
+// http://localhost:8090/tests/simpleReact
 
 module.exports = {
   entry: {
-    iframeMadness: './index.js'
+    iframeMadness: './index.js',
+    iframeMadnessFooter: './footer.js'
   },
   output: {
     filename: '[name]-bundle.js',
@@ -59,11 +57,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env.EVAL_INJECTED': JSON.stringify(ei),
+      'process.env.EXPECTED_HOST': JSON.stringify('localhost:8090'),
+      'process.env.MUST_START_WITH': JSON.stringify('http://localhost:8091')
     }),
+    new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: false
     }),
-    new webpack.optimize.AggressiveMergingPlugin(),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

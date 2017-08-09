@@ -1,16 +1,17 @@
 import { Observable } from 'rxjs'
-import { ajax } from 'rxjs/observable/dom/ajax'
-import Promise from 'bluebird'
 import constants from '../constants'
 
 const {FetchGet, FetchLocalImage} = constants
 
 const doFetchGet = url => fetch(url).then(res => {
-  const myRes = {...res}
+  const myRes = {head: Array.from(res.headers.entries())}
   return res.json().then(body => ({res: myRes, body}))
 })
 
-const doFetchLocalImage = url => fetch(url).then(res => res.blob())
+const doFetchLocalImage = url => fetch(url).then(res => {
+  const myRes = {head: Array.from(res.headers.entries())}
+  return res.blob().then(blob => ({res: myRes, blob}))
+})
 
 const fetchGetDone = ({res, body}) => ({
   type: FetchGet.FETCH_GET_DONE,
@@ -23,9 +24,10 @@ const fetchGetError = err => ({
   err
 })
 
-const fetchLocalImDone = (blob) => ({
+const fetchLocalImDone = ({res,blob}) => ({
   type: FetchLocalImage.FETCH_LOCAL_IMAGE_DONE,
-  blob
+  blob,
+  res
 })
 
 const fetchLocalImError = err => ({
@@ -36,11 +38,11 @@ const fetchLocalImError = err => ({
 export const fetchGetEpic = action$ =>
   action$.ofType(FetchGet.DO_FETCH_GET)
     .mergeMap(action => {
-      console.log('fetch get epic', action)
-      return Observable.fromPromise(doFetchGet(action.url))
+        console.log('fetch get epic', action)
+        return Observable.fromPromise(doFetchGet(action.url))
           .map(result => fetchGetDone(result))
           .catch(err => fetchGetError(err))
-    }
+      }
     )
 
 export const fetchLocalImage = action$ =>

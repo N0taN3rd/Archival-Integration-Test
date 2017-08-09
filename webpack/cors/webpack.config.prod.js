@@ -48,7 +48,8 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.API_ENDPOINT': JSON.stringify('http://wsdl-docker.cs.odu.edu:8091')
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: false

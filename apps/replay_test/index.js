@@ -3,9 +3,13 @@ import 'uikit/dist/css/uikit.min.css'
 import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
+import UIkit from 'uikit'
+import Icons from 'uikit/dist/js/uikit-icons'
 import Root from './containers/root'
 import createDetectElementResize from './detectElementResize'
 import configureStore from './store/configureStore'
+
+UIkit.use(Icons)
 
 const store = configureStore()
 window.resizer = createDetectElementResize()

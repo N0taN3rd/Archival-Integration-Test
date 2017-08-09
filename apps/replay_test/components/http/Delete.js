@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Fail from './Fail'
 
 export default class Delete extends Component {
   constructor (...args) {
@@ -20,17 +21,30 @@ export default class Delete extends Component {
       baseURL: window.Replay_Test.api,
       url: '/httpTest',
       data: {
-        Replicants: ' Quite an experience to live in fear, isn\'t it? That\'s what it is to be a slave.'
+        Replicants: 'Quite an experience to live in fear, isn\'t it? That\'s what it is to be a slave.'
       }
     }).then(response => {
+      let fail = false
+      if (response.data !== '{"Rick Deckard":"Replicants are like any other machine, are either a benefit or a hazard. If they\'re a benefit it\'s not my problem."}') {
+        fail = true
+      }
       let display = (
         <div>
           <ul className='uk-list uk-list-bullet uk-overflow-auto'>
-            {Array.from(Object.entries(response.headers)).map(([k, v]) => (
-              <li key={`${k}: ${v}`}>{k}: {v}</li>
-            ))}
+            {Array.from(Object.entries(response.headers)).map(([k, v]) => {
+              if (k === 'content-length' && v !== '139') {
+                fail = true
+              }
+              if (k === 'content-type' && v !== 'application/json; charset=utf-8') {
+                fail = true
+              }
+              return (
+                <li key={`${k}: ${v}`}>{k}: {v}</li>
+              )
+            })}
           </ul>
           <p>{response.data}</p>
+          {fail && <Fail/>}
         </div>
       )
       this.setState({
@@ -52,6 +66,7 @@ export default class Delete extends Component {
               ))}
             </ul>
             <p>{error.response.data}</p>
+            <Fail/>
           </div>
         )
         this.setState({
@@ -64,7 +79,7 @@ export default class Delete extends Component {
           )
         })
       } else if (error.request) {
-        let display = (<p>No Response</p>)
+        let display = (<div><p>No Response</p><Fail/></div>)
         this.setState({
           done: true,
           wasError: true,
@@ -74,7 +89,7 @@ export default class Delete extends Component {
           )
         })
       } else {
-        let display = (<p className='uk-text-break'>${error}</p>)
+        let display = (<div><p className='uk-text-break'>${error}</p><Fail/></div>)
         this.setState({
           done: true,
           wasError: true,

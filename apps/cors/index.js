@@ -16,7 +16,18 @@ UIkit.use(Icons)
 const apiEndPoint = ACID.api
 
 function loadPhotosJQ () {
-  let {apiKey, meth, url} = $.parseJSON($('#flik').text())
+  let pjs
+  try {
+    pjs = $.parseJSON($('#flik').text())
+  } catch (error) {
+    UIkit.notification({
+      message: `What Did You Do To My Embedded JSON About FLICKR Images ${error}`,
+      status: 'danger',
+      pos: 'top-left',
+      timeout: 5000
+    })
+  }
+  let {apiKey, meth, url} = pjs
   url = url + apiKey
   return new Promise((resolve, reject) => {
     let photos = $('#photos')
@@ -40,6 +51,12 @@ function loadPhotosJQ () {
           jqPhotos.append($(`<div><a class="uk-inline" href="${ims[i].url_q}"><img src="${ims[i].url_q}"></a></div>`))
         }
       } else {
+        UIkit.notification({
+          message: `Fetching FLICKR Images Failed ${data.message}`,
+          status: 'danger',
+          pos: 'top-left',
+          timeout: 5000
+        })
         $('#test1').removeClass('uk-alert-success').addClass('uk-alert-warning')
         jqPhotos.replaceWith(`<p>${data.message}</p>`)
         let head = jqXHR.getAllResponseHeaders().trim()
@@ -47,9 +64,14 @@ function loadPhotosJQ () {
         jqStatus.append($(`<div class="uk-card-badge uk-label uk-label-danger">${data.stat}</div><h3>HTTP Headers</h3><p class="uk-text-break">${head.join('<br/>')}</p>`))
       }
       resolve()
-      // bowfinben@cs.com
     })
       .fail((jqXHR, textStatus, errorThrown) => {
+        UIkit.notification({
+          message: `Fetching FLICKR Images ${url} FAILED! ${errorThrown}!`,
+          status: 'danger',
+          pos: 'top-right',
+          timeout: 5000
+        })
         let cdiv = $(simple.fail)
         photos.empty()
         photos.append(cdiv)
@@ -88,6 +110,12 @@ function loadPhotosApi1 () {
     let acid1Photos = $('#acid1Photos')
     let acid1Status = $('#acid1Status')
     if (clenTest && ctypTest) {
+      UIkit.notification({
+        message: `You Modified Both The Content Length And Content Type For Randy Image Request`,
+        status: 'danger',
+        pos: 'top-left',
+        timeout: 5000
+      })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
       let photoParent = $('#acid2PhotosParent')
       photoParent.empty()
@@ -111,6 +139,12 @@ function loadPhotosApi1 () {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Type</p>'))
       }
     } else if (clenTest) {
+      UIkit.notification({
+        message: `You Modified The Content Length For Randy Image Request`,
+        status: 'danger',
+        pos: 'top-left',
+        timeout: 5000
+      })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
       let photoParent = $('#acid2PhotosParent')
       photoParent.empty()
@@ -129,6 +163,12 @@ function loadPhotosApi1 () {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Length</p>'))
       }
     } else if (ctypTest) {
+      UIkit.notification({
+        message: `You Modified The Content Type For Randy Image Request`,
+        status: 'danger',
+        pos: 'top-left',
+        timeout: 5000
+      })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
       let photoParent = $('#acid2PhotosParent')
       photoParent.empty()
@@ -161,6 +201,12 @@ function loadPhotosApi1 () {
       }
     }
   }).catch(error => {
+    UIkit.notification({
+      message: `There Was An Error For Randy Image Request ${error}`,
+      status: 'danger',
+      pos: 'top-left',
+      timeout: 5000
+    })
     // console.log(error)
     let photos = $('#photos-acid1')
     let cdiv = $(acidApi1.fail)
@@ -215,6 +261,12 @@ function loadPhotosApi2 () {
     let clenTest = response.headers['content-length'] !== '306'
     let ctypTest = response.headers['content-type'] !== 'application/acid.cors-ims-lookup.2'
     if (clenTest && ctypTest) {
+      UIkit.notification({
+        message: `You Modified Both The Content Length And Content Type For Image Request`,
+        status: 'danger',
+        pos: 'top-left',
+        timeout: 5000
+      })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
       let photoParent = $('#acid2PhotosParent')
       photoParent.empty()
@@ -238,6 +290,12 @@ function loadPhotosApi2 () {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Type</p>'))
       }
     } else if (clenTest) {
+      UIkit.notification({
+        message: `You Modified Both The Content Length For Image Request`,
+        status: 'danger',
+        pos: 'top-left',
+        timeout: 5000
+      })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
       let photoParent = $('#acid2PhotosParent')
       photoParent.empty()
@@ -256,6 +314,12 @@ function loadPhotosApi2 () {
         acid1Status.append($('<p class="uk-text-break uk-text-danger">No Content-Length</p>'))
       }
     } else if (ctypTest) {
+      UIkit.notification({
+        message: `You Modified Both The Content Type For Image Request`,
+        status: 'danger',
+        pos: 'top-left',
+        timeout: 5000
+      })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
       let photoParent = $('#acid2PhotosParent')
       photoParent.empty()
@@ -290,6 +354,12 @@ function loadPhotosApi2 () {
       }
     }
   }).catch(error => {
+    UIkit.notification({
+      message: `Image Request Error ${error}`,
+      status: 'danger',
+      pos: 'top-left',
+      timeout: 5000
+    })
     // console.log(error)
     let photos = $('#photos-acid2')
     let cdiv = $(acidApi2.fail)
@@ -337,10 +407,34 @@ function feathersAuth () {
       password: 'InfectedMushroom'
     })
       .then(response => {
-        console.log('Authenticated!', response)
-        state = 'Verifying Token'
-        $('#authState').text(state)
-        $('#auth').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
+        try {
+          let dummy = response.accessToken
+        } catch (error) {
+          UIkit.notification({
+            message: `What Did I Receive As The Response For My Access Token?<br/>${error}<br/>${response}`,
+            status: 'danger',
+            pos: 'top-left',
+            timeout: 5000
+          })
+          $('#authCard').append(response)
+        }
+        if (!response.accessToken) {
+          UIkit.notification({
+            message: 'No Access Token Received!',
+            status: 'danger',
+            pos: 'top-left',
+            timeout: 5000
+          })
+          state = 'Verifying Token'
+          $('#authState').text(state)
+          $('#auth').text('Token Not Sent!')
+          $('#authCard').append(response)
+        } else {
+          console.log('Authenticated!', response)
+          state = 'Verifying Token'
+          $('#authState').text(state)
+          $('#auth').removeClass('uk-text-danger').addClass('uk-text-success').text('Yes!')
+        }
         return client.passport.verifyJWT(response.accessToken)
       })
       .then(payload => {
@@ -414,7 +508,19 @@ $(document).ready(() => {
     }
   }), {concurrency: 1}).then(() => {
     console.log('Done!')
+    UIkit.notification({
+      message: 'Done!',
+      status: 'primary',
+      pos: 'top-left',
+      timeout: 5000
+    })
   }).catch(error => {
     console.error(error)
+    UIkit.notification({
+      message: `Oh Boy A Big Error Happened ${error}`,
+      status: 'danger',
+      pos: 'top-left',
+      timeout: 5000
+    })
   })
 })

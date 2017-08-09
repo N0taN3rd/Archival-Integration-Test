@@ -1,5 +1,4 @@
 import constants from '../constants'
-import Promise from 'bluebird'
 
 const {ServiceWorker} = constants
 

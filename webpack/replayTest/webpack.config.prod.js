@@ -1,17 +1,19 @@
 const path = require('path')
 const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const cwd = process.cwd()
 
 module.exports = {
   entry: {
-    replayTest: './index.js'
+    replayTest: './index.js',
+    rpVend: ['react', 'react-dom', 'uikit', 'jquery', 'rxjs']
   },
   output: {
     filename: '[name]-bundle.js',
     chunkFilename: '[name]-chunk.js',
-    path: path.join(cwd, 'public/js'),
+    path: path.join(cwd, 'public/rpTest'),
     publicPath: '/'
     // necessary for HMR to know where to load the hot update chunks
   },
@@ -49,20 +51,37 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.API_ENDPOINT': JSON.stringify('http://wsdl-docker.cs.odu.edu:8091')
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false
-    }),
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'rpVend'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity
+    }),
+    new UglifyJSPlugin({
+      sourceMap: false,
+      parallel: {
+        cache: true,
+        workers: 2 // for e.g
+      },
+      uglifyOptions: {
+        compress: true,
+        mangle: true
+      }
+    }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$/,
-      threshold: 10240,
+      threshold: 0,
       minRatio: 0.0
     })
-
   ]
 }

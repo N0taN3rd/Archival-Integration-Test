@@ -34,6 +34,10 @@ const app = feathers(express())
 
 const HOST = process.env.USE_HOST || '0.0.0.0'
 
+/*
+{"bot":false,"comment":"[[:Page:The Boy Travellers in the Russian Empire.djvu/492]] removed from category, [[Special:WhatLinksHere/Page:The Boy Travellers in the Russian Empire.djvu/492|this page is included within other pages]]","id":9527276,"meta":{"domain":"en.wikisource.org","dt":"2017-08-08T17:34:54+00:00","id":"e6c0cbf7-7c5f-11e7-8c28-141877613164","request_id":"bebaa06c-88f8-48b9-b274-ffa9d14db697","schema_uri":"mediawiki/recentchange/1","topic":"eqiad.mediawiki.recentchange","uri":"https://en.wikisource.org/wiki/Category:Problematic","partition":0,"offset":339155796},"namespace":14,"parsedcomment":"<a href=\"/wiki/Page:The_Boy_Travellers_in_the_Russian_Empire.djvu/492\" title=\"Page:The Boy Travellers in the Russian Empire.djvu/492\">Page:The Boy Travellers in the Russian Empire.djvu/492</a> removed from category, <a href=\"/wiki/Special:WhatLinksHere/Page:The_Boy_Travellers_in_the_Russian_Empire.djvu/492\" title=\"Special:WhatLinksHere/Page:The Boy Travellers in the Russian Empire.djvu/492\">this page is included within other pages</a>","server_name":"en.wikisource.org","server_script_path":"/w","server_url":"https://en.wikisource.org","timestamp":1502213694,"title":"Category:Problematic","type":"categorize","user":"Jasonanaggie","wiki":"enwikisource"}
+
+ */
 app.configure(rest((req, res) => {
   res.format({
     'application/acid.cors-ims-lookup.1': () => {
@@ -84,6 +88,21 @@ app.configure(rest((req, res) => {
   .delete('/httpTest', (req, res, next) => {
     res.json(JSON.stringify({'Rick Deckard': 'Replicants are like any other machine, are either a benefit or a hazard. If they\'re a benefit it\'s not my problem.'}))
   })
+  .get('/ifmAds', (req, res, next) => {
+    res.json({
+      location: `https://www.youtube.com/embed/8QEAA94FjHc?rel=0&autoplay=${process.env.NODE_ENV === 'production' ? 1 : 0}&amp;controls=0&amp;showinfo=0`
+    })
+  })
+  .get('/wikiStream', (req, res, next) => {
+    res.json({
+      wle: 'https://stream.wikimedia.org/v2/stream/recentchange'
+    })
+  })
+  .get('/lmgtfyStream', (req, res, next) => {
+    res.json({
+      liveLMGTFY: 'ws://live-ws.lmgtfy.com/live_ws'
+    })
+  })
   .use(errorHandler({
     html (error, req, res, next) {
       console.log(error)
@@ -96,6 +115,8 @@ app.configure(rest((req, res) => {
       res.send(error)
     }
   }))
+
+app.set('trust proxy', true)
 
 if (config.port) {
   app.listen(config.port, config.host, err => {

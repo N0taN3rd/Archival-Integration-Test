@@ -1,0 +1,55 @@
+cp dockerfiles/api/Dockerfile .
+docker build -t jberlin/acid-api .
+docker images
+docker run -p 8091:8080 -d jberlin/acid-api
+docker ps
+docker build -t jberlin/acid-api .
+docker rmi jberlin/acid-api dangling=true
+docker ps
+docker images
+docker build -t jberlin/acid-api .
+docker images
+docker rmi jberlin/acid-api
+cp dockerfiles/api/Dockerfile .
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+cp dockerfiles/api/Dockerfile .
+docker rmi jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+docker rmi jberlin/acid-api
+docker build -t jberlin/acid-api .
+cp dockerfiles/api/Dockerfile .
+docker rmi jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+docker rmi jberlin/acid-api
+cp dockerfiles/api/Dockerfile .
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+docker rmi jberlin/acid-api
+cp dockerfiles/api/Dockerfile .
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+whereis docker
+docker info
+docker exec -i -t adoring_wing /bin/bash
+docker rmi jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker rmi jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+docker rmi jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+docker rmi jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+docker build -t jberlin/acid-api .
+docker run -p 8091:8080 jberlin/acid-api
+cp dockerfiles/frontEnd/Dockerfile .
+docker build -t jberlin/acid-front .
+docker run -p 8091:8080 -d jberlin/acid-api
+docker run -p 8090:8080 -d jberlin/acid-front

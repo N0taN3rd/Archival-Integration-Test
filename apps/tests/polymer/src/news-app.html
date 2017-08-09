@@ -91,7 +91,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-location route="{{route}}"></app-location>
     <app-route
         route="{{route}}"
-        pattern="/tests/polymer/:page"
+        pattern="/:page"
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
 
@@ -209,8 +209,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       created: function() {
         // Custom elements polyfill safe way to indicate an element has been upgraded.
         this.removeAttribute('unresolved');
-//        window.history.pushState({}, null, '/list/top_stories')
-//        this.fire('location-changed')
+        window.history.pushState({}, null, '/list/top_stories')
+        this.fire('location-changed')
 
         // Chrome on iOS recomputes "vh" unit when URL bar goes off screen. Since we use "vh" unit
         // to size the cover image and the title, those items will resize in response to the URL
@@ -240,7 +240,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged: function(page) {
         if (!page) {
           // set default route if route path is empty
-          this.set('route.path', '/tests/polymer/list/top_stories');
+          this.set('route.path', '/list/top_stories');
           return;
         }
         this.page = page;

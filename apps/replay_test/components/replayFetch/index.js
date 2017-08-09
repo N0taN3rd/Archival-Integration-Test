@@ -1,6 +1,5 @@
 import React from 'react'
 import { pure, setDisplayName, compose } from 'recompose'
-import Flexbox from 'flexbox-react'
 import FetchGithubApi from './fetchGithubApi'
 import FetchLocalImage from './anImage'
 

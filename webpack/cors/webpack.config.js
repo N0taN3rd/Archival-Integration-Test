@@ -4,21 +4,16 @@ const webpack = require('webpack')
 const cwd = process.cwd()
 
 module.exports = {
-  entry: [
-    './index.js'
-    // the entry point of our app
-  ],
-  output: {
-    filename: 'cors.js',
-    // the output bundle
-
-    path: path.join(cwd, 'apps/cors/complexTest'),
-
-    publicPath: '/'
-    // necessary for HMR to know where to load the hot update chunks
+  entry: {
+    cors: './index.js'
   },
-
-  context: path.join(cwd, 'apps/cors/complexTest'),
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[name]-chunk.js',
+    path: path.join(cwd, 'public/js'),
+    publicPath: '/'
+  },
+  context: path.join(cwd, 'apps/cors'),
   module: {
     rules: [
       {

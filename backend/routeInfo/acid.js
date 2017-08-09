@@ -3,7 +3,7 @@ module.exports = {
     '/': 'Home',
     '/acidv1': 'Acid Test v1',
     '/redirection': 'Redirection',
-    '/dynamic': 'Highly Dynamic'
+    '/dynamic': 'Dynamic'
   },
   sections: {
     '/': [
@@ -33,19 +33,19 @@ module.exports = {
       {
         title: 'Original On This Domain',
         desc: 'The Original Test Created By Mat Kelly',
-        href: '/acidv1/mats',
+        href: '/tests/acidv1Mats',
         actTest: true
       },
       {
         title: 'Original Iframe',
         desc: "Mat Kelly's Original Test But Loaded Via An Iframe From The Original Domain",
-        href: '/acidv1/viaIframe',
+        href: '/tests/acidv1Iframe',
         actTest: true
       },
       {
         title: 'Original Custom Element',
         desc: 'Can You Handle Custom Elements?',
-        href: '/acidv1/customElements',
+        href: '/tests/acidv1CustomElements',
         actTest: true
       }
     ],
@@ -67,13 +67,25 @@ module.exports = {
       {
         title: 'Iframe Madness',
         desc: 'Dynamic Content And Ads Come From Everywhere including Iframes',
-        href: '/dynamic/iframeMadness',
+        href: '/tests/iframeMadness',
         actTest: true
       },
       {
         title: 'React',
         desc: 'JavaScript UX Please!',
-        href: '/dynamic/react',
+        href: '/tests/simpleReact',
+        actTest: true
+      },
+      {
+        title: 'Polymer',
+        desc: 'A Progressive Web App',
+        href: '/tests/polymer',
+        actTest: true
+      },
+      {
+        title: 'SPA',
+        desc: 'A Single Page Application',
+        href: '/tests/reactSPA',
         actTest: true
       }
     ]
@@ -82,7 +94,7 @@ module.exports = {
     { path: '/', exact: true },
     { path: '/acidv1', exact: false },
     { path: '/redirection', exact: false },
-    { path: '/dynamic', exact: false },
+    { path: '/dynamic', exact: false }
   ],
   trailer: [ 'sections', 'navInfo' ]
 }

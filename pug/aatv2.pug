@@ -3,16 +3,26 @@ html(lang='en')
     head
         meta(charset='utf-8')
         meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
-        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0')
+        link(href='/frontAssets/uikit.min.css', rel='stylesheet')
+        link(rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=m2ldOPOX80")
+        link(rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=m2ldOPOX80")
+        link(rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png?v=m2ldOPOX80")
+        link(rel="manifest" href="/icons/manifest.json?v=m2ldOPOX80")
+        link(rel="mask-icon" href="/icons/safari-pinned-tab.svg?v=m2ldOPOX80" color="#5bbad5")
+        link(rel="shortcut icon" href="/icons/favicon.ico?v=m2ldOPOX80")
+        meta(name="theme-color" content="#ffffff")
         title Archival Acid Test 2.0
-        link(href='/css/uikit.min.css', rel='stylesheet')
         style.
             html, body, #app { height: 100%; margin: 0 }
-
-        //script(src='/js/av2vendor-bundle.js')
+        script(src='/frontAssets/manifest.js')
     body
         #app
         script.
               window.__ROUTE_INFO__ = !{embed};
-        script(src='http://localhost:9000/bundle.js')
-        //script(src='/js/av2-bundle.js')
+        noscript.
+            #[a(href='http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript') When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.<br/>All Tests Failed]
+        //script(src='http://localhost:9000/bundle.js')
+        script(src='/frontAssets/vendor-bundle.js')
+        script(src='/frontAssets/app-bundle.js')
+

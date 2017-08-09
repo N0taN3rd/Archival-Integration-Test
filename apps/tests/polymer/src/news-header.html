@@ -264,6 +264,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <template is="dom-repeat" items="[[categories]]" as="category" initial-count="9">
             <a name="[[category.name]]" href="/list/[[category.name]]">[[category.title]]</a>
           </template>
+            <a name="Acid Test Home" href="#" onclick="goBackAcidTest()">Acid Test Home</a>
+            <a name="Dynamic Tests" href="#" onclick="goBackDynam()">Dynamic Tests</a>
         </iron-selector>
       </template>
     </header>
@@ -296,6 +298,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <template is="dom-repeat" items="[[categories]]" as="category" initial-count="9">
             <a name="[[category.name]]" href="/list/[[category.name]]">[[category.title]]</a>
           </template>
+          <a name="Acid Test Home" href="#" onclick="goBackAcidTest()">Acid Test Home</a>
+          <a name="Dynamic Tests" href="#" onclick="goBackDynam()">Dynamic Tests</a>
         </iron-selector>
       </div>
     </app-box>

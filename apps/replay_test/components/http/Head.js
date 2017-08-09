@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Fail from './Fail'
 
 export default class Head extends Component {
   constructor (...args) {
@@ -20,14 +21,27 @@ export default class Head extends Component {
       baseURL: window.Replay_Test.api,
       url: '/httpTest'
     }).then(response => {
+      let fail = false
+      if (response.data === '<p>You Get Me!</p>') {
+        fail = true
+      }
       let display = (
         <div>
           <ul className='uk-list uk-list-bullet uk-overflow-auto'>
-            {Array.from(Object.entries(response.headers)).map(([k, v]) => (
-              <li key={`${k}: ${v}`}>{k}: {v}</li>
-            ))}
+            {Array.from(Object.entries(response.headers)).map(([k, v]) => {
+              if (k === 'content-length' && v !== '18') {
+                fail = true
+              }
+              if (k === 'content-type' && v !== 'text/html; charset=utf-8') {
+                fail = true
+              }
+              return (
+                <li key={`${k}: ${v}`}>{k}: {v}</li>
+              )
+            })}
           </ul>
           <p>{response.data}</p>
+          {fail && <Fail/>}
         </div>
       )
       this.setState({
@@ -49,6 +63,7 @@ export default class Head extends Component {
               ))}
             </ul>
             <p>{error.response.data}</p>
+            <Fail/>
           </div>
         )
         this.setState({
@@ -60,7 +75,7 @@ export default class Head extends Component {
           )
         })
       } else if (error.request) {
-        let display = (<p>No Response</p>)
+        let display = (<div><p>No Response</p><Fail/></div>)
         this.setState({
           done: true,
           wasError: true,
@@ -70,7 +85,7 @@ export default class Head extends Component {
           )
         })
       } else {
-        let display = (<p className='uk-text-break'>${error}</p>)
+        let display = (<div><p className='uk-text-break'>${error}</p><Fail/></div>)
         this.setState({
           done: true,
           wasError: true,

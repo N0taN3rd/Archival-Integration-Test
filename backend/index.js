@@ -1,32 +1,10 @@
 const express = require('express')
-const feathers = require('feathers/lib/feathers')
-const rest = require('feathers-rest')
-const hooks = require('feathers-hooks')
-const errorHandler = require('feathers-errors/handler')
-
-const session = require('express-session')
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-
-const path = require('path')
 
 const config = require('./config')
-const redirectionRouter = require('./routes/redirection')
+const routes = require('./routes')
 
-const app = feathers(express())
-
-const corsTestApiLoc = { acidApiLoc: config.apiEndPoint }
-
-const dynamicIFramesApiLoc = {
-  apiLoremPixel: `${config.apiEndPoint}/lorempixel`,
-  apiLoremPixelEncoded: Buffer.from(`${config.apiEndPoint}/lorempixel`, 'utf8').toString('base64')
-}
-
-const dynamicReactApiLoc = {
-  apiLoc: config.apiEndPoint,
-  expectedDomain: config.frontEndDomain
-}
+const app = express()
 
 console.log(config.apiEndPoint)
 
@@ -36,37 +14,23 @@ app
   .set('view engine', config.viewEngine)
   .set('views', config.viewsPath)
   .use(cookieParser())
-  .use(bodyParser.json())
-  .use(bodyParser.urlencoded({ extended: true }))
   .get('*.js', (req, res, next) => {
-    if (req.url.includes('bundle')) {
+    if (req.url.includes('-bundle') || req.url.includes('mainifest')) {
       req.url = req.url + '.gz'
       res.set('Content-Encoding', 'gzip')
     }
     next()
   })
+  .use('/', routes.acidFront(config))
+  .use('/acidv1', routes.acidV1(config))
+  .use('/cors', routes.corsTest(config))
+  .use('/dynamic', routes.dynamicTest(config))
+  .use('/redirection', routes.redirectionTest(config))
+  .use('/tests', routes.tests(config))
+  .get('/list*', (req, res, next) => {
+    res.redirect('/tests/polymer')
+  })
   .use(express.static(config.staticPath))
-  .use('/redirection', redirectionRouter)
-  .get('/', (req, res) => {
-    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
-  })
-  .get('/acidv1', (req, res) => {
-    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
-  })
-  .get('/cors', (req, res, next) => {
-    res.cookie('acidApiAuth', 'acid:tabs', config.corsAuthCookie)
-    res.render('cors/test1', corsTestApiLoc)
-  })
-  .get('/dynamic', (req, res) => {
-    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
-  })
-  .get('/dynamic/iframeMadness', (req, res, next) => {
-    res.render('dynamic/iframes', dynamicIFramesApiLoc)
-  })
-  .get('/dynamic/react', (req, res, next) => {
-    res.render('dynamic/react', dynamicReactApiLoc)
-  })
-  .use(errorHandler())
 
 if (config.port) {
   app.listen(config.port, config.host, err => {

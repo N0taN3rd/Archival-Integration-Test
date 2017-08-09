@@ -68,6 +68,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   </style>
 
+  <script>
+    function goBackDynam () {
+      window.location = window.location.origin + '/dynamic'
+    }
+
+    function goBackAcidTest () {
+      window.location = window.location.origin
+    }
+  </script>
+
 </head>
 <body>
 
@@ -75,11 +85,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer = {lazyRegister: true, dom: 'shadow'};
-
+    var isFirefox = typeof InstallTrigger !== 'undefined';
     (function() {
       if ('registerElement' in document
           && 'import' in document.createElement('link')
-          && 'content' in document.createElement('template')) {
+          && 'content' in document.createElement('template') && !isFirefox) {
         // platform is good!
       } else {
         // polyfill the platform!
@@ -89,6 +99,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     })();
   </script>
-
+  <noscript>
+    <a href="http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript">When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.</a><br/>
+    <a href="/">Test FAILED!</a>
+  </noscript>
 </body>
 </html>

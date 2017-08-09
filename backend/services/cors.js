@@ -108,6 +108,7 @@ module.exports = {
       }
     }
     if (req.path === checkCred) {
+      // console.log(req.cookies)
       if (req.cookies === undefined || req.cookies === null) {
         res.status(403).json({
           message: 'Is your cookie jar empty?',

@@ -17,7 +17,6 @@ export default function addTrailer (pconf, trailer) {
       }
       pconf[ k ] = v
     }
-
   } else {
     v = pconf[ trailer ]
     for (kk in v) {

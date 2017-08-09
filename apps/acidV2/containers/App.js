@@ -1,6 +1,6 @@
 import React from 'react'
-import { AppContainer } from 'react-hot-loader'
-import { BrowserRouter } from 'react-router-dom'
+import AppContainer from 'react-hot-loader/lib/AppContainer'
+import BrowserRouter from 'react-router-dom/BrowserRouter'
 import Nav from '../components/Nav'
 import Main from '../components/Main'
 

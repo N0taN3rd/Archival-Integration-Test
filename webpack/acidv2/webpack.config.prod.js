@@ -1,18 +1,20 @@
 const path = require('path')
 const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const cwd = process.cwd()
 
 module.exports = {
   // devtool: 'source-map',
   entry: {
-    av2: './index.js',
-    av2vendor: ['react', 'uikit'],
+    app: './index.js',
+    vendor: ['core-js', 'react-router-dom', 'react-dom']
   },
   output: {
-    filename: `[name]-bundle.js`,
-    path: path.join(cwd, 'public/js'),
+    filename: '[name]-bundle.js',
+    chunkFilename: '[name]-chunk.js',
+    path: path.join(cwd, 'public/frontAssets'),
     publicPath: '/'
     // necessary for HMR to know where to load the hot update chunks
   },
@@ -59,22 +61,34 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      // The order of this array matters
-      name: 'av2vendor'
+      name: 'vendor'
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      filename: 'manifest.js',
+      minChunks: Infinity
+    }),
+    new UglifyJSPlugin({
+      sourceMap: false,
+      parallel: {
+        cache: true,
+        workers: 2 // for e.g
+      },
+      uglifyOptions: {
+        compress: true,
+        mangle: true
+      }
     }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$/,
-      threshold: 10240,
+      threshold: 0,
       minRatio: 0.0
     })
   ]

@@ -5,9 +5,9 @@ html(lang='en')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         meta(charset='utf-8')
         title AATv2.0 Iframe Madness
-        link(rel='stylesheet' href='/css/iframeMadness.css')
+        link(rel='stylesheet' href='/tests/iframeMadness/iframeMadness.css')
     body
-        iframe.acidFrame(src='/highlyDynamic/iframeMadness/navHeader.html')
+        iframe.acidFrame(src='/tests/iframeMadness/navHeader.html')
         .testBody
             .uk-flex.uk-flex-around
                 p.uk-text-break.uk-text-small
@@ -38,26 +38,14 @@ html(lang='en')
                         #coresMeImDiv
                     #corsMe2.corsME2
                         p
-                            | This is the same url but I will play nice. Still going to use it to make a request to the live web. :)
+                            | This is the same url but I will play nice.<br/>Still going to use it to make a request to the live web. :)
                         a#coresMeUR2L(href=apiLoremPixel) #{apiLoremPixel}
                         #coresMeImDiv2
-                p#heheh(style='display: none') L2hpZ2hseUR5bmFtaWMvaWZyYW1lTWFkbmVzcy9ldmFsSW5qZWN0ZWRJZnJhbWUyLmh0bWw=
-            .uk-panel(style='margin: 20px;')
-                .uk-flex.uk-flex-row.uk-flex-around.uk-flex-wrap
-                    div
-                        #_infoEvalInjected
-                        #_infoGotRandy
-                    div
-                        #_infoCors1
-                        #_infoCors2
-            script(src='/js/iframeMadness-bundle.js')
-            // <script src="http://localhost:9000/iframeMadness-bundle.js"></script>
-            script.
-              function receiveMessage (event) {
-                if (event.data.type === 'goHome') {
-                  window.location = '/'
-                } else if (event.data.type === 'goDynam') {
-                  window.location = '/highlyDynamic'
-                }
-              }
-              window.addEventListener("message", receiveMessage, false)
+                    #adContainer(data-adConf=adConf)
+                        h3 BUY MORE STUFF!
+            p#heheh(style='display: none') #{hehehEncoded}
+            #footerContainer
+    noscript.
+        #[a(href='http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript') When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.<br/>Test Failed]
+    script(src='/js/iframeMadness-bundle.js')
+    //script(src="http://localhost:9000/iframeMadness-bundle.js")

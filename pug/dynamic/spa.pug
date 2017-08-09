@@ -1,0 +1,20 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(charset='utf-8')
+        title AATv2.0 Single Page Application
+        link(rel='Swanson' href='http://ron-swanson-quotes.herokuapp.com/v2/quotes')
+        script(src='/rspa/manifest-bundle.js')
+    body
+        #app
+        script.
+          window.__PDATE__ = #{preservedDate};
+        script.
+          window.__JOKES__ = !{jokes};
+        //script(src="http://localhost:9000/app-bundle.js")
+        script(src="/rspa/reactSPAV1-bundle.js")
+        script(src="/rspa/reactSPA-bundle.js")
+        noscript.
+            #[a(href='http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript') When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.<br/>Test Failed]

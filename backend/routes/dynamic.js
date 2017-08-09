@@ -1,23 +1,13 @@
 const router = require('express').Router()
 
-router.get('/', (req, res, next) => {
-  res.send('<p>You Get Me!</p>')
-})
+module.exports = function (config) {
+  router.get('/', (req, res) => {
+    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
+  })
 
-router.head('/', (req, res, next) => {
-  res.send('<p>You Get Me!</p>')
-})
+  router.get('/index.html', (req, res) => {
+    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
+  })
 
-router.post('/', (req, res, next) => {
-
-})
-
-router.put('/', (req, res, next) => {
-
-})
-
-router.delete('/', (req, res, next) => {
-
-})
-
-module.exports = router
+  return router
+}

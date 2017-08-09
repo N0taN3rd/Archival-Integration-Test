@@ -15,7 +15,7 @@ const stateToProps = state => ({
 
 const dispatchToProps = dispatch => bindActionCreators({directMessageSw}, dispatch)
 
-const subtitle = < span>
+const subtitle = <span>
   This communication relies on navigator.serviceWorker.controller.postMessage which may be rewritten if JavaScript
   rewriting is looking for window.postMessage via a regex.
 </span>
