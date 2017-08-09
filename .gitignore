@@ -40,7 +40,8 @@ jspm_packages/
 apps/polymer/bower_components/
 apps/polymer/build/
 apps/polymer/node_modules/
-!public/test/polymer/bower_components/
+!public/test/polymer/bower_components
+!public/test/polymer/bower_components/*
 
 # Typescript v1 declaration files
 typings/
