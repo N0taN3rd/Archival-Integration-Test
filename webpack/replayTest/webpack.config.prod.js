@@ -54,7 +54,7 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
-      'process.env.API_ENDPOINT': JSON.stringify('http://wsdl-docker.cs.odu.edu:8091')
+      'process.env.API_ENDPOINT': JSON.stringify('http://wsdl-docker.cs.odu.edu:8880')
     }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),

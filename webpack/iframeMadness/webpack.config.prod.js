@@ -58,7 +58,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env.EVAL_INJECTED': JSON.stringify(ei),
       'process.env.EXPECTED_HOST': JSON.stringify('wsdl-docker.cs.odu.edu:8080'),
-      'process.env.MUST_START_WITH': JSON.stringify('http://wsdl-docker.cs.odu.edu:8091')
+      'process.env.MUST_START_WITH': JSON.stringify('http://wsdl-docker.cs.odu.edu:8880')
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.UglifyJsPlugin({
