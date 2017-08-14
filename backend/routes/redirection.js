@@ -15,11 +15,11 @@ module.exports = function (config) {
   }
 
   router.get('/', (req, res) => {
-    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
+    res.render('aatv2', { embed: JSON.stringify(config.acidRoutes) })
   })
 
   router.get('/index.html', (req, res) => {
-    res.render('aatv2', {embed: JSON.stringify(config.acidRoutes)})
+    res.render('aatv2', { embed: JSON.stringify(config.acidRoutes) })
   })
 
   router.get('/chain', (req, res) => {
@@ -85,5 +85,22 @@ module.exports = function (config) {
       })
     })
   })
+
+  router.get('/metaRefresh', (req, res) => {
+    res.send(`<meta http-equiv="refresh" content="0;url=${config.metaRefreshP1}" />`)
+  })
+
+  router.get('/metaRefresh/p1', (req, res) => {
+    res.render('redirected/metaP1', {
+      to: config.metaRefreshFin
+    })
+  })
+
+  router.get('/metaRefresh/fin', (req, res) => {
+    res.render('redirected/metaFin', {
+      from: config.metaRefreshP1
+    })
+  })
+
   return router
 }

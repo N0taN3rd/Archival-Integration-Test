@@ -61,6 +61,12 @@ module.exports = {
         desc: 'Does A Cookie Make It After Bouncing Around',
         href: '/redirection/cookie',
         actTest: true
+      },
+      {
+        title: 'Meta Refresh',
+        desc: 'Redirection Will Be Indicated Using Only A Meta Refresh Tag',
+        href: '/redirection/metaRefresh',
+        actTest: true
       }
     ],
     '/dynamic': [

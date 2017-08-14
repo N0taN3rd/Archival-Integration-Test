@@ -80,6 +80,7 @@ module.exports = {
         workers: 2 // for e.g
       },
       uglifyOptions: {
+        ie8: false,
         compress: true,
         mangle: true
       }

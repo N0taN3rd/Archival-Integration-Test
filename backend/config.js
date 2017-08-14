@@ -19,16 +19,19 @@ module.exports = {
   },
   host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
   port: process.env.LISTENPORT,
+  frontEndLoc: process.env.FRONT_END_LOC,
   apiEndPoint: process.env.API_ENDPOINT || '',
-  frontEndDomain: process.env.NODE_ENV !== 'production' ? 'localhost' : 'wsdl-docker.cs.odu.edu',
-  hehehEncoded: process.env.NODE_ENV !== 'production' ? 'http://localhost:8090/tests/iframeMadness/evalInjectedIframe2.html' : 'http://wsdl-docker.cs.odu.edu:8080/tests/iframeMadness/evalInjectedIframe2.html',
+  frontEndDomain: process.env.FRONT_END_DOMAIN,
+  hehehEncoded: `${process.env.FRONT_END_LOC}/tests/iframeMadness/evalInjectedIframe2.html`,
+  metaRefreshP1: `${process.env.FRONT_END_LOC}/redirection/metaRefresh/p1`,
+  metaRefreshFin: `${process.env.FRONT_END_LOC}/redirection/metaRefresh/fin`,
   dbPath: path.join(__dirname, '..', 'dbs'),
   staticPath: path.join(__dirname, '..', 'public'),
   viewsPath: path.join(__dirname, '..', 'pug'),
   viewEngine: 'pug',
   randomJokes: {
     chuckNorris: {
-      cats: ['dev', 'movie', 'food', 'celebrity', 'science', 'political', 'sport', 'religion', 'explicit', 'animal', 'music', 'history', 'travel', 'career', 'money', 'fashion'],
+      cats: [ 'dev', 'movie', 'food', 'celebrity', 'science', 'political', 'sport', 'religion', 'explicit', 'animal', 'music', 'history', 'travel', 'career', 'money', 'fashion' ],
       randy: 'random',
       https: true,
       endpoint: 'api.chucknorris.io'

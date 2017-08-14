@@ -1,0 +1,260 @@
+
+.tm-sidebar-left {
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 240px !important;
+    padding: 40px 40px 60px 40px;
+    border-right: 1px #e5e5e5 solid;
+    overflow: auto
+}
+
+.tm-sidebar-right {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 0px);
+    width: 200px
+}
+
+@media (min-width: 960px) {
+    .tm-sidebar-left + .tm-main {
+        padding-left: 240px
+    }
+}
+
+@media (min-width: 1200px) {
+    .tm-sidebar-right {
+        left: calc(100% + 0px)
+    }
+
+    .tm-sidebar-left + .tm-main {
+        padding-left: 40px
+    }
+}
+
+@media (min-width: 1400px) {
+    .tm-sidebar-left {
+        width: 300px !important;
+        padding: 45px 45px 60px 45px
+    }
+
+    .tm-sidebar-right {
+        left: calc(100% + 60px)
+    }
+
+    .tm-sidebar-left + .tm-main {
+        padding-left: 40px
+    }
+}
+
+.tm-navbar-container .uk-navbar-nav > li > a {
+    position: relative
+}
+
+.tm-navbar-container .uk-navbar-nav > li > a::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 15px;
+    right: calc(102% - 15px);
+    bottom: 20px;
+    height: 1px;
+    background-color: currentColor;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    -webkit-transition-property: right;
+    transition-property: right
+}
+
+.tm-navbar-container .uk-navbar-nav > li > a:hover::before {
+    right: 15px
+}
+
+.tm-nav > li.uk-active > a {
+    position: relative
+}
+
+.tm-nav > li.uk-active > a:before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: -25px;
+    width: 15px;
+}
+
+.tm-nav .uk-nav-header {
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e5e5
+}
+
+@media (min-width: 960px) {
+    .tm-subnav {
+        margin-left: -50px
+    }
+
+    .tm-subnav > * {
+        padding-left: 50px
+    }
+}
+
+.tm-subnav > * > :first-child {
+    text-transform: capitalize
+}
+
+.tm-width-small {
+    width: 80px
+}
+
+.tm-button-default, .tm-button-primary {
+    border-radius: 500px
+}
+
+.tm-button-large {
+    line-height: 48px
+}
+
+.tm-section-primary {
+    background: linear-gradient(to left top, #28a5f5, #1e87f0) 0 0 no-repeat
+}
+
+.tm-section-intro {
+    background: linear-gradient(to left top, #28a5f5, #1e87f0) 0 0 no-repeat, #fff;
+    background-size: 100% 75%
+}
+
+.tm-h4, .tm-h5, .tm-h6 {
+    font-family: Montserrat;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999
+}
+
+.tm-h4 {
+    font-size: 14px
+}
+
+.tm-h5 {
+    font-size: 12px
+}
+
+.tm-h6 {
+    font-size: 11px
+}
+
+.tm-text-large {
+    font-size: 18px
+}
+
+.tm-box-shadow-medium {
+    box-shadow: 2px 12px 35px rgba(0, 0, 0, 0.1), 0 1px 6px rgba(0, 0, 0, 0.05)
+}
+
+.tm-box-shadow-large {
+    box-shadow: -40px 40px 160px 0 rgba(0, 0, 0, 0.08), -8px 8px 15px 0 rgba(120, 120, 120, 0.04), 3px 3px 30px 0 rgba(0, 0, 0, 0.04)
+}
+
+.tm-box-shadow-modal {
+    box-shadow: 3px 3px 40px 0 rgba(0, 0, 0, 0.06)
+}
+
+.tm-overlay-default {
+    background: rgba(255, 255, 255, 0.5)
+}
+
+.tm-modal-dialog {
+    background: #f8f8f8
+}
+
+.tm-modal-header {
+    padding: 20px 30px
+}
+
+.tm-modal-body {
+    padding: 0
+}
+
+@media (min-width: 640px) {
+    .tm-modal-header {
+        padding: 25px 50px
+    }
+
+    .tm-modal-body {
+        padding: 0 50px
+    }
+}
+
+@media (min-width: 1600px) {
+    .tm-modal-header {
+        padding: 50px 120px
+    }
+
+    .tm-modal-body {
+        padding: 0 120px
+    }
+}
+
+.tm-modal-close-full {
+    background: transparent;
+    padding: 30px
+}
+
+@media (min-width: 640px) {
+    .tm-modal-close-full {
+        padding: 40px
+    }
+}
+
+.tm-heading-fragment > a {
+    color: inherit;
+    text-decoration: none
+}
+
+@media (min-width: 640px) {
+    h2.tm-heading-fragment > a {
+        display: block;
+        margin-left: -25px
+    }
+
+    h2.tm-heading-fragment > a:before {
+        content: "#";
+        width: 25px;
+        float: left;
+        color: #999
+    }
+}
+
+.tm-main .uk-container {
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+@media (min-width: 640px) {
+    .tm-main .uk-container {
+        padding-left: 30px;
+        padding-right: 30px
+    }
+}
+
+@media (min-width: 960px) {
+    .tm-main .uk-container {
+        padding-left: 40px;
+        padding-right: 40px
+    }
+}
+
+@media (min-width: 1200px) {
+    .tm-intro-text {
+        margin-top: 30px
+    }
+}
+
+@media (min-width: 1600px) {
+    .tm-intro-text {
+        margin-top: 90px
+    }
+
+    .tm-intro-image {
+        margin-right: -75px
+    }
+}

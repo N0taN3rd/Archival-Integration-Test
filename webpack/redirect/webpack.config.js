@@ -6,9 +6,7 @@ const cwd = process.cwd()
 
 module.exports = {
   entry: {
-    chain: './chain.js',
-    cookie: './cookie.js',
-    default: '../default.js'
+    metaRefreshp1: './metaRefreshp1.js',
   },
   output: {
     filename: '[name]-bundle.js',
@@ -55,24 +53,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'simple-commons',
-      minChunks (module, count) {
-        const context = module.context
-        return context && context.indexOf('node_modules') >= 0
-      }
-    }),
-    new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$/,
-      threshold: 10240,
-      minRatio: 0.8
+      'process.env.NODE_ENV': JSON.stringify('development')
     })
   ]
 }

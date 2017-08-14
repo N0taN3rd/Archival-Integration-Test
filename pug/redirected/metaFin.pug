@@ -1,0 +1,35 @@
+doctype html
+html(lang='eng')
+    head
+        meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        meta(charset='utf-8')
+        title AATv2 Meta Refresh Fin
+        link(href='/css/uikit.min.css' rel='stylesheet')
+    body
+        nav.uk-navbar-container(uk-navbar)
+            .uk-navbar-left
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='/') Archival Acid Test 2.0
+                    li.uk-parent
+                        a(href='/redirection') Redirection
+            .uk-navbar-right
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='#') Meta Refresh Fin
+        .uk-section.uk-section-default
+            .uk-container
+                .uk-flex.uk-flex-center
+                    .uk-card.uk-card-default.uk-card-hover.uk-width-expand.uk-box-shadow-xlarge
+                        .uk-card-badge.uk-label.uk-label Winning?
+                        .uk-card-body
+                            h3.uk-card-title Finished
+                            p Hopefully You Are Viewing An Archived Version Of This Page
+                            p There Are Two Different Ways This Page Could Have Been Archived
+                            p 1. URI Contained In The Meta Refresh Tag (In Head) Of <a href=#{from}>Part 1</a> <span class='uk-text-success'><b>Was Used</b></span>
+                            p 2. URI Was Used Directly. <span class="uk-text-warning"><b>Not Originating From The Part 1 Meta Refresh Link</b></span>
+                            p More Information About This Behavior Can Be Found In The Blog Post <a href='http://ws-dl.blogspot.com/2012/10/2012-10-10-zombies-in-archives.html'>2012-10-10: Zombies in the Archives</a>
+        noscript.
+            #[a(href='http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript') When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.<br/>Test Failed!]
+        script(src='/js/default-bundle.js')

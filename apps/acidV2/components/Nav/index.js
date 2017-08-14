@@ -13,13 +13,13 @@ function Nav ({location}) {
           </li>
         </ul>
       </div>
-      {ninfo && (
-        <div className='uk-navbar-right'>
-          <ul className='uk-navbar-nav'>
-            <li className='uk-active'><a href='#'>{ninfo}</a></li>
-          </ul>
-        </div>
-      )}
+      <div className='uk-navbar-right'>
+        <ul className='uk-navbar-nav'>
+          {ninfo && <li className='uk-active'><a href='#'>{ninfo}</a></li>}
+          <a className='uk-navbar-toggle uk-hidden@m uk-navbar-toggle-icon' data-uk-icon='icon: table'
+             data-uk-toggle='target: #offcanvas' />
+        </ul>
+      </div>
     </nav>
   )
 }

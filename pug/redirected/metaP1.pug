@@ -1,0 +1,40 @@
+doctype html
+html(lang='eng')
+    head
+        meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        meta(charset='utf-8')
+        meta(http-equiv="refresh" content="5;url=" + to)
+        title AATv2 Meta Refresh Part 1
+        link(href='/css/uikit.min.css' rel='stylesheet')
+    body
+        nav.uk-navbar-container(uk-navbar)
+            .uk-navbar-left
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='/') Archival Acid Test 2.0
+                    li.uk-parent
+                        a(href='/redirection') Redirection
+            .uk-navbar-right
+                ul.uk-navbar-nav
+                    li.uk-active
+                        a(href='#') Meta Refresh Part 1
+        .uk-section.uk-section-default
+            .uk-container
+                .uk-flex.uk-flex-center
+                    .uk-card.uk-card-default.uk-card-hover.uk-width-expand.uk-box-shadow-xlarge
+                        .uk-card-badge.uk-label.uk-label-warning 50% Complete
+                        .uk-card-body
+                            h3.uk-card-title Part 1
+                            p This page contains a meta refresh tag that will take you to the final part of the test.
+                            p There Are Two Different Ways This Page Could Have Been Archived
+                            p 1. URI Contained In The Meta Refresh Tag Served As The Response Body For The Test Link <span class='uk-text-success'>Was Followed</span>
+                            p 2. URI Was Used Directly. <span class="uk-text-warning">Not Originating From The Test Link</span>
+                            p More Information About This Behavior Can Be Found In The Blog Post <a href='http://ws-dl.blogspot.com/2012/10/2012-10-10-zombies-in-archives.html'>2012-10-10: Zombies in the Archives</a>
+                        .uk-card-footer
+                            p Time Till Meta Refresh Kicks In (45 seconds)
+                            progress.uk-progress#progressbar(value="1" max="35")
+        noscript.
+            #[a(href='http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript') When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.<br/>Test Failed!]
+        //script(src='/js/metaRefreshp1-bundle.js')
+        script(src='http://localhost:9000/metaRefreshp1-bundle.js')

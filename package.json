@@ -83,13 +83,13 @@
   "scripts": {
     "lint": "standard | snazzy",
     "lint-fix": "standard --fix",
-    "run-backend": "DEBUG=* USE_HOST=localhost LISTENPORT=8090 API_ENDPOINT=http://localhost:8091 node --harmony backend/index.js",
+    "run-backend": "FRONT_END_DOMAIN=localhost FRONT_END_LOC=http://localhost:8090 USE_HOST=localhost LISTENPORT=8090 API_ENDPOINT=http://localhost:8091 node --harmony backend/index.js",
     "run-api": "USE_HOST=localhost LISTENPORT=8091 node --harmony backend/apiServer",
     "build": "NODE_ENV=production webpack --config ./webpack/redirect/webpack.config.js --color -p --progress",
     "build-cors": "NODE_ENV=production webpack --config ./webpack/cors/webpack.config.prod.js --color -p --progress",
     "build-ifmad": "webpack --config ./webpack/iframeMadness/webpack.config.prod.js --color -p --progress",
     "build-r": "NODE_ENV=production webpack --config ./webpack/reactSpa/webpack.config.prod.js --color -p --progress",
-    "dev-ui": "node --harmony ./node_modules/.bin/webpack-dev-server --config ./webpack/reactSpa/webpack.config.js --port 9000 --content-base ./apps/reactSPA --hot --inline",
+    "dev-ui": "node --harmony ./node_modules/.bin/webpack-dev-server --config ./webpack/acidv2/webpack.config.js --port 9000 --content-base ./apps/acidV2 --hot --inline",
     "dev-cors": "node --harmony ./node_modules/.bin/webpack-dev-server --config ./webpack/cors/webpack.config.js --port 9000 --content-base ./apps/cors --hot --inline",
     "dev-replayT": "node --harmony ./node_modules/.bin/webpack-dev-server --config ./webpack/replayTest/webpack.config.js --port 9000 --content-base ./apps/replayTest --hot --inline"
   },
