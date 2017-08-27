@@ -94,20 +94,6 @@ https://n0tan3rd.github.io/replay_test/
 ![get link headers](accessToLinkHeader.png)
 
 ### JS Detection And Prevention Of Archiving
-```js
-var _0xc76c = ["\x6F\x72\x69\x67\x69\x6E", "\x6C\x6F\x63\x61\x74\x69\x6F\x6E", "\x70\x75\x62\x6C\x69\x63\x6F\x2E\x70\x74", "\x69\x6E\x64\x65\x78\x4F\x66", "\x68\x72\x65\x66", "\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x70\x75\x62\x6C\x69\x63\x6F\x2E\x70\x74"];
-if (window[_0xc76c[1]][_0xc76c[0]] && window[_0xc76c[1]][_0xc76c[0]][_0xc76c[3]](_0xc76c[2]) < 0) {
-       window[_0xc76c[1]][_0xc76c[4]] = _0xc76c[5]
-}
-```
-```js
-(function() {
-  var n = document[Object.keys((document))[0]].href
-  if ( n !== window.location.href && n.includes("wbrc.io") ) {
-    document.body.innerHTML = 'This site does not allow to be crawled.'
-  }
-})()
-```
 
 ### JS Detection Of Archiving With Correction
 - https://github.com/N0taN3rd/archiveAcid/blob/master/src/purl.js
@@ -118,8 +104,6 @@ if (window[_0xc76c[1]][_0xc76c[0]] && window[_0xc76c[1]][_0xc76c[0]][_0xc76c[3]]
 
 ### Eval
 - [Eval code that evals another html element](https://github.com/N0taN3rd/archiveAcid/blob/master/docs/funtimes.js)
-- Pywb/Webrecorder can not handle so will brick them hard. Something something Iframes??
-- Eval iframe with current URL as src heheehehehehe
 
 ### Videos
 - Stresses Pywb/Webrecorder
