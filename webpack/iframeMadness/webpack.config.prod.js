@@ -5,7 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const cwd = process.cwd()
 
-const EVAL_INJECTED = Buffer.from('http://wsdl-docker.cs.odu.edu:8880/tests/iframeMadness/funtimes.js', 'utf8').toString('base64')
+const EVAL_INJECTED = Buffer.from('http://wsdl-docker.cs.odu.edu:8080/tests/iframeMadness/funtimes.js', 'utf8').toString('base64')
 const EXPECTED_HOST = Buffer.from('wsdl-docker.cs.odu.edu:8080', 'utf8').toString('base64')
 const MUST_START_WITH = Buffer.from('http://wsdl-docker.cs.odu.edu:8880', 'utf8').toString('base64')
 
