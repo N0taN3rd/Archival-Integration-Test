@@ -38,9 +38,9 @@ const FetchLIm = (props) => {
       let blobUrl
       let fail = false
       try {
-        blobUrl = <img src={URL.createObjectURL(props.fetchLIState.get('body'))}/>
+        blobUrl = <img src={URL.createObjectURL(props.fetchLIState.get('body'))} />
       } catch (error) {
-        blobUrl = <Fail/>
+        blobUrl = <Fail />
         fail = true
       }
       return (
@@ -52,13 +52,13 @@ const FetchLIm = (props) => {
           <ul className='uk-list uk-list-bullet uk-overflow-auto'>
             {headers}
           </ul>
-          {!foundXpower && <p className="uk-text-danger">Where Is My X-Powered-By: Express Header?</p>}
+          {!foundXpower && <p className='uk-text-danger'>Where Is My X-Powered-By: Express Header?</p>}
         </div>
       )
     } else {
       return (<div><p>
         Was Error: {String(props.fetchLIState.get('err'))}
-      </p>  <Fail/>
+      </p>                      <Fail />
       </div>)
     }
   }

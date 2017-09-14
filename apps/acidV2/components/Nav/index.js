@@ -17,7 +17,7 @@ function Nav ({location}) {
         <ul className='uk-navbar-nav'>
           {ninfo && <li className='uk-active'><a href='#'>{ninfo}</a></li>}
           <a className='uk-navbar-toggle uk-hidden@m uk-navbar-toggle-icon' data-uk-icon='icon: table'
-             data-uk-toggle='target: #offcanvas' />
+            data-uk-toggle='target: #offcanvas' />
         </ul>
       </div>
     </nav>

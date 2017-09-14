@@ -4,7 +4,7 @@ html(lang='eng')
         meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
         meta(name='viewport' content='width=device-width, initial-scale=1.0')
         meta(charset='utf-8')
-        meta(http-equiv="refresh" content="5;url=" + to)
+        meta(http-equiv="refresh" content="35;url=" + to)
         title AATv2 Meta Refresh Part 1
         link(href='/css/uikit.min.css' rel='stylesheet')
     body
@@ -32,9 +32,9 @@ html(lang='eng')
                             p 2. URI Was Used Directly. <span class="uk-text-warning">Not Originating From The Test Link</span>
                             p More Information About This Behavior Can Be Found In The Blog Post <a href='http://ws-dl.blogspot.com/2012/10/2012-10-10-zombies-in-archives.html'>2012-10-10: Zombies in the Archives</a>
                         .uk-card-footer
-                            p Time Till Meta Refresh Kicks In (45 seconds)
+                            p Time Till Meta Refresh Kicks In (35 seconds)
                             progress.uk-progress#progressbar(value="1" max="35")
         noscript.
             #[a(href='http://lmgtfy.com/?s=d&iie=1&q=How+To+Enable+JavaScript') When you have eliminated the <strong>JavaScript</strong>, whatever remains must be an empty page.<br/>Test Failed!]
-        //script(src='/js/metaRefreshp1-bundle.js')
-        script(src='http://localhost:9000/metaRefreshp1-bundle.js')
+        script(src='/js/metaRefreshp1-bundle.js')
+        //script(src='http://localhost:9000/metaRefreshp1-bundle.js')

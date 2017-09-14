@@ -3,7 +3,9 @@ const webpack = require('webpack')
 
 const cwd = process.cwd()
 
-const ei = Buffer.from('http://localhost:8090/tests/iframeMadness/funtimes.js', 'utf8').toString('base64')
+const EVAL_INJECTED = Buffer.from('http://localhost:8090/tests/iframeMadness/funtimes.js', 'utf8').toString('base64')
+const EXPECTED_HOST = Buffer.from('localhost:8090', 'utf8').toString('base64')
+const MUST_START_WITH = Buffer.from('http://localhost:8091', 'utf8').toString('base64')
 
 module.exports = {
   entry: {
@@ -56,9 +58,9 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-      'process.env.EVAL_INJECTED': JSON.stringify(ei),
-      'process.env.EXPECTED_HOST': JSON.stringify('localhost:8090'),
-      'process.env.MUST_START_WITH': JSON.stringify('http://localhost:8091')
+      'process.env.EVAL_INJECTED': JSON.stringify(EVAL_INJECTED),
+      'process.env.EXPECTED_HOST': JSON.stringify(EXPECTED_HOST),
+      'process.env.MUST_START_WITH': JSON.stringify(MUST_START_WITH)
     })
 
   ]

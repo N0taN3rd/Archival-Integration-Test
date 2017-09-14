@@ -7,11 +7,10 @@ UIkit.use(Icons)
 
 $(() => {
   let animate = setInterval(() => {
-    window.progressbar && (window.progressbar.value += 1);
+    window.progressbar && (window.progressbar.value += 1)
 
     if (!window.progressbar || window.progressbar.value >= window.progressbar.max) {
       clearInterval(animate)
     }
   }, 1000)
 })
-

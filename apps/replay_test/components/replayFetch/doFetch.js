@@ -18,7 +18,6 @@ const enhance = compose(
   onlyUpdateForKeys(['fetchState'])
 )
 
-
 const doSum = data => {
   const vals = Array.from(Object.entries(data.toJS()))
   let total = 0
@@ -57,8 +56,8 @@ const DoFetch = (props) => {
       }
       let list
       let fail = false
-      try  {
-        let sum =  doSum(props.fetchState.get('body'))
+      try {
+        let sum = doSum(props.fetchState.get('body'))
         list = (
           <ul className='uk-list uk-list-bullet uk-overflow-auto'>
             {sum}
@@ -66,7 +65,7 @@ const DoFetch = (props) => {
         )
       } catch (error) {
         fail = true
-        list = <Fail/>
+        list = <Fail />
       }
       return (
         <div>
@@ -83,7 +82,7 @@ const DoFetch = (props) => {
       return (<div>
         <div className='uk-card-badge uk-label uk-label-danger'>No!</div>
         <p>Was Error: {String(props.fetchState.get('err'))}</p>
-        <Fail/>
+        <Fail />
       </div>)
     }
   }

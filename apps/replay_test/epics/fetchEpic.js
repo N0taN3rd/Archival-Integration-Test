@@ -24,7 +24,7 @@ const fetchGetError = err => ({
   err
 })
 
-const fetchLocalImDone = ({res,blob}) => ({
+const fetchLocalImDone = ({res, blob}) => ({
   type: FetchLocalImage.FETCH_LOCAL_IMAGE_DONE,
   blob,
   res
@@ -38,11 +38,11 @@ const fetchLocalImError = err => ({
 export const fetchGetEpic = action$ =>
   action$.ofType(FetchGet.DO_FETCH_GET)
     .mergeMap(action => {
-        console.log('fetch get epic', action)
-        return Observable.fromPromise(doFetchGet(action.url))
+      console.log('fetch get epic', action)
+      return Observable.fromPromise(doFetchGet(action.url))
           .map(result => fetchGetDone(result))
           .catch(err => fetchGetError(err))
-      }
+    }
     )
 
 export const fetchLocalImage = action$ =>

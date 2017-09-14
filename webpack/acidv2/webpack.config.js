@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:9000',
+    'webpack-dev-server/client?http://localhost:9000/',
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
     'webpack/hot/only-dev-server',
@@ -56,7 +56,9 @@ module.exports = {
     ]
   },
   devServer: {
-    historyApiFallback: true,
+    host: 'localhost',
+    port: 9000,
+    // historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',

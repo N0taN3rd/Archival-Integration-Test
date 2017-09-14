@@ -22,5 +22,11 @@ module.exports = function (config) {
     res.render('dynamic/spa', {preservedDate: Date.now(), jokes: jsStringify(config.randomJokes)})
   })
 
+  router.get('/onlyCSS', (req, res, next) => {
+    res.set('Link', '<linkIncluded.css>;rel=stylesheet')
+    res.set('Content-Type', 'text/html; charset=UTF-8')
+    res.end()
+  })
+
   return router
 }

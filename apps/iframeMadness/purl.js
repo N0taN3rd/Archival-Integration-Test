@@ -3,15 +3,15 @@ export default class Purl {
     this._hostOn = document[Object.keys(document)[0]].host || window.location.host
     this.ok = false
     this._parser = document.createElement('a')
-    this._mustStartWith = process.env.MUST_START_WITH
-    this._expectedHost = process.env.EXPECTED_HOST
+    this._mustStartWith = atob(process.env.MUST_START_WITH)
+    this._expectedHost = atob(process.env.EXPECTED_HOST)
   }
 
   hostInfo (expectLocation, notifyID) {
     if (this._hostOn !== expectLocation.host) {
       this.ok = false
       let message = `This page is not on the expected host of ${expectLocation.host}`
-      message += `<br>Actual ${n}<br>`
+      message += `<br>Actual ${this._hostOn}<br>`
       message += 'Adjusting Accordingly'
       document.getElementById(notifyID).innerHTML = `<p class="alert">${message}</p>`
     } else {

@@ -3,7 +3,8 @@ module.exports = {
     '/': 'Home',
     '/acidv1': 'Acid Test v1',
     '/redirection': 'Redirection',
-    '/dynamic': 'Dynamic'
+    '/dynamic': 'Dynamic',
+    '/funkyTown': 'Funky Town'
   },
   sections: {
     '/': [
@@ -27,6 +28,11 @@ module.exports = {
         title: 'Dynamic Content',
         desc: 'How Well Can You Handle The Dynamic Web',
         href: '/dynamic'
+      },
+      {
+        title: 'Funky Town',
+        desc: 'Oh The Things You Can Do On The Web',
+        href: '/funkyTown'
       }
     ],
     '/acidv1': [
@@ -94,13 +100,28 @@ module.exports = {
         href: '/tests/reactSPA',
         actTest: true
       }
+    ],
+    '/funkyTown': [
+      {
+        title: 'Only CSS',
+        desc: 'A Page That Only Exists Through CSS',
+        href: '/tests/onlyCSS',
+        actTest: true
+      },
+      {
+        title: 'ES Modules',
+        desc: 'Script Tags The Use "import x from where"',
+        href: 'tests/esModules',
+        actTest: true
+      }
     ]
   },
   routeConf: [
     { path: '/', exact: true },
     { path: '/acidv1', exact: false },
     { path: '/redirection', exact: false },
-    { path: '/dynamic', exact: false }
+    { path: '/dynamic', exact: false },
+    { path: '/funkyTown', exact: false }
   ],
   trailer: [ 'sections', 'navInfo' ]
 }

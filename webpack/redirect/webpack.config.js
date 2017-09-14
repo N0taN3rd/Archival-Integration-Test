@@ -6,7 +6,7 @@ const cwd = process.cwd()
 
 module.exports = {
   entry: {
-    metaRefreshp1: './metaRefreshp1.js',
+    metaRefreshp1: './metaRefreshp1.js'
   },
   output: {
     filename: '[name]-bundle.js',

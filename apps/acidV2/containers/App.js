@@ -11,7 +11,7 @@ export default function App () {
       <BrowserRouter>
         <div className='uk-offcanvas-content' style={{width: '100vw', height: '100vh'}}>
           <Nav />
-          <SideNav/>
+          <SideNav />
           <div className='uk-section uk-section-default'>
             <div className='uk-container'>
               <Main />

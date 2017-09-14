@@ -8,12 +8,9 @@ const jwt = require('feathers-authentication-jwt')
 const auth = require('feathers-authentication')
 const memory = require('feathers-memory')
 
-const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const path = require('path')
-const http = require('http')
 const request = require('request')
 
 const config = require('./config')
@@ -26,31 +23,24 @@ const corsOptions = {
   origin: true,
   credentials: true
 }
-/*
- case 'lorempixel':
-        return rp('http://lorempixel.com/400/200/')
- */
+
 const app = feathers(express())
 
-const HOST = process.env.USE_HOST || '0.0.0.0'
-
-/*
-{"bot":false,"comment":"[[:Page:The Boy Travellers in the Russian Empire.djvu/492]] removed from category, [[Special:WhatLinksHere/Page:The Boy Travellers in the Russian Empire.djvu/492|this page is included within other pages]]","id":9527276,"meta":{"domain":"en.wikisource.org","dt":"2017-08-08T17:34:54+00:00","id":"e6c0cbf7-7c5f-11e7-8c28-141877613164","request_id":"bebaa06c-88f8-48b9-b274-ffa9d14db697","schema_uri":"mediawiki/recentchange/1","topic":"eqiad.mediawiki.recentchange","uri":"https://en.wikisource.org/wiki/Category:Problematic","partition":0,"offset":339155796},"namespace":14,"parsedcomment":"<a href=\"/wiki/Page:The_Boy_Travellers_in_the_Russian_Empire.djvu/492\" title=\"Page:The Boy Travellers in the Russian Empire.djvu/492\">Page:The Boy Travellers in the Russian Empire.djvu/492</a> removed from category, <a href=\"/wiki/Special:WhatLinksHere/Page:The_Boy_Travellers_in_the_Russian_Empire.djvu/492\" title=\"Special:WhatLinksHere/Page:The Boy Travellers in the Russian Empire.djvu/492\">this page is included within other pages</a>","server_name":"en.wikisource.org","server_script_path":"/w","server_url":"https://en.wikisource.org","timestamp":1502213694,"title":"Category:Problematic","type":"categorize","user":"Jasonanaggie","wiki":"enwikisource"}
-
- */
-app.configure(rest((req, res) => {
-  res.format({
-    'application/acid.cors-ims-lookup.1': () => {
-      res.end(JSON.stringify(res.data))
-    },
-    'application/acid.cors-ims-lookup.2': () => {
-      res.end(JSON.stringify(res.data))
-    },
-    json () {
-      res.json(res.data)
-    }
-  })
-}))
+app
+  .enable('trust proxy')
+  .configure(rest((req, res) => {
+    res.format({
+      'application/acid.cors-ims-lookup.1': () => {
+        res.end(JSON.stringify(res.data))
+      },
+      'application/acid.cors-ims-lookup.2': () => {
+        res.end(JSON.stringify(res.data))
+      },
+      json () {
+        res.json(res.data)
+      }
+    })
+  }))
   .configure(hooks())
   .set('config', config)
   .use(cookieParser())
@@ -115,8 +105,6 @@ app.configure(rest((req, res) => {
       res.send(error)
     }
   }))
-
-app.set('trust proxy', true)
 
 if (config.port) {
   app.listen(config.port, config.host, err => {

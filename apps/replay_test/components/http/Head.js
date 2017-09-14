@@ -41,7 +41,7 @@ export default class Head extends Component {
             })}
           </ul>
           <p>{response.data}</p>
-          {fail && <Fail/>}
+          {fail && <Fail />}
         </div>
       )
       this.setState({
@@ -63,7 +63,7 @@ export default class Head extends Component {
               ))}
             </ul>
             <p>{error.response.data}</p>
-            <Fail/>
+            <Fail />
           </div>
         )
         this.setState({
@@ -75,7 +75,7 @@ export default class Head extends Component {
           )
         })
       } else if (error.request) {
-        let display = (<div><p>No Response</p><Fail/></div>)
+        let display = (<div><p>No Response</p><Fail /></div>)
         this.setState({
           done: true,
           wasError: true,
@@ -85,7 +85,7 @@ export default class Head extends Component {
           )
         })
       } else {
-        let display = (<div><p className='uk-text-break'>${error}</p><Fail/></div>)
+        let display = (<div><p className='uk-text-break'>${error}</p><Fail /></div>)
         this.setState({
           done: true,
           wasError: true,

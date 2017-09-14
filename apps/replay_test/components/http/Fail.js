@@ -21,7 +21,7 @@ export default function Fail () {
     <div>
       <p>Zombie For You!</p>
       <img
-        src={atob(failFishes[failSauce])}/>
+        src={atob(failFishes[failSauce])} />
     </div>
   )
 }

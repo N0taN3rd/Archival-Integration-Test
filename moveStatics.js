@@ -1,10 +1,9 @@
 const fs = require('fs-extra')
 
 const moveMe = [
-  {from: 'node_modules/normalize.css/normalize.css', to: 'public/css/normalize.css'},
-  {from: 'node_modules/@blueprintjs/core/dist/blueprint.css', to: 'public/css/blueprint.css'},
-  {from: 'node_modules/@blueprintjs/docs/dist/docs.css', to: 'public/css/blueprint-docs.css'},
-  {from: 'node_modules/js-cookie/src/js.cookie.js', to: 'public/js/js.cookie.js'}
+  {from: 'node_modules/uikit/dist/css/uikit.min.css', to: 'public/css/uikit.min.css'},
+  {from: 'node_modules/uikit/dist/css/uikit.min.css', to: 'public/frontAssets/uikit.min.css'},
+  {from: 'node_modules/uikit/dist/css/uikit.min.css', to: 'public/frontAssets/uikit.min.css'}
 ]
 
 async function doIt () {

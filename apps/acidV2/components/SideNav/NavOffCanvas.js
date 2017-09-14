@@ -6,7 +6,7 @@ export default function NavOffCanvas () {
     <div id='offcanvas' data-uk-offcanvas='mode: push; overlay: true'>
       <div className='uk-offcanvas-bar'>
         <div className='uk-panel'>
-          <NavLinks/>
+          <NavLinks />
         </div>
       </div>
     </div>

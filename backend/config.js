@@ -9,7 +9,7 @@ module.exports = {
       httpOnly: false,
       maxAge: ONE_DAY,
       name: 'feathers-jwt',
-      secure: false,
+      secure: false
     }
   },
   corsAuthCookie: {
@@ -17,8 +17,9 @@ module.exports = {
     httpOnly: false,
     maxAge: ONE_DAY
   },
-  host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
+  host: process.env.NODE_ENV === 'development' ? 'localhost' : '0.0.0.0',
   port: process.env.LISTENPORT,
+  outsideDockerPort: process.env.OUT_SIDE_DOCKER_PORT,
   frontEndLoc: process.env.FRONT_END_LOC,
   apiEndPoint: process.env.API_ENDPOINT || '',
   frontEndDomain: process.env.FRONT_END_DOMAIN,
@@ -31,7 +32,7 @@ module.exports = {
   viewEngine: 'pug',
   randomJokes: {
     chuckNorris: {
-      cats: [ 'dev', 'movie', 'food', 'celebrity', 'science', 'political', 'sport', 'religion', 'explicit', 'animal', 'music', 'history', 'travel', 'career', 'money', 'fashion' ],
+      cats: ['dev', 'movie', 'food', 'celebrity', 'science', 'political', 'sport', 'religion', 'explicit', 'animal', 'music', 'history', 'travel', 'career', 'money', 'fashion'],
       randy: 'random',
       https: true,
       endpoint: 'api.chucknorris.io'

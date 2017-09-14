@@ -23,7 +23,7 @@ function loadPhotosJQ () {
     UIkit.notification({
       message: `What Did You Do To My Embedded JSON About FLICKR Images ${error}`,
       status: 'danger',
-      pos: 'top-left',
+      pos: 'top-center',
       timeout: 5000
     })
   }
@@ -54,7 +54,7 @@ function loadPhotosJQ () {
         UIkit.notification({
           message: `Fetching FLICKR Images Failed ${data.message}`,
           status: 'danger',
-          pos: 'top-left',
+          pos: 'top-center',
           timeout: 5000
         })
         $('#test1').removeClass('uk-alert-success').addClass('uk-alert-warning')
@@ -69,7 +69,7 @@ function loadPhotosJQ () {
         UIkit.notification({
           message: `Fetching FLICKR Images ${url} FAILED! ${errorThrown}!`,
           status: 'danger',
-          pos: 'top-right',
+          pos: 'top-center',
           timeout: 5000
         })
         let cdiv = $(simple.fail)
@@ -113,7 +113,7 @@ function loadPhotosApi1 () {
       UIkit.notification({
         message: `You Modified Both The Content Length And Content Type For Randy Image Request`,
         status: 'danger',
-        pos: 'top-left',
+        pos: 'top-center',
         timeout: 5000
       })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
@@ -142,7 +142,7 @@ function loadPhotosApi1 () {
       UIkit.notification({
         message: `You Modified The Content Length For Randy Image Request`,
         status: 'danger',
-        pos: 'top-left',
+        pos: 'top-center',
         timeout: 5000
       })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
@@ -166,7 +166,7 @@ function loadPhotosApi1 () {
       UIkit.notification({
         message: `You Modified The Content Type For Randy Image Request`,
         status: 'danger',
-        pos: 'top-left',
+        pos: 'top-center',
         timeout: 5000
       })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
@@ -204,7 +204,7 @@ function loadPhotosApi1 () {
     UIkit.notification({
       message: `There Was An Error For Randy Image Request ${error}`,
       status: 'danger',
-      pos: 'top-left',
+      pos: 'top-center',
       timeout: 5000
     })
     // console.log(error)
@@ -264,7 +264,7 @@ function loadPhotosApi2 () {
       UIkit.notification({
         message: `You Modified Both The Content Length And Content Type For Image Request`,
         status: 'danger',
-        pos: 'top-left',
+        pos: 'top-center',
         timeout: 5000
       })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
@@ -293,7 +293,7 @@ function loadPhotosApi2 () {
       UIkit.notification({
         message: `You Modified Both The Content Length For Image Request`,
         status: 'danger',
-        pos: 'top-left',
+        pos: 'top-center',
         timeout: 5000
       })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
@@ -317,7 +317,7 @@ function loadPhotosApi2 () {
       UIkit.notification({
         message: `You Modified Both The Content Type For Image Request`,
         status: 'danger',
-        pos: 'top-left',
+        pos: 'top-center',
         timeout: 5000
       })
       $('#test3').removeClass('uk-alert-success').addClass('uk-alert-danger')
@@ -357,7 +357,7 @@ function loadPhotosApi2 () {
     UIkit.notification({
       message: `Image Request Error ${error}`,
       status: 'danger',
-      pos: 'top-left',
+      pos: 'top-center',
       timeout: 5000
     })
     // console.log(error)
@@ -413,7 +413,7 @@ function feathersAuth () {
           UIkit.notification({
             message: `What Did I Receive As The Response For My Access Token?<br/>${error}<br/>${response}`,
             status: 'danger',
-            pos: 'top-left',
+            pos: 'top-center',
             timeout: 5000
           })
           $('#authCard').append(response)
@@ -422,7 +422,7 @@ function feathersAuth () {
           UIkit.notification({
             message: 'No Access Token Received!',
             status: 'danger',
-            pos: 'top-left',
+            pos: 'top-center',
             timeout: 5000
           })
           state = 'Verifying Token'
@@ -511,7 +511,7 @@ $(document).ready(() => {
     UIkit.notification({
       message: 'Done!',
       status: 'primary',
-      pos: 'top-left',
+      pos: 'top-center',
       timeout: 5000
     })
   }).catch(error => {
@@ -519,7 +519,7 @@ $(document).ready(() => {
     UIkit.notification({
       message: `Oh Boy A Big Error Happened ${error}`,
       status: 'danger',
-      pos: 'top-left',
+      pos: 'top-center',
       timeout: 5000
     })
   })
