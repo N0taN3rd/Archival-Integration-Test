@@ -19,7 +19,6 @@ module.exports = {
   },
   host: process.env.NODE_ENV === 'development' ? 'localhost' : '0.0.0.0',
   port: process.env.LISTENPORT,
-  outsideDockerPort: process.env.OUT_SIDE_DOCKER_PORT,
   frontEndLoc: process.env.FRONT_END_LOC,
   apiEndPoint: process.env.API_ENDPOINT || '',
   frontEndDomain: process.env.FRONT_END_DOMAIN,

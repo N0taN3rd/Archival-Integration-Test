@@ -26,7 +26,7 @@ module.exports = function (config) {
   map['/robots.txt'] = getArr
   return {
     url: process.env.FRONT_END_DOMAIN,
-    port: process.env.NODE_ENV === 'development' ? config.port : process.env.outsideDockerPort,
+    port: process.env.NODE_ENV === 'development' ? config.port : process.env.OUT_SIDE_DOCKER_PORT,
     map
   }
 }
