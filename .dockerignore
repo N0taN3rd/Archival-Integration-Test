@@ -103,8 +103,18 @@ typings/
 # JIRA plugin
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
+# Crashxzlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+webpack/
+moveStatics.js
+build-polymer.sh
+buildPug.js
+accessToLinkHeader.png
+acidLiveWeb.html
+blah.txt
+README.md
+yarn.lock
+corsTest.html

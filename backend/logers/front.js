@@ -13,7 +13,7 @@ module.exports = function (siteMap) {
     })
   } else {
     transport = new (winston.transports.DailyRotateFile)({
-      dirname: path.join('logs', 'frontEnd'),
+      dirname: path.join('logsDir', 'frontEnd'),
       filename: 'log',
       prepend: true,
       level: 'info'

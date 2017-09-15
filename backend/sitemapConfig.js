@@ -12,11 +12,13 @@ module.exports = function (config) {
     i = 0
     while (i < len) {
       href = v[i].href
-      if (href[0] !== '/') {
-        href = `/${href}`
-      }
-      if (map[href] === undefined) {
-        map[href] = getArr
+      if (href.indexOf('googlechrome.github.io') === -1) {
+        if (href[0] !== '/') {
+          href = `/${href}`
+        }
+        if (map[href] === undefined) {
+          map[href] = getArr
+        }
       }
       i++
     }
