@@ -1,16 +1,14 @@
 FROM node:8.5.0
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY backend /usr/src/app/backend
-COPY dbs /usr/src/app/dbs
-COPY package.json /usr/src/app/
-COPY run-api.sh /usr/src/app/
+VOLUME /logs
 
-RUN chmod +x run-api.sh
-
+COPY package.json /app/
 RUN npm install
+
+COPY backend dbs run-api.sh /app/
+RUN chmod +x run-api.sh
 
 EXPOSE 8080
 

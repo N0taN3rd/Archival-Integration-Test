@@ -1,17 +1,15 @@
 FROM node:8.5.0
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY backend /usr/src/app/backend
-COPY public /usr/src/app/public
-COPY pug /usr/src/app/pug
-COPY package.json /usr/src/app/
-COPY run-backend.sh /usr/src/app/
+VOLUME /logs
+
+COPY package.json /app/
+RUN npm install
+
+COPY backend public pug run-backend.sh /app/
 
 RUN chmod +x run-backend.sh
-
-RUN npm install
 
 ENV NODE_ENV=production
 ENV LISTENPORT=8080

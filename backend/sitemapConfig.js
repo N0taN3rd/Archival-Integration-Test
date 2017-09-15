@@ -1,6 +1,5 @@
-const getArr = ['get']
-
 module.exports = function (config) {
+  const getArr = ['get']
   let map = {}
   let i
   let len

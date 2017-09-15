@@ -13,13 +13,14 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const request = require('request')
 
+const logger = require('./logers/api')
 const config = require('./config')
 const services = require('./services')
 
 const corsOptions = {
   allowedHeaders: ['X-Acid-Request', 'X-Requested-With', 'Content-Type', 'Authorization'],
   exposedHeaders: ['Access-Control-Allow-Methods', 'Content-Length', 'Connection', 'Pragma', 'X-Powered-By', 'Vary'],
-  methods: ['GET,HEAD,PUT,PATCH,POST,DELETE', 'OPTIONS'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
   origin: true,
   credentials: true
 }
@@ -53,6 +54,7 @@ app
     entity: 'user'
   }))
   .configure(jwt())
+  .use(logger())
   .use('/users', memory())
   .configure(services())
   .post('/login', auth.express.authenticate('acid-local', {
@@ -92,6 +94,9 @@ app
     res.json({
       liveLMGTFY: 'ws://live-ws.lmgtfy.com/live_ws'
     })
+  })
+  .get('/robots.txt', (req, res, next) => {
+    res.status(200).send('User-agent: *\nDisallow: \n')
   })
   .use(errorHandler({
     html (error, req, res, next) {

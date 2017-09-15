@@ -3,12 +3,6 @@ const auth = require('feathers-authentication')
 const configDb = require('./db')
 const {checkHeaders, CORService} = require('./cors')
 
-const superUser = {
-  email: 'rivalDealer@acid.test',
-  password: 'InfectedMushroom',
-  permissions: ['*']
-}
-
 module.exports = function () {
   return function () {
     configDb(this)
@@ -33,13 +27,19 @@ module.exports = function () {
           auth.hooks.authenticate('jwt')
         ],
         create: [
-          local.hooks.hashPassword({ passwordField: 'password' })
+          local.hooks.hashPassword({passwordField: 'password'})
         ]
       }
     })
-    this.service('users').create(superUser)
+    this.service('users')
+      .create({
+        email: 'rivalDealer@acid.test',
+        password: 'InfectedMushroom',
+        permissions: ['*']
+      })
       .then(user => {
         console.log('Created default user', user)
-      }).catch(console.error)
+      })
+      .catch(console.error)
   }
 }

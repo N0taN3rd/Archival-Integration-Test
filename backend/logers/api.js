@@ -3,8 +3,7 @@ const expressWinston = require('express-winston')
 const path = require('path')
 require('winston-daily-rotate-file')
 
-module.exports = function (siteMap) {
-  const onlyLog = new Set(Object.keys(siteMap.map))
+module.exports = function () {
   let transport
   if (process.env.NODE_ENV === 'development') {
     transport = new winston.transports.Console({
@@ -13,7 +12,7 @@ module.exports = function (siteMap) {
     })
   } else {
     transport = new (winston.transports.DailyRotateFile)({
-      dirname: path.join('logs', 'frontEnd'),
+      dirname: path.join('logs', 'api'),
       filename: 'log',
       prepend: true,
       level: 'info'
@@ -24,9 +23,6 @@ module.exports = function (siteMap) {
     meta: true,
     expressFormat: false,
     colorize: false,
-    ignoreRoute (req, res) {
-      return !onlyLog.has(req.path)
-    },
     dynamicMeta (req, res) {
       return {ip: req.ip}
     }

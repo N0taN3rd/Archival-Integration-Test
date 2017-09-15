@@ -99,6 +99,12 @@ module.exports = {
         desc: 'A Single Page Application',
         href: '/tests/reactSPA',
         actTest: true
+      },
+      {
+        title: 'Streaming',
+        desc: 'Fetch response body stream',
+        href: 'https://googlechrome.github.io/samples/fetch-api/fetch-response-stream.html',
+        actTest: true
       }
     ],
     '/funkyTown': [
