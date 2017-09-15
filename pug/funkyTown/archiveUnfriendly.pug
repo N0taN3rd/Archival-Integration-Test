@@ -1,0 +1,59 @@
+doctype html
+html(lang='en', inceptme=incept1, inceptme2=incept2)
+    head
+        meta(charset='UTF-8')
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='getsworse-BerkJerker', content=gwbc)
+        title #{title}
+        style.
+            *,:after,:before{box-sizing:border-box}body{margin:40px;font-family:'Open Sans',sans-serif;background-color:#fff;color:#444}img{max-width:100%}h1,p{margin:0 0 1em}.media{margin-bottom:2em;border:2px solid #444;padding:10px;display:grid;grid-column-gap:20px;grid-template-areas:"title" "img" "bd" "ft"}.media>.title{grid-area:title}.media>.img{grid-area:img}.media>.content{grid-area:bd}.media>.footer{grid-area:ft}@media (min-width:600px){.media:after{content:"";display:block;clear:both}.media>.media{margin-left:160px;clear:both}.media .img{float:left;margin:0 10px 0 0;width:150px}.media .footer{background-color:#eee;padding:10px}.media.media-flip .img{float:right;margin:0 0 0 10px}.media>*{margin:0 0 0 160px}.media.media-flip>*{margin:0 160px 0 0}@supports (display:grid){.media.media-flip>*,.media>*{margin:0}.media .img,.media.media-flip .img{width:auto;margin:0}.media:after{content:none}.media{display:grid;grid-column-gap:20px;grid-template-columns:150px 3fr;grid-template-rows:auto 1fr auto;grid-template-areas:"img title" "img bd" "ft ft"}.media.media-flip{grid-template-columns:3fr 150px;grid-template-areas:"title img" "bd img" "ft ft"}.media.img-flexie{grid-template-columns:minmax(150px,1fr) 3fr}.media.media-flip.img-flexie{grid-template-columns:3fr minmax(150px,1fr)}.media>.media{grid-column:2/-1;margin:1em 0 0}}}
+    body
+        .media.img-flexie
+            .content
+                a(href='/') Home
+                br
+                a(href='/funkyTown') Funky Town
+        .media.img-flexie
+            #gtswrs.img
+                img(src='http://placehold.it/250x250', alt='Placeholder')
+            h2.title Percent Encoded Iframe
+            .content
+                p#gm
+                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula vitae ligula sit amet maximus.
+                    | Nunc auctor neque ipsum, ac porttitor elit lobortis ac. Vivamus ultrices sodales tellus et aliquam.
+                    | Pellentesque porta sit amet nulla vitae luctus. Praesent quis risus id dolor venenatis condimentum.
+            .footer
+                | You should go give the band Gets Worse a listen on
+                a(href='https://getsworse.bandcamp.com/music') Band Camp
+                | .
+                |         Met and had a beer with them really awesome guys.
+        .media.img-flexie
+            #liveGetsWorse.img
+                img(src='http://placehold.it/250x250', alt='Placeholder')
+            h2.title Actually You Can Listen To Gets Worse Here!
+            #theBlues.content
+                p
+                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula vitae ligula sit amet maximus.
+                    | Nunc auctor neque ipsum, ac porttitor elit lobortis ac. Vivamus ultrices sodales tellus et aliquam.
+                    | Pellentesque porta sit amet nulla vitae luctus. Praesent quis risus id dolor venenatis condimentum.
+            .footer
+                a#getsBetterEmbed(href='https://bandcamp.com/EmbeddedPlayer/album=2649988283/size=large/bgcol=333333/linkcol=e32c14/tracklist=false/transparent=true/')
+                    | https://bandcamp.com/EmbeddedPlayer/album=2649988283/size=large/bgcol=333333/linkcol=e32c14/tracklist=false/transparent=true/
+        .media.media-flip.img-flexie
+            #incept.img
+                img(src='http://placehold.it/250x250', alt='Placeholder')
+            h2.title Iframe From Link Header rel="original". PS I Really Only Work In The Archive
+            #linkIF.content
+                p
+                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula vitae ligula sit amet maximus. Nunc
+                    | auctor neque ipsum, ac porttitor elit lobortis ac. Vivamus ultrices sodales tellus et aliquam. Pellentesque
+                    | porta sit amet nulla vitae luctus. Praesent quis risus id dolor venenatis condimentum.
+            .footer
+                | Yes JavaScript can access Link headers!
+        script.
+          let encoded='%3C%69%66%72%61%6D%65%20%73%72%63%3D%22%68%74%74%70%73%3A%2F%2F%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D%2F%6D%61%70%73%2F%65%6D%62%65%64%3F%70%62%3D%21%31%6D%31%38%21%31%6D%31%32%21%31%6D%33%21%31%64%32%30%30%34%2E%38%37%35%39%33%33%38%32%39%33%34%31%39%21%32%64%2D%37%36%2E%33%30%39%32%30%34%36%34%31%37%36%34%32%35%21%33%64%33%36%2E%38%38%36%30%32%33%37%34%30%32%39%37%39%31%21%32%6D%33%21%31%66%30%21%32%66%30%21%33%66%30%21%33%6D%32%21%31%69%31%30%32%34%21%32%69%37%36%38%21%34%66%31%33%2E%31%21%33%6D%33%21%31%6D%32%21%31%73%30%78%38%39%62%61%39%39%61%64%32%66%62%38%61%61%65%33%25%33%41%30%78%36%32%36%38%35%35%31%65%63%64%38%61%39%65%37%31%21%32%73%34%38%39%38%2B%45%6C%6B%68%6F%72%6E%2B%41%76%65%25%32%43%2B%4E%6F%72%66%6F%6C%6B%25%32%43%2B%56%41%2B%32%33%35%30%38%21%35%65%31%21%33%6D%32%21%31%73%65%6E%21%32%73%75%73%21%34%76%31%35%30%35%34%34%34%38%36%35%33%32%35%22%20%77%69%64%74%68%3D%22%36%30%30%22%20%68%65%69%67%68%74%3D%22%34%35%30%22%20%66%72%61%6D%65%62%6F%72%64%65%72%3D%22%30%22%20%73%74%79%6C%65%3D%22%62%6F%72%64%65%72%3A%30%22%20%61%6C%6C%6F%77%66%75%6C%6C%73%63%72%65%65%6E%3E%3C%2F%69%66%72%61%6D%65%3E';document.getElementById('gm').innerHTML=unescape(encoded);let img=document.createElement('img');img.src=document.querySelector('title').textContent;let gtswrs=document.getElementById('gtswrs');gtswrs.replaceChild(img,gtswrs.firstElementChild);
+        script.
+          function parseLinkHeader(a){if(0===a.length)throw new Error('input must not be of zero length');let b=a.split(','),c={},d=0,e=b.length;for(;d<e;d++){let f=b[d].split(';');if(2===f.length){let g=f[0].replace(/<(.*)>/,'$1').trim(),h=f[1].replace(/rel="(.*)"/,'$1').trim();c[h]=g}}return c}fetch(window.location).then(a=>{let b;for(let[f,g]of a.headers.entries())if('link'===f.toLowerCase()){b=parseLinkHeader(g);break}let c=document.getElementById('linkIF'),d=document.getElementById('incept'),e=document.createElement('img');if(b!==void 0){let f=b.original;c.innerHTML='<iframe src="'+f+'" width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>',e.src=document.querySelector('[inceptMe]').getAttribute('inceptMe'),d.replaceChild(e,d.firstElementChild)}else window.self===window.top?(c.innerHTML='<iframe src="'+window.location+'" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>',e.src=document.querySelector('[inceptMe]').getAttribute('inceptMe'),d.replaceChild(e,d.firstElementChild)):(c.innerHTML='If Only We Could Have Inception!',e.src=document.querySelector('[inceptMe]').getAttribute('inceptMe2'),d.replaceChild(e,d.firstElementChild))});
+        script.
+          document.getElementById('theBlues').innerHTML='<iframe style="border: 0; width: 350px; height: 470px;" src="'+document.getElementById('getsBetterEmbed').textContent+'" seamless><a href="http://getsworse.bandcamp.com/album/the-blues">The Blues by Gets Worse</a></iframe>';let soMeta=document.querySelectorAll('head > meta'),i=0,len=soMeta.length;for(;i<len;i++)if('getsworse-BerkJerker'===soMeta[i].name){document.getElementById('liveGetsWorse').innerHTML='<img src="'+soMeta[i].getAttribute('content')+'">';break}

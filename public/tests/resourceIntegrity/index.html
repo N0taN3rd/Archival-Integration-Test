@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="require-sri-for script style">
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
     <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Resource Integrity</title>
+    <style>
+        .noWork {
+            color: #d50000;
+        }
+    </style>
+    <link rel="stylesheet" href="theStyleSheet.css" integrity="sha384-eKdwSs2g6PL+F9/RnQ14sov7h5SAFYgq8WJln2tXHOSW/7fJt4G+Td7PcVzkJunk">
 </head>
 <body>
-<div id='scriptSaysHi'></div>
-<script src="theScript.js" integrity="sha256-pTWR0j4rFqy7zRZh/soglj59l3PpFD67sFt0p9BvCSU="></script>
+<div class="wrapper">
+    <header class="header">Archival Acid Test 2.0 Subresource Integrity Test</header>
+    <aside class="sidebar">
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/funkyTown">Funky Town</a>
+            </li>
+        </ul>
+    </aside>
+    <article id='hiParent' class="content noWork">
+        <h1>Protected JS Should Say Hi Bellow</h1>
+        <div id='scriptSaysHi'></div>
+    </article>
+    <footer class="footer">My footer</footer>
+</div>
+<script src="theScript.js" integrity="sha256-qerliYS7q6jrFLa4BJJ3g1ua00vkPz9SjuYsHPLpVzE="></script>
 </body>
 </html>

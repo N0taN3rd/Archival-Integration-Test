@@ -28,5 +28,9 @@ module.exports = function (config) {
     res.end()
   })
 
+  router.get('/archivingUnfriendly', (req, res, next) => {
+    res.render('funkyTown/archiveUnfriendly', config.getsWorse)
+  })
+
   return router
 }

@@ -29,6 +29,12 @@ module.exports = {
   staticPath: path.join(__dirname, '..', 'public'),
   viewsPath: path.join(__dirname, '..', 'pug'),
   viewEngine: 'pug',
+  getsWorse: {
+    title: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/getsWorse.jpg`,
+    incept1: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/inception.jpg`,
+    incept2: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/inception2.jpg`,
+    gwbc: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/getsworselive.jpg`,
+  },
   randomJokes: {
     chuckNorris: {
       cats: ['dev', 'movie', 'food', 'celebrity', 'science', 'political', 'sport', 'religion', 'explicit', 'animal', 'music', 'history', 'travel', 'career', 'money', 'fashion'],

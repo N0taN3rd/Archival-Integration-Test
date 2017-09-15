@@ -113,6 +113,18 @@ module.exports = {
         desc: 'Script Tags The Use "import x from where"',
         href: 'tests/esModules',
         actTest: true
+      },
+      {
+        title: 'Resource Integrity',
+        desc: 'Protected Script And Link Tag',
+        href: 'tests/resourceIntegrity',
+        actTest: true
+      },
+      {
+        title: 'An Unfriendly Page',
+        desc: 'This Page Is Archiving Unfriendly',
+        href: 'tests/archivingUnfriendly',
+        actTest: true
       }
     ]
   },
