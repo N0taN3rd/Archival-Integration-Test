@@ -1,5 +1,12 @@
 FROM node:8.5.0
 
+ENV NODE_ENV=production \
+    LISTENPORT=8080 \
+    FRONT_END_DOMAIN="wsdl-docker.cs.odu.edu" \
+    FRONT_END_LOC="http://wsdl-docker.cs.odu.edu:8080" \
+    OUT_SIDE_DOCKER_PORT=8880 \
+    API_ENDPOINT="http://wsdl-docker.cs.odu.edu:8880"
+
 WORKDIR /app
 
 VOLUME /logs
@@ -7,16 +14,10 @@ VOLUME /logs
 COPY package.json /app/
 RUN npm install
 
-COPY backend public pug run-backend.sh /app/
+COPY backend/ public/ pug/ run-backend.sh /app/
 
 RUN chmod +x run-backend.sh
 
-ENV NODE_ENV=production
-ENV LISTENPORT=8080
-ENV FRONT_END_DOMAIN="wsdl-docker.cs.odu.edu"
-ENV FRONT_END_LOC="http://wsdl-docker.cs.odu.edu:8080"
-ENV OUT_SIDE_DOCKER_PORT=8880
-ENV API_ENDPOINT="http://wsdl-docker.cs.odu.edu:8880"
 
 EXPOSE 8080
 
