@@ -1,7 +1,7 @@
 const path = require('path')
 const ONE_DAY = 60 * 60 * 24 * 1000
 
-const cspAllow = "'self' 'unsafe-eval' 'unsafe-inline' http://* https://*"
+const cspAllow = "'self' 'unsafe-eval' 'unsafe-inline' http://* https://* http://wsdl-docker.cs.odu.edu:8080 google.com"
 
 module.exports = {
   auth: {
@@ -32,7 +32,7 @@ module.exports = {
   viewsPath: path.join(__dirname, '..', 'pug'),
   viewEngine: 'pug',
   getsWorse: {
-    csp: `default-src ${cspAllow}; connect-src ${cspAllow}; frame-src ${cspAllow}; img-src data: ${cspAllow}; manifest-src ${cspAllow}; media-src ${cspAllow}; object-src ${cspAllow}; script-src ${cspAllow}; style-src ${cspAllow}; font-src data: ${cspAllow}; worker-src ${cspAllow};`,
+    csp: `connect-src ${cspAllow}; frame-src ${cspAllow}; img-src data: ${cspAllow}; manifest-src ${cspAllow}; media-src ${cspAllow}; object-src ${cspAllow}; script-src ${cspAllow}; style-src ${cspAllow}; font-src data: ${cspAllow}; worker-src ${cspAllow};`,
     title: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/getsWorse.jpg`,
     incept1: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/inception.jpg`,
     incept2: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/inception2.jpg`,
