@@ -1,7 +1,7 @@
 const path = require('path')
 const ONE_DAY = 60 * 60 * 24 * 1000
 
-const cspAllow = "'self' 'unsafe-eval' 'unsafe-inline' http://* https://* http://wsdl-docker.cs.odu.edu:8080 google.com"
+const cspAllow = "'self' 'unsafe-eval' 'unsafe-inline' http://wsdl-docker.cs.odu.edu:8080/ http://wsdl-docker.cs.odu.edu:8080/tests/archivingUnfriendly/ https://bandcamp.com/ https://www.google.com/ http://placehold.it/"
 
 module.exports = {
   auth: {
