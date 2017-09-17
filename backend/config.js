@@ -1,7 +1,9 @@
 const path = require('path')
 const ONE_DAY = 60 * 60 * 24 * 1000
 
-const cspAllow = "'self' 'unsafe-eval' 'unsafe-inline' http://wsdl-docker.cs.odu.edu:8080/ http://wsdl-docker.cs.odu.edu:8080/tests/archivingUnfriendly/ https://bandcamp.com/ https://www.google.com/ http://placehold.it/"
+const styleNONCE = "'nonce-hahahah1'"
+const scriptNONCE = "'nonce-hahahah2' 'nonce-hahahah3' 'nonce-hahahah4' 'nonce-hahahah5'"
+const cspAllow = `${styleNONCE} ${scriptNONCE} ${process.env.FRONT_END_LOC} ${process.env.FRONT_END_LOC}/tests/archivingUnfriendly https://bandcamp.com https://www.google.com http://placehold.it`
 
 module.exports = {
   auth: {
@@ -32,7 +34,7 @@ module.exports = {
   viewsPath: path.join(__dirname, '..', 'pug'),
   viewEngine: 'pug',
   getsWorse: {
-    csp: `connect-src ${cspAllow}; frame-src ${cspAllow}; img-src data: ${cspAllow}; manifest-src ${cspAllow}; media-src ${cspAllow}; object-src ${cspAllow}; script-src ${cspAllow}; style-src ${cspAllow}; font-src data: ${cspAllow}; worker-src ${cspAllow};`,
+    csp: `default-src ${cspAllow}; connect-src ${cspAllow}; frame-src ${cspAllow}; img-src ${cspAllow}; manifest-src ${cspAllow}; media-src ${cspAllow}; object-src ${cspAllow}; script-src ${cspAllow}; style-src ${cspAllow}; font-src data: ${cspAllow}; worker-src ${cspAllow};`,
     title: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/getsWorse.jpg`,
     incept1: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/inception.jpg`,
     incept2: `${process.env.FRONT_END_LOC}/tests/archivingUnfriendly/inception2.jpg`,
