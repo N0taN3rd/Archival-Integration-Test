@@ -16,6 +16,7 @@ const theSiteMap = sitemap(theSiteMapConfig)
 
 app
   .enable('trust proxy')
+  .set('etag', false)
   .engine(config.viewEngine, require(config.viewEngine).__express)
   .set('config', config)
   .set('view engine', config.viewEngine)
@@ -45,7 +46,7 @@ app
   .get('/list*', (req, res, next) => {
     res.redirect('/tests/polymer')
   })
-  .use(express.static(config.staticPath))
+  .use(express.static(config.staticPath, {etag: false}))
 
 if (config.port) {
   app.listen(config.port, config.host, err => {

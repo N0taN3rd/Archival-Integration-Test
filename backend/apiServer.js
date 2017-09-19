@@ -28,6 +28,7 @@ const corsOptions = {
 const app = feathers(express())
 
 app
+  .set('etag', false)
   .enable('trust proxy')
   .configure(rest((req, res) => {
     res.format({
