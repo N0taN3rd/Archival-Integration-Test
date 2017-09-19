@@ -1,7 +1,7 @@
 const path = require('path')
 const ONE_DAY = 60 * 60 * 24 * 1000
 
-const NONCE = "'nonce-hahahah1' 'nonce-hahahah2' 'nonce-hahahah3' 'nonce-hahahah4' 'nonce-hahahah5'"
+const NONCE = "'nonce-hahahah1' 'nonce-hahahah2' 'nonce-hahahah3' 'nonce-hahahah4' 'nonce-hahahah5' 'nonce='hahahah6' 'nonce='hahahah7'"
 const allowURL = 'https://bandcamp.com/EmbeddedPlayer.html https://getsworse.bandcamp.com https://p4.bcbits.com https://f4.bcbits.com https://bandcamp.com https://www.google.com http://placehold.it https://s4.bcbits.com'
 const cspAllow = `${NONCE} ${process.env.FRONT_END_LOC} ${process.env.FRONT_END_LOC}/tests/archivingUnfriendly ${allowURL}`
 
