@@ -4,14 +4,12 @@ import NavOffCanvas from './NavOffCanvas'
 import NavLinks from './NavLinks'
 
 function SideNav () {
-  return (
-    <div>
-      <NavOffCanvas />
-      <div className='tm-sidebar-left uk-visible@m'>
-        <NavLinks />
-      </div>
+  return [
+    <NavOffCanvas key='offCanvasNav'/>,
+    <div key='navLinksDiv' className='tm-sidebar-left uk-visible@m'>
+      <NavLinks key='naveLinksSidebar' />
     </div>
-  )
+  ]
 }
 
 export default pure(SideNav)

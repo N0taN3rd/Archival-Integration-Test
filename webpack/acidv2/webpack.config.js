@@ -58,7 +58,7 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 9000,
-    // historyApiFallback: true,
+    historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
