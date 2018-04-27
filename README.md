@@ -1,5 +1,8 @@
-# Archival Acid Test 2.0
-This repository is a follow-on study of the Archival Acid Test ([web](http://acid.matkelly.com/), [source](https://github.com/machawk1/archivalAcidTest)) that seeks to evaluate archival crawlers and replay systems for the Web.
+# Archival Integration Test
+This repository is the sister project of the Archival Acid Test ([web](http://acid.matkelly.com/), [source](https://github.com/machawk1/archivalAcidTest)), 
+that seeks to test the archival crawlers and replay systems abilities to handle the full stack web (dynamic, JavaScript powered, APIs, markup).
+
+**If you can not pass the Archival Acid Test, what are you doing here???**. 
 
 Good Luck.
 
